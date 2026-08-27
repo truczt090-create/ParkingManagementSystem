@@ -1,0 +1,383 @@
+﻿@model ParkingManagement.Web.ViewModels.Auth.RegisterOwnerViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký chủ bãi xe";
+    Layout = "_AuthLayout";
+}
+
+<section class="auth-page">
+
+    <div class="auth-shell">
+
+        <!-- =========================
+             LEFT SIDE
+        ========================== -->
+        <div class="auth-visual">
+
+            <div class="auth-visual-overlay"></div>
+
+            <div class="auth-visual-content">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="auth-brand">
+
+                    <img src="~/images/logo.png"
+                         alt="OmniPark"
+                         class="auth-brand-logo" />
+
+                </a>
+
+
+                <div class="auth-intro">
+
+                    <span class="auth-kicker">
+                        OMNIPARK
+                    </span>
+
+                    <h1>
+                        Quản lý bãi xe,<br />
+                        <span>dễ dàng hơn</span>
+                    </h1>
+
+                    <p>
+                        Đăng ký trở thành chủ bãi xe OmniPark để quản lý
+                        bãi xe, nhân viên và hoạt động kinh doanh của bạn.
+                    </p>
+
+                </div>
+
+
+                <div class="auth-benefits">
+
+                    <div class="auth-benefit-item">
+
+                        <div class="auth-benefit-icon">
+                            <i class="bi bi-p-square"></i>
+                        </div>
+
+                        <div>
+                            <strong>Quản lý bãi xe</strong>
+                            <span>Theo dõi và quản lý các bãi xe của bạn</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="auth-benefit-item">
+
+                        <div class="auth-benefit-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div>
+                            <strong>Quản lý nhân viên</strong>
+                            <span>Tạo và quản lý tài khoản nhân viên</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="auth-benefit-item">
+
+                        <div class="auth-benefit-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+
+                        <div>
+                            <strong>Quản lý hoạt động</strong>
+                            <span>Theo dõi hoạt động kinh doanh bãi xe</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-visual-footer">
+                    © @DateTime.Now.Year OmniPark. Smart Parking. Better Living.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             RIGHT SIDE
+        ========================== -->
+        <div class="auth-form-side">
+
+            <div class="auth-card auth-register-card">
+
+                <div class="auth-card-heading">
+
+                    <span class="auth-card-label">
+                        Dành cho đối tác OmniPark
+                    </span>
+
+                    <h2>Đăng ký chủ bãi xe</h2>
+
+                    <p>
+                        Tạo tài khoản chủ bãi để bắt đầu quản lý hệ thống.
+                    </p>
+
+                </div>
+
+
+                <form asp-controller="Account"
+                      asp-action="RegisterOwner"
+                      method="post"
+                      class="auth-form">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="auth-validation-summary"
+                         role="alert">
+                    </div>
+
+
+                    <!-- FULL NAME -->
+                    <div class="auth-field">
+
+                        <label asp-for="FullName">
+                            Họ và tên
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-person"></i>
+
+                            <input asp-for="FullName"
+                                   placeholder="Nhập họ và tên"
+                                   autocomplete="name" />
+
+                        </div>
+
+                        <span asp-validation-for="FullName"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+                    <div class="auth-field">
+
+                        <label asp-for="Email">
+                            Email
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-envelope"></i>
+
+                            <input asp-for="Email"
+                                   type="email"
+                                   placeholder="Nhập email của bạn"
+                                   autocomplete="email" />
+
+                        </div>
+
+                        <span asp-validation-for="Email"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+                    <div class="auth-field">
+
+                        <label asp-for="Phone">
+                            Số điện thoại
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-telephone"></i>
+
+                            <input asp-for="Phone"
+                                   type="tel"
+                                   placeholder="Nhập số điện thoại"
+                                   autocomplete="tel" />
+
+                        </div>
+
+                        <span asp-validation-for="Phone"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- BUSINESS NAME -->
+                    <div class="auth-field">
+
+                        <label asp-for="BusinessName">
+                            Tên đơn vị / bãi xe
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-building"></i>
+
+                            <input asp-for="BusinessName"
+                                   placeholder="Nhập tên đơn vị hoặc bãi xe" />
+
+                        </div>
+
+                        <span asp-validation-for="BusinessName"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- TAX CODE -->
+                    <div class="auth-field">
+
+                        <label asp-for="TaxCode">
+                            Mã số thuế
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-receipt"></i>
+
+                            <input asp-for="TaxCode"
+                                   placeholder="Nhập mã số thuế nếu có" />
+
+                        </div>
+
+                        <span asp-validation-for="TaxCode"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="auth-field">
+
+                        <label asp-for="Password">
+                            Mật khẩu
+                        </label>
+
+                        <div class="auth-input-wrap">
+
+                            <i class="bi bi-lock"></i>
+
+                            <input asp-for="Password"
+                                   id="registerOwnerPassword"
+                                   type="password"
+                                   placeholder="Nhập mật khẩu"
+                                   autocomplete="new-password" />
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('registerOwnerPassword', this)"
+                                    aria-label="Hiện hoặc ẩn mật khẩu">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                        <span asp-validation-for="Password"
+                              class="auth-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- POLICY -->
+                    <label class="auth-policy">
+
+                        <input type="checkbox"
+                               required />
+
+                        <span>
+                            Tôi đồng ý với
+                            <a href="#">Điều khoản sử dụng</a>
+                            và
+                            <a href="#">Chính sách bảo mật</a>
+                        </span>
+
+                    </label>
+
+
+                    <!-- SUBMIT -->
+                    <button type="submit"
+                            class="auth-submit-btn">
+
+                        <span>Đăng ký chủ bãi xe</span>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+
+                    <!-- SWITCH CUSTOMER -->
+                    <div class="auth-switch">
+
+                        Bạn chỉ muốn đặt chỗ?
+
+                        <a asp-controller="Account"
+                           asp-action="Register">
+                            Đăng ký khách hàng
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN -->
+                    <div class="auth-switch mt-2">
+
+                        Đã có tài khoản?
+
+                        <a asp-controller="Account"
+                           asp-action="Login">
+                            Đăng nhập ngay
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function togglePassword(inputId, button) {
+
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector("i");
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            }
+        }
+    </script>
+}

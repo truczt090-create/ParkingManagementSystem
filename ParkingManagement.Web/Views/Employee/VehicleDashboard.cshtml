@@ -1,0 +1,1380 @@
+﻿@model ParkingManagement.Web.ViewModels.Employee.VehicleDashboardViewModel
+
+@{
+    ViewData["Title"] = "Quản lý xe";
+
+    string GetStatusClass(string? status)
+    {
+        return status?.Trim() switch
+        {
+            "Trống" => "slot-available",
+
+            "Đang sử dụng" => "slot-occupied",
+            "Có xe" => "slot-occupied",
+            "Đang có xe" => "slot-occupied",
+            _ => "slot-disabled"
+        };
+    }
+
+    string GetStatusText(string? status)
+    {
+        return status?.Trim() switch
+        {
+            "Trống" => "Trống",
+
+            "Đang sử dụng" => "Đang có xe",
+            "Có xe" => "Đang có xe",
+            "Đang có xe" => "Đang có xe",
+
+            null => "Không xác định",
+            "" => "Không xác định",
+
+            _ => status!
+        };
+    }
+
+    bool IsAvailable(string? status)
+    {
+        return string.Equals(
+            status?.Trim(),
+            "Trống",
+            StringComparison.OrdinalIgnoreCase);
+    }
+
+    bool IsOccupied(string? status)
+    {
+        var value = status?.Trim();
+
+        return value == "Đang sử dụng"
+            || value == "Có xe"
+            || value == "Đang có xe";
+    }
+
+    bool IsReserved(string? status)
+    {
+        var value = status?.Trim();
+
+        return value == "Đặt trước"
+            || value == "Đã đặt trước";
+    }
+
+    var slots = Model.Slots
+        ?? new List<ParkingManagement.Web.ViewModels.Employee.ParkingSlotDashboardViewModel>();
+
+    var checkInUrl = Url.Action("CheckIn", "Employee") ?? "/Employee/CheckIn";
+    var checkOutUrl = Url.Action("CheckOut", "Employee") ?? "/Employee/CheckOut";
+}
+
+<style>
+    /* ======================================================
+               PAGE
+            ====================================================== */
+
+    .vehicle-dashboard {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 32px 24px 50px;
+    }
+
+        .vehicle-dashboard * {
+            box-sizing: border-box;
+        }
+
+    /* ======================================================
+               HEADER
+            ====================================================== */
+
+    .vehicle-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+
+    .vehicle-title {
+        margin: 0 0 7px;
+        color: #0b1f3a;
+        font-size: 40px;
+        font-weight: 750;
+        line-height: 1.15;
+    }
+
+    .vehicle-subtitle {
+        margin: 0;
+        color: #667085;
+        font-size: 15px;
+    }
+
+    .vehicle-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .vehicle-header-btn {
+        min-height: 44px;
+        padding: 0 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid #1570ef;
+        border-radius: 0;
+        background: #ffffff;
+        color: #175cd3;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+        .vehicle-header-btn:hover {
+            background: #eff6ff;
+            color: #175cd3;
+            text-decoration: none;
+        }
+
+        .vehicle-header-btn.primary {
+            background: #1570ef;
+            color: #ffffff;
+        }
+
+            .vehicle-header-btn.primary:hover {
+                background: #175cd3;
+                color: #ffffff;
+            }
+
+    /* ======================================================
+               STATISTICS
+            ====================================================== */
+
+    .vehicle-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .vehicle-stat {
+        min-height: 112px;
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        border: 1px solid #d0d5dd;
+        border-radius: 0;
+        background: #ffffff;
+    }
+
+        .vehicle-stat.stat-total {
+            border-left: 5px solid #1570ef;
+            background: #f8fbff;
+        }
+
+        .vehicle-stat.stat-available {
+            border-left: 5px solid #12b76a;
+            background: #f6fef9;
+        }
+
+        .vehicle-stat.stat-occupied {
+            border-left: 5px solid #f04438;
+            background: #fff8f7;
+        }
+
+        .vehicle-stat.stat-reserved {
+            border-left: 5px solid #7f56d9;
+            background: #faf9ff;
+        }
+
+    .stat-label {
+        display: block;
+        margin-bottom: 6px;
+        color: #667085;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .stat-number {
+        display: block;
+        color: #101828;
+        font-size: 31px;
+        font-weight: 750;
+        line-height: 1;
+    }
+
+    .stat-icon-box {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        font-weight: 750;
+        border-radius: 0;
+    }
+
+    .stat-total .stat-icon-box {
+        color: #175cd3;
+        background: #dbeafe;
+    }
+
+    .stat-available .stat-icon-box {
+        color: #067647;
+        background: #d1fadf;
+    }
+
+    .stat-occupied .stat-icon-box {
+        color: #b42318;
+        background: #fee4e2;
+    }
+
+    .stat-reserved .stat-icon-box {
+        color: #6941c6;
+        background: #ebe9fe;
+    }
+
+    /* ======================================================
+               MAIN LAYOUT
+            ====================================================== */
+
+    .vehicle-main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 18px;
+        align-items: start;
+    }
+
+    /* ======================================================
+               PARKING MAP
+            ====================================================== */
+
+    .parking-map {
+        min-width: 0;
+        border: 1px solid #d0d5dd;
+        border-radius: 0;
+        background: #ffffff;
+    }
+
+    .parking-map-header {
+        padding: 18px 21px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 1px solid #eaecf0;
+        background: #f8fafc;
+    }
+
+        .parking-map-header h2 {
+            margin: 0 0 4px;
+            color: #101828;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .parking-map-header p {
+            margin: 0;
+            color: #667085;
+            font-size: 13px;
+        }
+
+    .parking-map-count {
+        color: #175cd3;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .parking-map-body {
+        padding: 21px;
+    }
+
+    /* ======================================================
+               LEGEND
+            ====================================================== */
+
+    .parking-legend {
+        padding-bottom: 17px;
+        margin-bottom: 21px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #475467;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .legend-box {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+    }
+
+        .legend-box.available {
+            background: #12b76a;
+        }
+
+        .legend-box.occupied {
+            background: #f04438;
+        }
+
+        .legend-box.reserved {
+            background: #1570ef;
+        }
+
+        .legend-box.warning {
+            background: #f79009;
+        }
+
+        .legend-box.disabled {
+            background: #98a2b3;
+        }
+
+    /* ======================================================
+               PARKING SLOT GRID
+            ====================================================== */
+
+    .parking-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+        gap: 13px;
+    }
+
+    .parking-slot {
+        position: relative;
+        min-height: 92px;
+        padding: 12px 8px;
+        border: 2px solid transparent;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        cursor: pointer;
+        appearance: none;
+        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+        .parking-slot:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 16px rgba(16, 24, 40, .13);
+        }
+
+        .parking-slot.selected {
+            border-color: #101828;
+            box-shadow: 0 0 0 2px rgba(16, 24, 40, .12);
+        }
+
+    .slot-available {
+        background: #12b76a;
+    }
+
+    .slot-occupied {
+        background: #f04438;
+    }
+
+    .slot-reserved {
+        background: #1570ef;
+    }
+
+    .slot-warning {
+        background: #f79009;
+    }
+
+    .slot-disabled {
+        background: #98a2b3;
+    }
+
+    .slot-code {
+        margin-bottom: 6px;
+        font-size: 19px;
+        font-weight: 750;
+        line-height: 1;
+    }
+
+    .slot-status {
+        max-width: 100%;
+        font-size: 11px;
+        font-weight: 650;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .slot-license {
+        margin-top: 5px;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90px;
+    }
+
+    /* ======================================================
+               DETAIL PANEL
+            ====================================================== */
+
+    .slot-detail {
+        position: sticky;
+        top: 20px;
+        border: 1px solid #d0d5dd;
+        border-radius: 0;
+        background: #ffffff;
+    }
+
+    .slot-detail-header {
+        padding: 18px 20px;
+        border-bottom: 1px solid #163454;
+        background: #0b1f3a;
+        color: #ffffff;
+    }
+
+        .slot-detail-header h2 {
+            margin: 0 0 4px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .slot-detail-header p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 12px;
+        }
+
+    .slot-detail-body {
+        padding: 20px;
+    }
+
+    .slot-empty {
+        margin: 0;
+        color: #667085;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .slot-detail-content {
+        display: none;
+    }
+
+    .slot-code-large {
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        border-left: 4px solid #1570ef;
+        background: #eff6ff;
+    }
+
+        .slot-code-large span {
+            color: #667085;
+            font-size: 13px;
+        }
+
+        .slot-code-large strong {
+            color: #175cd3;
+            font-size: 23px;
+            font-weight: 750;
+        }
+
+    .detail-row {
+        min-height: 47px;
+        padding: 11px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .detail-label {
+        color: #667085;
+        font-size: 13px;
+    }
+
+    .detail-value {
+        color: #101828;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    .detail-status {
+        padding: 5px 8px;
+        display: inline-block;
+        border: 1px solid #d0d5dd;
+        border-radius: 0;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+        .detail-status.available {
+            color: #067647;
+            border-color: #abefc6;
+            background: #ecfdf3;
+        }
+
+        .detail-status.occupied {
+            color: #b42318;
+            border-color: #fecdca;
+            background: #fef3f2;
+        }
+
+        .detail-status.reserved {
+            color: #175cd3;
+            border-color: #b2ccff;
+            background: #eff8ff;
+        }
+
+        .detail-status.warning {
+            color: #b54708;
+            border-color: #fedf89;
+            background: #fffaeb;
+        }
+
+        .detail-status.disabled {
+            color: #475467;
+            border-color: #d0d5dd;
+            background: #f2f4f7;
+        }
+
+    /* ======================================================
+               ACTIONS
+            ====================================================== */
+
+    .slot-actions {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .slot-action {
+        width: 100%;
+        min-height: 46px;
+        padding: 0 15px;
+        border: 1px solid;
+        border-radius: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+        .slot-action:hover {
+            text-decoration: none;
+        }
+
+    .action-checkin {
+        color: #ffffff;
+        border-color: #1570ef;
+        background: #1570ef;
+    }
+
+        .action-checkin:hover {
+            color: #ffffff;
+            border-color: #175cd3;
+            background: #175cd3;
+        }
+
+    .action-checkout {
+        color: #ffffff;
+        border-color: #f79009;
+        background: #f79009;
+    }
+
+        .action-checkout:hover {
+            color: #ffffff;
+            border-color: #dc6803;
+            background: #dc6803;
+        }
+
+    .action-booking {
+        color: #175cd3;
+        border-color: #84adff;
+        background: #eff8ff;
+    }
+
+        .action-booking:hover {
+            color: #175cd3;
+            background: #dbeafe;
+        }
+
+    /* ======================================================
+               EMPTY
+            ====================================================== */
+
+    .dashboard-empty {
+        padding: 60px 20px;
+        border: 1px solid #d0d5dd;
+        background: #ffffff;
+        color: #667085;
+        text-align: center;
+    }
+
+        .dashboard-empty strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #344054;
+            font-size: 19px;
+        }
+
+    /* ======================================================
+               RESPONSIVE
+            ====================================================== */
+
+    @@media (max-width: 1100px) {
+        .vehicle-main {
+            grid-template-columns: 1fr;
+        }
+
+        .slot-detail {
+            position: static;
+        }
+
+        .vehicle-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @@media (max-width: 760px) {
+        .vehicle-dashboard {
+            padding: 24px 12px 40px;
+        }
+
+        .vehicle-header {
+            flex-direction: column;
+        }
+
+        .vehicle-title {
+            font-size: 31px;
+        }
+
+        .vehicle-header-actions {
+            width: 100%;
+        }
+
+        .vehicle-header-btn {
+            flex: 1;
+        }
+
+        .parking-map-header {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    @@media (max-width: 580px) {
+        .vehicle-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .parking-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .parking-map-body {
+            padding: 15px;
+        }
+    }
+</style>
+
+
+<div class="vehicle-dashboard">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="vehicle-header">
+
+        <div>
+            <h1 class="vehicle-title">
+                @(string.IsNullOrWhiteSpace(Model.ParkingLotName)
+                    ? "Quản lý xe"
+                    : Model.ParkingLotName)
+            </h1>
+
+            <p class="vehicle-subtitle">
+                Theo dõi sơ đồ bãi đỗ và quản lý quá trình xe vào / ra
+            </p>
+        </div>
+
+
+        <div class="vehicle-header-actions">
+
+            <a asp-controller="Employee"
+               asp-action="CheckIn"
+               class="vehicle-header-btn primary">
+                + Check-in xe
+            </a>
+
+            <a asp-controller="Employee"
+               asp-action="CheckOut"
+               class="vehicle-header-btn">
+                Check-out xe
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <div class="vehicle-stats">
+
+        <div class="vehicle-stat stat-total">
+
+            <div>
+                <span class="stat-label">
+                    Tổng vị trí
+                </span>
+
+                <strong class="stat-number">
+                    @Model.TotalSlots
+                </strong>
+            </div>
+
+            <div class="stat-icon-box">
+                P
+            </div>
+
+        </div>
+
+
+        <div class="vehicle-stat stat-available">
+
+            <div>
+                <span class="stat-label">
+                    Chỗ trống
+                </span>
+
+                <strong class="stat-number">
+                    @Model.AvailableSlots
+                </strong>
+            </div>
+
+            <div class="stat-icon-box">
+                ✓
+            </div>
+
+        </div>
+
+
+        <div class="vehicle-stat stat-occupied">
+
+            <div>
+                <span class="stat-label">
+                    Đang có xe
+                </span>
+
+                <strong class="stat-number">
+                    @Model.OccupiedSlots
+                </strong>
+            </div>
+
+            <div class="stat-icon-box">
+                🚗
+            </div>
+
+        </div>
+
+
+        <div class="vehicle-stat stat-reserved">
+
+            <div>
+                <span class="stat-label">
+                    Đã đặt trước
+                </span>
+
+                <strong class="stat-number">
+                    @Model.ReservedSlots
+                </strong>
+            </div>
+
+            <div class="stat-icon-box">
+                R
+            </div>
+
+        </div>
+
+    </div>
+
+
+    @if (slots.Any())
+    {
+        <div class="vehicle-main">
+
+            <!-- ================= PARKING MAP ================= -->
+
+            <section class="parking-map">
+
+                <div class="parking-map-header">
+
+                    <div>
+                        <h2>Sơ đồ vị trí đỗ xe</h2>
+
+                        <p>
+                            Nhấn vào một vị trí để xem thông tin và thao tác
+                        </p>
+                    </div>
+
+                    <div class="parking-map-count">
+                        @slots.Count vị trí
+                    </div>
+
+                </div>
+
+
+                <div class="parking-map-body">
+
+                    <!-- LEGEND -->
+
+                    <div class="parking-legend">
+
+                        <div class="legend-item">
+                            <span class="legend-box available"></span>
+                            Trống
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-box occupied"></span>
+                            Đang có xe
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-box reserved"></span>
+                            Đã đặt trước
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-box warning"></span>
+                            Cần xử lý
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-box disabled"></span>
+                            Không khả dụng
+                        </div>
+
+                    </div>
+
+
+                    <!-- SLOT GRID -->
+
+                    <div class="parking-grid">
+
+                        @foreach (var slot in slots.OrderBy(x => x.SlotCode))
+                        {
+                            var cssClass = GetStatusClass(slot.Status);
+                            var statusText = GetStatusText(slot.Status);
+
+                            <button type="button"
+                                    class="parking-slot @cssClass"
+                                    data-slot-id="@slot.ParkingSlotId"
+                                    data-slot-code="@slot.SlotCode"
+                                    data-status="@slot.Status"
+                                    data-status-text="@statusText"
+                                    data-session-id="@(slot.ParkingSessionId?.ToString() ?? "")"
+                                    data-license="@(slot.LicensePlate ?? "")"
+                                    data-booking-id="@(slot.BookingId?.ToString() ?? "")"
+                                    data-checkin-time="@(slot.CheckInTime?.ToString("dd/MM/yyyy HH:mm") ?? "")">
+
+                                <span class="slot-code">
+                                    @slot.SlotCode
+                                </span>
+
+                                <span class="slot-status">
+                                    @statusText
+                                </span>
+
+                                @if (!string.IsNullOrWhiteSpace(slot.LicensePlate))
+                                {
+                                    <span class="slot-license">
+                                        @slot.LicensePlate
+                                    </span>
+                                }
+
+                            </button>
+                        }
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= DETAIL PANEL ================= -->
+
+            <aside class="slot-detail">
+
+                <div class="slot-detail-header">
+
+                    <h2>Thông tin vị trí</h2>
+
+                    <p>
+                        Thông tin của ô đỗ đang được chọn
+                    </p>
+
+                </div>
+
+
+                <div class="slot-detail-body">
+
+                    <!-- CHƯA CHỌN -->
+
+                    <p id="slotEmptyMessage"
+                       class="slot-empty">
+
+                        Chọn một ô đỗ trên sơ đồ để xem thông tin chi tiết.
+
+                    </p>
+
+
+                    <!-- ĐÃ CHỌN -->
+
+                    <div id="slotDetailContent"
+                         class="slot-detail-content">
+
+
+                        <div class="slot-code-large">
+
+                            <span>Vị trí đỗ</span>
+
+                            <strong id="detailSlotCode">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span class="detail-label">
+                                Trạng thái
+                            </span>
+
+                            <span id="detailStatus"
+                                  class="detail-status">
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <div id="licenseRow"
+                             class="detail-row"
+                             style="display:none;">
+
+                            <span class="detail-label">
+                                Biển số xe
+                            </span>
+
+                            <span id="detailLicense"
+                                  class="detail-value">
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <div id="bookingRow"
+                             class="detail-row"
+                             style="display:none;">
+
+                            <span class="detail-label">
+                                Mã Booking
+                            </span>
+
+                            <span id="detailBooking"
+                                  class="detail-value">
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <div id="checkInTimeRow"
+                             class="detail-row"
+                             style="display:none;">
+
+                            <span class="detail-label">
+                                Thời gian vào
+                            </span>
+
+                            <span id="detailCheckInTime"
+                                  class="detail-value">
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <div class="slot-actions">
+
+                            <a id="slotCheckInButton"
+                               href="#"
+                               class="slot-action action-checkin">
+
+                                Check-in xe vào vị trí này
+
+                            </a>
+
+
+                            <a id="slotBookingCheckInButton"
+                               href="#"
+                               class="slot-action action-booking">
+
+                                Check-in Booking
+
+                            </a>
+
+
+                            <a id="slotCheckOutButton"
+                               href="#"
+                               class="slot-action action-checkout">
+
+                                Check-out xe
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+    }
+    else
+    {
+        <div class="dashboard-empty">
+
+            <strong>
+                Chưa có dữ liệu vị trí đỗ xe
+            </strong>
+
+            Không tìm thấy vị trí đỗ nào của bãi xe này.
+
+        </div>
+    }
+
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const checkInBaseUrl = '@Html.Raw(checkInUrl)';
+        const checkOutBaseUrl = '@Html.Raw(checkOutUrl)';
+
+        const slots =
+            document.querySelectorAll(".parking-slot");
+
+        const emptyMessage =
+            document.getElementById("slotEmptyMessage");
+
+        const detailContent =
+            document.getElementById("slotDetailContent");
+
+        const detailSlotCode =
+            document.getElementById("detailSlotCode");
+
+        const detailStatus =
+            document.getElementById("detailStatus");
+
+        const licenseRow =
+            document.getElementById("licenseRow");
+
+        const detailLicense =
+            document.getElementById("detailLicense");
+
+        const bookingRow =
+            document.getElementById("bookingRow");
+
+        const detailBooking =
+            document.getElementById("detailBooking");
+
+        const checkInTimeRow =
+            document.getElementById("checkInTimeRow");
+
+        const detailCheckInTime =
+            document.getElementById("detailCheckInTime");
+
+        const checkInButton =
+            document.getElementById("slotCheckInButton");
+
+        const bookingCheckInButton =
+            document.getElementById("slotBookingCheckInButton");
+
+        const checkOutButton =
+            document.getElementById("slotCheckOutButton");
+
+
+        function hideActions() {
+
+            checkInButton.style.display = "none";
+            bookingCheckInButton.style.display = "none";
+            checkOutButton.style.display = "none";
+        }
+
+
+        function setStatusStyle(status) {
+
+            detailStatus.className = "detail-status";
+
+            if (status === "Trống") {
+                detailStatus.classList.add("available");
+                return;
+            }
+
+            if (
+                status === "Đang sử dụng" ||
+                status === "Có xe" ||
+                status === "Đang có xe"
+            ) {
+                detailStatus.classList.add("occupied");
+                return;
+            }
+
+            if (
+                status === "Đặt trước" ||
+                status === "Đã đặt trước"
+            ) {
+                detailStatus.classList.add("reserved");
+                return;
+            }
+
+            if (
+                status === "Vi phạm" ||
+                status === "Cần xử lý"
+            ) {
+                detailStatus.classList.add("warning");
+                return;
+            }
+
+            detailStatus.classList.add("disabled");
+        }
+
+
+        slots.forEach(slot => {
+
+            slot.addEventListener("click", function () {
+
+                /*
+                 * Xóa selected cũ
+                 */
+                slots.forEach(item =>
+                    item.classList.remove("selected"));
+
+                this.classList.add("selected");
+
+
+                /*
+                 * Đọc dữ liệu
+                 */
+                const slotId =
+                    this.dataset.slotId;
+
+                const slotCode =
+                    this.dataset.slotCode;
+
+                const status =
+                    (this.dataset.status || "").trim();
+
+                const statusText =
+                    this.dataset.statusText || status;
+                const sessionId =
+                    this.dataset.sessionId || "";
+
+                const license =
+                    this.dataset.license || "";
+
+                const bookingId =
+                    this.dataset.bookingId || "";
+
+                const checkInTime =
+                    this.dataset.checkinTime || "";
+
+
+                /*
+                 * Hiện panel
+                 */
+                emptyMessage.style.display = "none";
+                detailContent.style.display = "block";
+
+
+                /*
+                 * Mã ô
+                 */
+                detailSlotCode.textContent =
+                    slotCode || "-";
+
+
+                /*
+                 * Status
+                 */
+                detailStatus.textContent =
+                    statusText || "Không xác định";
+
+                setStatusStyle(status);
+
+
+                /*
+                 * Biển số
+                 */
+                if (license) {
+
+                    licenseRow.style.display = "flex";
+
+                    detailLicense.textContent = license;
+
+                }
+                else {
+
+                    licenseRow.style.display = "none";
+
+                    detailLicense.textContent = "-";
+                }
+
+
+                /*
+                 * Booking
+                 */
+                if (bookingId) {
+
+                    bookingRow.style.display = "flex";
+
+                    detailBooking.textContent =
+                        "BK" +
+                        String(bookingId)
+                            .padStart(6, "0");
+
+                }
+                else {
+
+                    bookingRow.style.display = "none";
+
+                    detailBooking.textContent = "-";
+                }
+
+
+                /*
+                 * Check-in time
+                 */
+                if (checkInTime) {
+
+                    checkInTimeRow.style.display = "flex";
+
+                    detailCheckInTime.textContent =
+                        checkInTime;
+
+                }
+                else {
+
+                    checkInTimeRow.style.display = "none";
+
+                    detailCheckInTime.textContent = "-";
+                }
+
+
+                /*
+                 * Reset action
+                 */
+                hideActions();
+
+
+                /*
+                 * =====================================
+                 * Ô TRỐNG
+                 * =====================================
+                 */
+                if (status === "Trống") {
+
+                    checkInButton.style.display = "flex";
+
+                    checkInButton.href =
+                        checkInBaseUrl +
+                        "?parkingSlotId=" +
+                        encodeURIComponent(slotId);
+
+                    return;
+                }
+
+
+                /*
+                 * =====================================
+                 * Ô ĐẶT TRƯỚC
+                 * =====================================
+                 */
+                if (
+                    status === "Đặt trước" ||
+                    status === "Đã đặt trước"
+                ) {
+
+                    bookingCheckInButton.style.display =
+                        "flex";
+
+                    let url =
+                        checkInBaseUrl +
+                        "?parkingSlotId=" +
+                        encodeURIComponent(slotId);
+
+                    if (bookingId) {
+
+                        url +=
+                            "&bookingId=" +
+                            encodeURIComponent(bookingId);
+                    }
+
+                    bookingCheckInButton.href = url;
+
+                    return;
+                }
+
+
+                /*
+                 * =====================================
+                 * Ô ĐANG CÓ XE
+                 * =====================================
+                 */
+                if (status === "Đang sử dụng") {
+
+                    checkOutButton.style.display = "flex";
+
+                    if (sessionId) {
+                        checkOutButton.href =
+                            checkOutBaseUrl +
+                            "?sessionId=" +
+                            encodeURIComponent(sessionId);
+                    }
+                    else {
+                        checkOutButton.href =
+                            checkOutBaseUrl;
+                    }
+
+                    return;
+                }
+
+            });
+
+        });
+
+    });
+</script>

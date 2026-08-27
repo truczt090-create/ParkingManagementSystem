@@ -1,0 +1,9405 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+    .brand-text strong {
+        color: #165ddd;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .brand-text small {
+        margin-top: 5px;
+        color: #475569;
+        font-size: 10px;
+        font-weight: 500;
+    }
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.main-menu {
+    gap: 14px;
+}
+
+    .main-menu .nav-link {
+        position: relative;
+        padding: 29px 13px 25px !important;
+        color: #101828;
+        font-size: 14px;
+        font-weight: 600;
+        transition: .2s;
+    }
+
+        .main-menu .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .main-menu .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 15px;
+            width: 0;
+            height: 3px;
+            transform: translateX(-50%);
+            background: var(--primary);
+            border-radius: 10px;
+            transition: width .2s;
+        }
+
+        .main-menu .nav-link:hover::after {
+            width: 75%;
+        }
+
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 20px;
+}
+
+.header-icon-btn {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+    font-size: 20px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: .2s;
+}
+
+    .header-icon-btn:hover {
+        color: var(--primary);
+        background: #eff6ff;
+    }
+
+.notification-dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 8px;
+    height: 8px;
+    background: #dc2626;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+
+/* LOGIN BUTTON */
+
+.btn-login-header {
+    min-width: 115px;
+    padding: 10px 18px;
+    border: 1px solid #dce2ea;
+    border-radius: 7px;
+    background: white;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+    .btn-login-header:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+        background: white;
+    }
+
+
+/* REGISTER BUTTON */
+
+.btn-register-header {
+    min-width: 102px;
+    padding: 10px 18px;
+    border: 1px solid var(--primary);
+    border-radius: 7px;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+    .btn-register-header:hover {
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+        color: white;
+    }
+
+
+/* =========================================================
+   USER DROPDOWN
+========================================================= */
+
+.user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: transparent;
+    color: var(--dark);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-avatar {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.user-name {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-menu {
+    min-width: 230px;
+    padding: 8px;
+    border: 1px solid #edf0f5;
+    border-radius: 11px;
+    box-shadow: 0 16px 35px rgba(15,23,42,.13);
+}
+
+.dropdown-item {
+    padding: 10px 12px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+    .dropdown-item:hover {
+        background: #eff6ff;
+    }
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.home-hero {
+    position: relative;
+    min-height: 565px;
+    overflow: hidden;
+    background: linear-gradient( 90deg, rgba(4,18,40,.96) 0%, rgba(5,29,61,.91) 48%, rgba(6,35,69,.70) 100% ), url('/images/parking_hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-row {
+    min-height: 565px;
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.hero-content {
+    max-width: 690px;
+    color: white;
+}
+
+.hero-label {
+    display: inline-block;
+    padding: 7px 13px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 40px;
+    background: rgba(255,255,255,.10);
+    color: #dbeafe;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* FONT GIỐNG MẪU */
+
+.hero-content h1 {
+    max-width: 690px;
+    margin-bottom: 20px;
+    color: #2f8ff2;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp( 43px, 4.7vw, 67px );
+    line-height: 1.16;
+    font-weight: 700;
+    letter-spacing: -.045em;
+}
+
+    .hero-content h1 span {
+        color: #2f8ff2;
+    }
+
+.hero-content > p {
+    max-width: 590px;
+    margin-bottom: 27px;
+    color: white;
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: 500;
+}
+
+
+/* YELLOW CTA */
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 9px 25px 9px 10px;
+    border-radius: 50px;
+    background: var(--yellow);
+    color: #111827;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: .2s;
+}
+
+    .hero-cta:hover {
+        color: #111827;
+        transform: translateY(-2px);
+    }
+
+.hero-cta-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   HERO STATS
+========================================================= */
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 28px;
+}
+
+.hero-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+    .stat-icon.blue {
+        color: #1268ed;
+        background: white;
+    }
+
+    .stat-icon.green {
+        color: white;
+        background: #13af64;
+    }
+
+    .stat-icon.yellow {
+        color: white;
+        background: #f5c400;
+    }
+
+.hero-stat-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stat-item strong {
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.hero-stat-item span:not(.stat-icon) {
+    color: #dbeafe;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SEARCH CARD
+========================================================= */
+
+.hero-search-card {
+    max-width: 525px;
+    margin-left: auto;
+    padding: 25px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 20px 50px rgba(0,0,0,.22);
+}
+
+.search-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 21px;
+}
+
+    .search-card-title span {
+        width: 39px;
+        height: 39px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--primary);
+        font-size: 20px;
+    }
+
+    .search-card-title h3 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+.hero-search-card .form-label {
+    color: #101828;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.hero-input-group {
+    position: relative;
+}
+
+    .hero-input-group input {
+        width: 100%;
+        height: 49px;
+        padding: 0 45px 0 15px;
+        border: 1px solid #d9e0e9;
+        border-radius: 7px;
+        outline: none;
+        font-size: 13px;
+        transition: .2s;
+    }
+
+        .hero-input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(18,104,237,.10);
+        }
+
+    .hero-input-group i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #475569;
+    }
+
+
+/* VEHICLE */
+
+.vehicle-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.vehicle-button {
+    flex: 1;
+    min-height: 48px;
+    border: 1px solid #dce2ea;
+    border-radius: 7px;
+    background: white;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+    .vehicle-button i {
+        margin-right: 8px;
+    }
+
+    .vehicle-button.active {
+        color: var(--primary);
+        border-color: var(--primary);
+        background: #f5f9ff;
+    }
+
+.hero-date {
+    min-height: 48px;
+    border-color: #dce2ea;
+    font-size: 13px;
+}
+
+
+/* SEARCH BUTTON */
+
+.hero-search-button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 19px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient( 90deg, #1169ef, #0876ee );
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+    .hero-search-button:hover {
+        color: white;
+        background: #0758cb;
+    }
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.home-features {
+    position: relative;
+    z-index: 5;
+    background: white;
+}
+
+.features-wrapper {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: center;
+    margin-top: -1px;
+    padding: 26px 25px;
+    border-radius: 0 0 20px 20px;
+    background: white;
+    box-shadow: 0 10px 28px rgba(15,23,42,.08);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 14px;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: var(--primary);
+    font-size: 21px;
+}
+
+.feature-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--dark);
+    font-size: 14px;
+}
+
+.feature-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.feature-separator {
+    width: 1px;
+    height: 50px;
+    background: #e5e7eb;
+}
+
+
+/* =========================================================
+   PARKING SECTION
+========================================================= */
+
+.popular-parking-section {
+    padding: 45px 0 65px;
+    background: #fff;
+}
+
+.parking-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 23px;
+}
+
+    .parking-section-heading h2 {
+        margin: 0;
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    .parking-section-heading a {
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+
+/* =========================================================
+   PARKING CARD
+========================================================= */
+
+.home-parking-card {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    background: white;
+    box-shadow: 0 5px 16px rgba(15,23,42,.07);
+    transition: .25s;
+}
+
+    .home-parking-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(15,23,42,.12);
+    }
+
+.parking-card-image {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+    .parking-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.favorite-button {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(15,23,42,.50);
+    color: white;
+    font-size: 16px;
+}
+
+.card-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: white;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+    .card-status.active {
+        color: #15803d;
+        background: #f0fdf4;
+    }
+
+.parking-card-content {
+    padding: 15px;
+}
+
+    .parking-card-content h3 {
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+.parking-location {
+    min-height: 35px;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+    .parking-location i {
+        color: #475569;
+    }
+
+.parking-time {
+    padding: 10px 11px;
+    margin-bottom: 12px;
+    border-radius: 7px;
+    background: #f8fafc;
+}
+
+    .parking-time div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .parking-time small {
+        color: #94a3b8;
+        font-size: 10px;
+    }
+
+    .parking-time strong {
+        color: #334155;
+        font-size: 11px;
+    }
+
+.parking-detail-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+/* EMPTY */
+
+.parking-empty {
+    padding: 60px;
+    text-align: center;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+    .parking-empty i {
+        color: #cbd5e1;
+        font-size: 55px;
+    }
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.how-it-works {
+    padding: 70px 0;
+    background: #f8fafc;
+}
+
+.how-title {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+    .how-title span {
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+    }
+
+    .how-title h2 {
+        margin-top: 7px;
+        font-size: 31px;
+    }
+
+
+/* =========================
+   HOW CARD
+========================= */
+
+.how-card {
+    position: relative;
+    height: 100%;
+    padding: 34px 30px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, .07);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+    .how-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 36px rgba(15, 23, 42, .11);
+    }
+
+
+/* =========================
+   3 MÀU CARD
+========================= */
+
+.how-it-works .row > div:nth-child(1) .how-card {
+    background: linear-gradient( 135deg, #eef5ff 0%, #dcecff 100% );
+}
+
+.how-it-works .row > div:nth-child(2) .how-card {
+    background: linear-gradient( 135deg, #eefcf6 0%, #daf5e8 100% );
+}
+
+.how-it-works .row > div:nth-child(3) .how-card {
+    background: linear-gradient( 135deg, #fff6ec 0%, #ffe7cf 100% );
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.how-card > i {
+    display: block;
+    margin-bottom: 17px;
+    font-size: 34px;
+}
+
+
+/* icon ô 1 */
+.how-it-works .row > div:nth-child(1) .how-card > i {
+    color: #1769e8;
+}
+
+/* icon ô 2 */
+.how-it-works .row > div:nth-child(2) .how-card > i {
+    color: #16a34a;
+}
+
+/* icon ô 3 */
+.how-it-works .row > div:nth-child(3) .how-card > i {
+    color: #ea580c;
+}
+
+
+/* =========================
+   NUMBER 01 02 03
+========================= */
+
+.how-number {
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+
+/* số ô 1 */
+.how-it-works .row > div:nth-child(1) .how-number {
+    color: rgba(23, 105, 232, .18);
+}
+
+/* số ô 2 */
+.how-it-works .row > div:nth-child(2) .how-number {
+    color: rgba(22, 163, 74, .18);
+}
+
+/* số ô 3 */
+.how-it-works .row > div:nth-child(3) .how-number {
+    color: rgba(234, 88, 12, .18);
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.how-card h4 {
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.how-card p {
+    margin-bottom: 0;
+    color: #475569;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.main-footer {
+    padding: 35px 0 25px;
+    background: #0b1730;
+    color: #cbd5e1;
+}
+
+    .main-footer h5 {
+        color: white;
+        font-size: 16px;
+    }
+
+    .main-footer p {
+        margin: 0;
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .main-menu {
+        gap: 5px;
+    }
+
+    .brand-text small {
+        display: none;
+    }
+}
+
+
+@media (max-width: 991px) {
+
+    .main-header .navbar {
+        min-height: 70px;
+    }
+
+    .main-menu {
+        padding-top: 14px;
+    }
+
+        .main-menu .nav-link {
+            padding: 10px 0 !important;
+        }
+
+            .main-menu .nav-link::after {
+                display: none;
+            }
+
+    .header-actions {
+        padding: 12px 0 17px;
+        margin-left: 0;
+    }
+
+    .hero-row {
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+
+    .hero-search-card {
+        max-width: 100%;
+        margin-top: 40px;
+    }
+
+    .features-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .feature-separator {
+        display: none;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .hero-content h1 {
+        font-size: 39px;
+    }
+
+    .hero-content > p {
+        font-size: 16px;
+    }
+
+    .hero-stats {
+        gap: 20px;
+    }
+
+    .features-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-item {
+        padding: 0;
+    }
+
+    .parking-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* =====================================================
+   OMNIPARK NAVBAR - GỌN, CÂN ĐỐI
+===================================================== */
+
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+    background: #ffffff;
+    border-bottom: 1px solid #e9edf3;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+    .main-header .navbar {
+        min-height: 68px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+
+/* LOGO */
+
+.omnipark-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 28px;
+    padding: 0;
+}
+
+.omnipark-logo {
+    display: block;
+    width: auto;
+    height: 52px;
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   MENU GIỮA
+===================================================== */
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .main-menu .nav-link {
+        position: relative;
+        padding: 20px 11px !important;
+        white-space: nowrap;
+        color: #334155;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        transition: color .2s ease;
+    }
+
+        .main-menu .nav-link:hover {
+            color: #1769e8;
+        }
+
+        .main-menu .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            width: 0;
+            height: 2px;
+            transform: translateX(-50%);
+            background: #1769e8;
+            border-radius: 999px;
+            transition: width .2s ease;
+        }
+
+        .main-menu .nav-link:hover::after {
+            width: 70%;
+        }
+
+
+/* =====================================================
+   KHU VỰC BÊN PHẢI
+===================================================== */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 18px;
+}
+
+
+/* CHUÔNG */
+
+.notification-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #0f172a;
+    font-size: 18px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+    .notification-btn:hover {
+        background: #eff6ff;
+        color: #1769e8;
+    }
+
+
+/* Badge chỉ hiện khi có thông báo */
+
+.notification-count {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #e11d48;
+    color: white;
+    border: 2px solid white;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   LOGIN / REGISTER
+===================================================== */
+
+.btn-login-nav,
+.btn-register-nav {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 17px;
+    border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: .2s;
+}
+
+.btn-login-nav {
+    min-width: 108px;
+    background: #ffffff;
+    border: 1px solid #d7dee8;
+    color: #0f172a;
+}
+
+    .btn-login-nav:hover {
+        background: #f8fbff;
+        border-color: #1769e8;
+        color: #1769e8;
+    }
+
+.btn-register-nav {
+    min-width: 96px;
+    background: #1769e8;
+    border: 1px solid #1769e8;
+    color: white;
+    box-shadow: 0 4px 10px rgba(23, 105, 232, 0.15);
+}
+
+    .btn-register-nav:hover {
+        background: #0757cc;
+        border-color: #0757cc;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+
+/* =====================================================
+   USER SAU KHI LOGIN
+===================================================== */
+
+.user-menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1769e8;
+    font-size: 17px;
+}
+
+.user-name {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .omnipark-logo {
+        height: 46px;
+    }
+
+    .main-menu {
+        gap: 4px;
+    }
+
+        .main-menu .nav-link {
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+            font-size: 13px;
+        }
+
+    .btn-login-nav,
+    .btn-register-nav {
+        padding: 0 13px;
+    }
+}
+
+
+@media (max-width: 991px) {
+
+    .main-header .navbar {
+        min-height: 64px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .omnipark-logo {
+        height: 44px;
+    }
+
+    .main-menu {
+        align-items: flex-start;
+        padding-top: 12px;
+    }
+
+        .main-menu .nav-link {
+            width: 100%;
+            padding: 10px 0 !important;
+        }
+
+            .main-menu .nav-link::after {
+                display: none;
+            }
+
+    .header-actions {
+        margin-left: 0;
+        padding-top: 10px;
+        padding-bottom: 12px;
+        flex-wrap: wrap;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .omnipark-logo {
+        height: 40px;
+    }
+
+    .btn-login-nav,
+    .btn-register-nav {
+        min-width: auto;
+        padding: 0 12px;
+    }
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+/* =========================================================
+   USER NAVBAR
+========================================================= */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #334155;
+    font-size: 19px;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+    .notification-btn:hover {
+        background: #eff6ff;
+        color: #1769e8;
+    }
+
+
+.notification-count {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #e11d48;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   USER BUTTON
+========================================================= */
+
+.user-dropdown {
+    position: relative;
+}
+
+.user-navbar-button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 3px 7px 3px 4px;
+    border: 0;
+    border-radius: 30px;
+    background: transparent;
+    color: #0f172a;
+    transition: .2s ease;
+}
+
+    .user-navbar-button:hover {
+        background: #f8fafc;
+    }
+
+
+/* AVATAR */
+
+.navbar-user-avatar {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid #dbeafe;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1769e8;
+    font-size: 17px;
+}
+
+
+.navbar-user-name {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+
+.user-chevron {
+    margin-left: 1px;
+    color: #475569;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   USER DROPDOWN PANEL
+========================================================= */
+
+.user-dropdown-menu {
+    position: relative;
+    width: 320px;
+    margin-top: 13px !important;
+    padding: 0;
+    overflow: visible;
+    border: 1px solid #e7ebf0;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 15px 40px rgba(15, 23, 42, 0.14);
+}
+
+
+/* MŨI TÊN */
+
+.dropdown-arrow {
+    position: absolute;
+    top: -8px;
+    right: 45px;
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+    border-top: 1px solid #e7ebf0;
+    border-left: 1px solid #e7ebf0;
+    background: white;
+}
+
+
+/* TITLE */
+
+.user-dropdown-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 20px 20px 15px;
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+    .user-dropdown-title i {
+        color: #64748b;
+        font-size: 19px;
+    }
+
+
+/* DIVIDER */
+
+.user-dropdown-divider {
+    height: 1px;
+    margin: 0 18px;
+    background: #e9edf2;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.user-information {
+    padding: 15px 20px;
+}
+
+.user-info-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: start;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+    .user-info-row:last-child {
+        margin-bottom: 0;
+    }
+
+.user-info-label {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.user-info-value {
+    color: #0f172a;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.user-info-email {
+    font-size: 11.5px;
+}
+
+
+/* =========================================================
+   MENU ITEMS
+========================================================= */
+
+.user-dropdown-link {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+    .user-dropdown-link:hover {
+        background: #f8fafc;
+        color: #1769e8;
+    }
+
+.dropdown-link-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+    .dropdown-link-left > i {
+        width: 19px;
+        color: #64748b;
+        font-size: 18px;
+    }
+
+.user-dropdown-link:hover .dropdown-link-left > i {
+    color: #1769e8;
+}
+
+.user-dropdown-link > i {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-form {
+    padding: 14px 18px 17px;
+    margin: 0;
+}
+
+.user-logout-button {
+    width: 100%;
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid #ff4d4f;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #ff3131;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+    .user-logout-button:hover {
+        background: #fff5f5;
+        border-color: #e11d48;
+        color: #e11d48;
+    }
+
+
+/* =========================================================
+   LOGIN SUCCESS TOAST
+========================================================= */
+
+.login-success-toast {
+    position: fixed;
+    top: 92px;
+    left: 28px;
+    z-index: 2000;
+    min-width: 270px;
+    max-width: 360px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 15px;
+    border: 1px solid #b7e4c7;
+    border-radius: 10px;
+    background: #f0fff4;
+    box-shadow: 0 10px 30px rgba(22, 163, 74, 0.12);
+    animation: loginToastIn .35s ease;
+}
+
+
+/* CHECK ICON */
+
+.login-success-icon {
+    width: 31px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+
+/* TEXT */
+
+.login-success-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+    .login-success-content strong {
+        color: #16a34a;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .login-success-content span {
+        color: #64748b;
+        font-size: 11px;
+    }
+
+
+/* CLOSE */
+
+.login-success-close {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #64748b;
+    font-size: 16px;
+}
+
+    .login-success-close:hover {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes loginToastIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-10px) translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+}
+
+
+.login-toast-hide {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .navbar-user-name {
+        display: none;
+    }
+
+    .user-chevron {
+        display: none;
+    }
+
+    .user-dropdown-menu {
+        width: 290px;
+    }
+
+    .login-success-toast {
+        top: 78px;
+        left: 15px;
+        right: 15px;
+        min-width: auto;
+        max-width: none;
+    }
+}
+
+/* =========================================================
+   AUTH FONT - BE VIETNAM PRO
+========================================================= */
+
+.auth-page,
+.auth-page * {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.auth-intro h1 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.auth-card-heading h2 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+}
+
+.auth-field label,
+.auth-field-heading label {
+    font-weight: 600;
+}
+
+.auth-input-wrap input {
+    font-weight: 400;
+}
+
+.auth-submit-btn {
+    font-weight: 600;
+}
+
+.auth-social-btn {
+    font-weight: 500;
+}
+
+/* =========================================================
+   OMNIPARK AUTH - LOGIN / REGISTER
+========================================================= */
+
+.auth-page {
+    min-height: calc(100vh - 68px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: linear-gradient( 135deg, #f5f9ff 0%, #ffffff 45%, #f3f8ff 100% );
+}
+
+
+/* =========================================================
+   SHELL
+========================================================= */
+
+.auth-shell {
+    width: min(1180px, 100%);
+    min-height: 690px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(430px, 0.92fr);
+    overflow: hidden;
+    border: 1px solid #e8edf4;
+    border-radius: 0;
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+}
+
+
+/* =========================================================
+   LEFT VISUAL
+========================================================= */
+.auth-visual {
+    position: relative;
+    min-height: 690px;
+    overflow: hidden;
+    background: linear-gradient( 90deg, rgba(4, 18, 40, .96) 0%, rgba(5, 29, 61, .91) 48%, rgba(6, 35, 69, .72) 100% ), url('/images/parking_hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.auth-visual-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient( 180deg, rgba(5, 25, 55, .05) 0%, rgba(5, 25, 55, .18) 100% );
+    pointer-events: none;
+}
+
+
+.auth-visual-content {
+    position: relative;
+    z-index: 2;
+    min-height: 690px;
+    display: flex;
+    flex-direction: column;
+    padding: 38px 48px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    text-decoration: none;
+}
+
+
+.auth-brand-logo {
+    display: block;
+    width: auto;
+    height: 60px;
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.auth-intro {
+    max-width: 470px;
+    margin-top: 92px;
+}
+
+
+.auth-kicker {
+    display: inline-flex;
+    padding: 6px 12px;
+    margin-bottom: 15px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, .10);
+    color: #1769e8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.auth-intro h1 {
+    margin: 0 0 18px;
+    max-width: 560px;
+    color: #ffffff;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(36px, 3.4vw, 52px);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.04em;
+}
+
+
+.auth-intro {
+    max-width: 560px;
+    margin-top: 72px;
+}
+
+    .auth-intro p {
+        max-width: 470px;
+        margin: 0;
+        color: rgba(255, 255, 255, .87);
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.auth-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    margin-top: 34px;
+}
+
+
+.auth-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+
+.auth-benefit-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #1769e8;
+    color: #ffffff;
+    font-size: 18px;
+    box-shadow: 0 8px 18px rgba(23, 105, 232, .20);
+}
+
+
+.auth-benefit-item > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.auth-benefit-item strong {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.auth-benefit-item span {
+    color: rgba(255, 255, 255, .72);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LEFT FOOTER
+========================================================= */
+
+.auth-visual-footer {
+    margin-top: auto;
+    padding-top: 25px;
+    color: #64748b;
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM SIDE
+========================================================= */
+
+.auth-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+    background: linear-gradient( 180deg, #ffffff, #fbfdff );
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 38px;
+    border: 1px solid #edf1f5;
+    border-radius: 0;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, .08);
+}
+
+
+.auth-register-card {
+    max-width: 460px;
+    padding-top: 31px;
+    padding-bottom: 31px;
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.auth-card-heading {
+    margin-bottom: 27px;
+}
+
+
+.auth-card-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #1769e8;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.auth-card-heading h2 {
+    margin: 0 0 7px;
+    color: #0f172a;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.035em;
+}
+
+
+.auth-card-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+    .auth-field label,
+    .auth-field-heading label {
+        margin: 0;
+        color: #172033;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+
+.auth-field-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.forgot-password-link {
+    color: #1769e8;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+    .forgot-password-link:hover {
+        text-decoration: underline;
+    }
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.auth-input-wrap {
+    position: relative;
+}
+
+
+    .auth-input-wrap > i:first-child {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        transform: translateY(-50%);
+        color: #8290a5;
+        font-size: 16px;
+        pointer-events: none;
+    }
+
+
+    .auth-input-wrap input {
+        width: 100%;
+        min-height: 48px;
+        padding: 0 44px 0 43px;
+        border: 1px solid #dce3ec;
+        border-radius: 0;
+        outline: none;
+        background: #ffffff;
+        color: #172033;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+
+        .auth-input-wrap input::placeholder {
+            color: #9ba7b8;
+        }
+
+
+        .auth-input-wrap input:focus {
+            border-color: #1769e8;
+            box-shadow: 0 0 0 3px rgba(23, 105, 232, .10);
+        }
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #8290a5;
+    font-size: 15px;
+}
+
+
+    .password-toggle:hover {
+        background: #f1f5f9;
+        color: #1769e8;
+    }
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.auth-validation-summary {
+    color: #dc2626;
+    font-size: 12px;
+}
+
+
+    .auth-validation-summary:empty {
+        display: none;
+    }
+
+
+.auth-field-error {
+    color: #dc2626;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.auth-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.auth-check,
+.auth-policy {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #475569;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+    .auth-check input,
+    .auth-policy input {
+        width: 15px;
+        height: 15px;
+        margin-top: 1px;
+        accent-color: #1769e8;
+    }
+
+
+.auth-policy {
+    line-height: 1.6;
+}
+
+
+    .auth-policy a {
+        color: #1769e8;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.auth-submit-btn {
+    width: 100%;
+    min-height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 9px;
+    background: linear-gradient( 90deg, #1769e8, #0878f8 );
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(23, 105, 232, .17);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+
+    .auth-submit-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(23, 105, 232, .22);
+    }
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+
+    .auth-divider::before,
+    .auth-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #e5eaf0;
+    }
+
+
+    .auth-divider span {
+        white-space: nowrap;
+    }
+
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.auth-social-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+}
+
+
+.auth-social-btn {
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid #dce3ec;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+
+    .auth-social-btn:hover {
+        border-color: #b9c6d7;
+        background: #f8fafc;
+    }
+
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: block;
+}
+
+
+.facebook-mark {
+    color: #1877f2;
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.auth-switch {
+    margin-top: 3px;
+    text-align: center;
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+    .auth-switch a {
+        margin-left: 3px;
+        color: #1769e8;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .auth-page {
+        padding: 20px;
+    }
+
+
+    .auth-shell {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        min-height: 0;
+    }
+
+
+    .auth-visual {
+        min-height: 330px;
+    }
+
+
+
+    .auth-visual-content {
+        min-height: 330px;
+        padding: 28px 32px;
+    }
+
+
+    .auth-intro {
+        margin-top: 35px;
+    }
+
+
+        .auth-intro h1 {
+            font-size: 37px;
+        }
+
+
+    .auth-benefits {
+        display: none;
+    }
+
+
+    .auth-visual-footer {
+        display: none;
+    }
+
+
+    .auth-form-side {
+        padding: 32px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .auth-page {
+        padding: 0;
+        background: #ffffff;
+    }
+
+
+    .auth-shell {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+
+    .auth-visual {
+        min-height: 235px;
+    }
+
+
+    .auth-visual-content {
+        min-height: 235px;
+        padding: 22px;
+    }
+
+
+    .auth-brand-logo {
+        height: 46px;
+    }
+
+
+    .auth-intro {
+        margin-top: 25px;
+    }
+
+
+        .auth-intro h1 {
+            margin-bottom: 10px;
+            font-size: 29px;
+        }
+
+
+        .auth-intro p {
+            font-size: 12px;
+        }
+
+
+    .auth-form-side {
+        padding: 20px 15px 30px;
+    }
+
+
+    .auth-card {
+        padding: 26px 20px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+
+    .auth-social-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   OMNIPARK AI CHATBOT
+========================================================= */
+
+.omnipark-chat {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 3000;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+
+/* NÚT CHAT */
+
+.chat-toggle {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: linear-gradient( 135deg, #1769e8, #0878f8 );
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(23, 105, 232, .35);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+
+    .chat-toggle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 32px rgba(23, 105, 232, .42);
+    }
+
+
+/* ONLINE DOT */
+
+.chat-online-dot {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 13px;
+    height: 13px;
+    border: 2px solid white;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+
+/* =========================================================
+   CHAT BOX
+========================================================= */
+
+.chat-box {
+    position: absolute;
+    right: 0;
+    bottom: 72px;
+    width: 360px;
+    height: 500px;
+    overflow: hidden;
+    border: 1px solid #e7ecf3;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, .18);
+}
+
+
+/* HEADER */
+
+.chat-header {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 17px;
+    background: linear-gradient( 135deg, #1769e8, #0878f8 );
+    color: white;
+}
+
+
+.chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+
+.chat-ai-avatar {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
+    font-size: 19px;
+}
+
+
+.chat-header-left > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.chat-header-left strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.chat-header-left span {
+    margin-top: 2px;
+    color: rgba(255,255,255,.82);
+    font-size: 10px;
+}
+
+
+.chat-close {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+    .chat-close:hover {
+        background: rgba(255,255,255,.13);
+    }
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.chat-messages {
+    height: calc(100% - 137px);
+    overflow-y: auto;
+    padding: 18px 14px;
+    background: #f8fafc;
+}
+
+
+.chat-msg {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+
+.chat-msg--bot {
+    justify-content: flex-start;
+}
+
+
+.chat-msg--user {
+    justify-content: flex-end;
+}
+
+
+.chat-small-avatar {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #1769e8;
+    color: white;
+    font-size: 11px;
+}
+
+
+.chat-bubble {
+    max-width: 78%;
+    padding: 10px 12px;
+    border-radius: 5px 14px 14px 14px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 12px;
+    line-height: 1.6;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, .06);
+}
+
+
+.chat-msg--user .chat-bubble {
+    border-radius: 14px 5px 14px 14px;
+    background: #1769e8;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CHAT INPUT
+========================================================= */
+
+.chat-form {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid #edf0f4;
+    background: #ffffff;
+}
+
+
+    .chat-form input {
+        flex: 1;
+        height: 43px;
+        padding: 0 14px;
+        border: 1px solid #dce3ec;
+        border-radius: 22px;
+        outline: none;
+        font-family: 'Be Vietnam Pro', sans-serif;
+        font-size: 12px;
+    }
+
+
+        .chat-form input:focus {
+            border-color: #1769e8;
+            box-shadow: 0 0 0 3px rgba(23,105,232,.08);
+        }
+
+
+    .chat-form button {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #1769e8;
+        color: #ffffff;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+
+/* MOBILE */
+
+@media (max-width: 576px) {
+
+    .omnipark-chat {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .chat-box {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 82px;
+        width: auto;
+        height: min(520px, calc(100vh - 110px));
+    }
+}
+
+.auth-benefit-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #1769e8;
+    color: #ffffff;
+    font-size: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.18);
+}
+
+.auth-visual-footer {
+    margin-top: auto;
+    padding-top: 25px;
+    color: rgba(255,255,255,.68);
+    font-size: 10px;
+}
+/* =========================================================
+   PARKING LOT INDEX
+========================================================= */
+
+.parking-search-hero,
+.parking-search-hero * {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.parking-results-section,
+.parking-results-section * {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.parking-search-hero {
+    position: relative;
+    min-height: 315px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient( 90deg, rgba(4,18,40,.97) 0%, rgba(5,29,61,.93) 45%, rgba(6,35,69,.76) 100% ), url('/images/parking_hero.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+
+.parking-search-hero-content {
+    max-width: 790px;
+    padding: 48px 0;
+}
+
+
+.parking-search-kicker {
+    display: block;
+    margin-bottom: 9px;
+    color: #7eb7ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+
+.parking-search-hero h1 {
+    margin: 0 0 9px;
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+
+
+    .parking-search-hero h1 span {
+        color: #3693ff;
+    }
+
+
+.parking-search-hero-content > p {
+    margin: 0 0 22px;
+    color: rgba(255,255,255,.82);
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   MAIN SEARCH
+========================================================= */
+
+.parking-main-search {
+    display: grid;
+    grid-template-columns: 1fr 175px;
+    max-width: 735px;
+    background: white;
+}
+
+
+.parking-search-input {
+    position: relative;
+}
+
+
+    .parking-search-input > i {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #64748b;
+        font-size: 17px;
+    }
+
+
+    .parking-search-input input {
+        width: 100%;
+        height: 56px;
+        padding: 0 18px 0 49px;
+        border: 0;
+        outline: 0;
+        background: white;
+        color: #0f172a;
+        font-size: 13px;
+    }
+
+
+        .parking-search-input input::placeholder {
+            color: #94a3b8;
+        }
+
+
+.parking-search-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    background: #1769e8;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+
+    .parking-search-submit:hover {
+        background: #0757cc;
+    }
+
+
+/* =========================================================
+   RESULTS SECTION
+========================================================= */
+
+.parking-results-section {
+    padding: 42px 0 70px;
+    background: #f7f9fc;
+}
+
+
+.parking-results-layout {
+    display: grid;
+    grid-template-columns: 255px minmax(0, 1fr);
+    gap: 27px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.parking-filter-panel {
+    padding: 22px 20px;
+    border: 1px solid #e3e8ef;
+    background: white;
+    box-shadow: 0 8px 24px rgba(15,23,42,.05);
+}
+
+
+.parking-filter-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-bottom: 17px;
+    margin-bottom: 19px;
+    border-bottom: 1px solid #edf0f4;
+    color: #0f172a;
+    font-size: 14px;
+}
+
+
+    .parking-filter-title i {
+        color: #1769e8;
+    }
+
+
+.parking-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 23px;
+}
+
+
+    .parking-filter-group > label:first-child {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #0f172a;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+
+        .parking-filter-group > label:first-child i {
+            color: #475569;
+        }
+
+
+.parking-filter-select {
+    width: 100%;
+    height: 42px;
+    padding: 0 11px;
+    border: 1px solid #dce3ec;
+    background: white;
+    outline: none;
+    color: #475569;
+    font-size: 11px;
+}
+
+
+    .parking-filter-select:focus {
+        border-color: #1769e8;
+    }
+
+
+.parking-filter-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #475569;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+    .parking-filter-check input {
+        accent-color: #1769e8;
+    }
+
+
+.filter-status-active {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+    .filter-status-active > i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16a34a;
+    }
+
+
+.parking-clear-filter {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid #1769e8;
+    color: #1769e8;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .2s ease;
+}
+
+
+    .parking-clear-filter:hover {
+        color: white;
+        background: #1769e8;
+    }
+
+
+/* =========================================================
+   RESULT HEADER
+========================================================= */
+
+.parking-results-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 17px;
+}
+
+
+.parking-result-label {
+    display: block;
+    margin-bottom: 4px;
+    color: #1769e8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+
+.parking-results-top h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.parking-sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}
+
+
+    .parking-sort label {
+        margin: 0;
+        color: #475569;
+    }
+
+
+    .parking-sort select {
+        height: 39px;
+        min-width: 135px;
+        padding: 0 10px;
+        border: 1px solid #dce3ec;
+        background: white;
+        color: #475569;
+        font-size: 11px;
+    }
+
+
+/* =========================================================
+   RESULT LIST
+========================================================= */
+
+.parking-result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+
+.parking-result-card {
+    min-height: 175px;
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr) 145px;
+    overflow: hidden;
+    border: 1px solid #e4e9f0;
+    background: white;
+    box-shadow: 0 5px 18px rgba(15,23,42,.04);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+
+    .parking-result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(15,23,42,.08);
+    }
+
+
+/* IMAGE */
+
+.parking-result-image {
+    min-height: 175px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+
+    .parking-result-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .35s ease;
+    }
+
+
+.parking-result-card:hover
+.parking-result-image img {
+    transform: scale(1.035);
+}
+
+
+/* INFO */
+
+.parking-result-info {
+    padding: 21px 24px;
+}
+
+
+.parking-result-heading h3 {
+    margin: 0 0 9px;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.parking-result-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+    .parking-result-address i {
+        margin-top: 2px;
+        color: #475569;
+    }
+
+
+/* META */
+
+.parking-result-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 17px;
+    margin-top: 14px;
+    color: #475569;
+    font-size: 11px;
+}
+
+
+    .parking-result-meta > span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+
+.parking-status {
+    padding: 4px 8px;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+
+.parking-status-active {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+
+    .parking-status-active > i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16a34a;
+    }
+
+
+/* VEHICLE */
+
+.parking-vehicle-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+
+    .parking-vehicle-tags span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        background: #eff6ff;
+        color: #315f98;
+        font-size: 10px;
+    }
+
+
+/* ACTION */
+
+.parking-result-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.parking-detail-btn {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 14px;
+    border: 1px solid #1769e8;
+    color: #1769e8;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+
+    .parking-detail-btn:hover {
+        background: #1769e8;
+        color: white;
+    }
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.parking-no-result {
+    padding: 70px 25px;
+    border: 1px solid #e4e9f0;
+    background: white;
+    text-align: center;
+}
+
+
+    .parking-no-result > i {
+        display: block;
+        margin-bottom: 13px;
+        color: #a7b4c6;
+        font-size: 45px;
+    }
+
+
+    .parking-no-result h3 {
+        margin-bottom: 8px;
+        font-size: 19px;
+        font-weight: 700;
+    }
+
+
+    .parking-no-result p {
+        color: #64748b;
+        font-size: 12px;
+    }
+
+
+    .parking-no-result a {
+        color: #1769e8;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .parking-results-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .parking-filter-panel {
+        display: none;
+    }
+
+    .parking-result-card {
+        grid-template-columns: 190px 1fr;
+    }
+
+    .parking-result-action {
+        grid-column: 2;
+        justify-content: flex-start;
+        padding: 0 24px 20px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .parking-search-hero h1 {
+        font-size: 32px;
+    }
+
+    .parking-main-search {
+        grid-template-columns: 1fr;
+    }
+
+    .parking-search-submit {
+        min-height: 50px;
+    }
+
+    .parking-results-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .parking-result-card {
+        grid-template-columns: 1fr;
+    }
+
+    .parking-result-image {
+        height: 190px;
+    }
+
+    .parking-result-action {
+        grid-column: auto;
+        justify-content: flex-start;
+        padding: 0 20px 20px;
+    }
+}
+
+.vehicle-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.vehicle-button {
+    flex: 1;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid #dce2ea;
+    background: #ffffff;
+    color: #334155;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+    .vehicle-button:hover {
+        color: #1769e8;
+        border-color: #1769e8;
+        background: #f8fbff;
+    }
+
+.vehicle-radio:checked + .vehicle-button {
+    color: #1769e8;
+    border-color: #1769e8;
+    background: #eff6ff;
+    box-shadow: inset 0 0 0 1px #1769e8;
+}
+/* =========================================================
+   OMNIPARK NOTIFICATION PAGE
+========================================================= */
+
+.notification-page,
+.notification-page * {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.notification-page {
+    min-height: calc(100vh - 68px);
+    padding: 44px 0 75px;
+    background: #f7f9fc;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.notification-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-bottom: 35px;
+}
+
+.notification-heading {
+    max-width: 600px;
+}
+
+.notification-kicker {
+    display: block;
+    margin-bottom: 8px;
+    color: #1769e8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.notification-page-header h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -.04em;
+}
+
+.notification-heading p {
+    margin: 10px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.notification-summary {
+    min-width: 520px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    padding: 22px 28px;
+    border: 1px solid #e5eaf1;
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, .05);
+}
+
+.notification-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.notification-summary-icon {
+    width: 49px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+    .notification-summary-icon.blue {
+        color: #1769e8;
+        background: #eaf2ff;
+    }
+
+    .notification-summary-icon.green {
+        color: #16a36a;
+        background: #e9f9f1;
+    }
+
+    .notification-summary-icon.purple {
+        color: #7048e8;
+        background: #f0ebff;
+    }
+
+.notification-summary-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-summary-item small {
+    color: #64748b;
+    font-size: 11px;
+}
+
+.notification-summary-item strong {
+    margin-top: 2px;
+    color: #0f172a;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.notification-summary-divider {
+    width: 1px;
+    height: 50px;
+    margin: 0 25px;
+    background: #e5e7eb;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.notification-layout {
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.notification-sidebar {
+    padding: 22px 16px;
+    border: 1px solid #e5eaf1;
+    background: #ffffff;
+    box-shadow: 0 7px 22px rgba(15,23,42,.04);
+}
+
+    .notification-sidebar h3 {
+        margin: 0 7px 18px;
+        color: #0f172a;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+.notification-nav-item {
+    width: 100%;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border: 0;
+    background: transparent;
+    color: #475569;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+    .notification-nav-item span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .notification-nav-item i {
+        font-size: 17px;
+    }
+
+    .notification-nav-item strong {
+        min-width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #475569;
+        font-size: 10px;
+    }
+
+    .notification-nav-item:hover,
+    .notification-nav-item.active {
+        background: #eef5ff;
+        color: #1769e8;
+    }
+
+        .notification-nav-item.active strong {
+            color: #1769e8;
+            background: #ffffff;
+        }
+
+
+/* =========================
+   SIDEBAR INFO
+========================= */
+
+.notification-security-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 70px;
+    padding: 16px 13px;
+    background: #f2f7ff;
+    color: #1769e8;
+}
+
+    .notification-security-box > i {
+        margin-top: 2px;
+        font-size: 17px;
+    }
+
+    .notification-security-box strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 10px;
+    }
+
+    .notification-security-box p {
+        margin: 0;
+        color: #64748b;
+        font-size: 9px;
+        line-height: 1.6;
+    }
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.notification-content {
+    border: 1px solid #e5eaf1;
+    background: #ffffff;
+    box-shadow: 0 7px 22px rgba(15,23,42,.04);
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.notification-toolbar {
+    min-height: 69px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 13px 16px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.notification-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notification-tab {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+    .notification-tab:hover {
+        border-color: #1769e8;
+        color: #1769e8;
+    }
+
+    .notification-tab.active {
+        border-color: #1769e8;
+        background: #1769e8;
+        color: #ffffff;
+    }
+
+.notification-tab-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1769e8;
+}
+
+.notification-tab.active .notification-tab-dot {
+    background: #ffffff;
+}
+
+
+/* =========================
+   LIST
+========================= */
+
+.notification-list {
+    padding: 0 12px 12px;
+}
+
+.notification-item {
+    min-height: 88px;
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 17px;
+    border-bottom: 1px solid #e8edf3;
+    background: #ffffff;
+    transition: background .2s ease, transform .2s ease;
+}
+
+    .notification-item:hover {
+        background: #fafcff;
+    }
+
+    .notification-item.unread {
+        background: #f4f8ff;
+    }
+
+
+/* =========================
+   TYPE ICON
+========================= */
+
+.notification-type-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+    .notification-type-icon.booking {
+        background: #5793f5;
+    }
+
+    .notification-type-icon.warning {
+        background: #ffa94d;
+    }
+
+    .notification-type-icon.overtime {
+        background: #7058e5;
+    }
+
+    .notification-type-icon.success {
+        background: #43c89b;
+    }
+
+    .notification-type-icon.danger {
+        background: #ef5d62;
+    }
+
+
+/* =========================
+   TEXT
+========================= */
+
+.notification-item-content h4 {
+    margin: 0 0 4px;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.notification-item-content p {
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+
+/* =========================
+   META
+========================= */
+
+.notification-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #64748b;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.unread-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1769e8;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.notification-empty {
+    padding: 70px 25px;
+    text-align: center;
+}
+
+    .notification-empty > i {
+        display: block;
+        margin-bottom: 12px;
+        color: #b5c1d2;
+        font-size: 43px;
+    }
+
+    .notification-empty h3 {
+        margin-bottom: 6px;
+        color: #0f172a;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .notification-empty p {
+        margin: 0;
+        color: #64748b;
+        font-size: 11px;
+    }
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .notification-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .notification-summary {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .notification-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .notification-sidebar {
+        display: none;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .notification-page {
+        padding-top: 28px;
+    }
+
+    .notification-page-header h1 {
+        font-size: 35px;
+    }
+
+    .notification-summary {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .notification-summary-divider {
+        display: none;
+    }
+
+    .notification-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .notification-tabs {
+        overflow-x: auto;
+    }
+
+    .notification-tab {
+        flex-shrink: 0;
+    }
+
+    .notification-item {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .notification-type-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .notification-item-meta {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+}
+
+.notification-read-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #dce5f1;
+    background: #ffffff;
+    color: #1769e8;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+    .notification-read-btn:hover {
+        border-color: #1769e8;
+        background: #1769e8;
+        color: #ffffff;
+    }
+
+
+.notification-item-meta form {
+    margin: 0;
+}
+
+
+.notification-read-icon {
+    color: #16a34a;
+    font-size: 17px;
+}
+/* =========================================
+   PROFILE PAGE
+   ========================================= */
+
+.profile-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 12px 60px;
+}
+
+.profile-heading {
+    margin-bottom: 24px;
+}
+
+.profile-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    color: #2374e1;
+}
+
+.profile-heading h1 {
+    margin: 5px 0 6px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #172033;
+}
+/* =========================================================
+   OMNIPARK - PROFILE FORMS
+   ========================================================= */
+
+.profile-form-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+    .profile-form-page *,
+    .profile-form-page *::before,
+    .profile-form-page *::after {
+        box-sizing: border-box;
+    }
+
+
+/* ==========================
+   PAGE HEADING
+   ========================== */
+
+.profile-form-heading {
+    margin-bottom: 28px;
+}
+
+    .profile-form-heading h1 {
+        margin: 6px 0 8px;
+        color: #101828;
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .profile-form-heading p {
+        margin: 0;
+        max-width: 760px;
+        color: #667085;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+
+/* ==========================
+   LAYOUT
+   ========================== */
+
+.profile-form-layout {
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.profile-form-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profile-form-main {
+    min-width: 0;
+}
+
+
+/* ==========================
+   USER CARD
+   ========================== */
+
+.profile-form-user-card {
+    padding: 30px 24px 25px;
+    background: #ffffff;
+    border: 1px solid #e4eaf2;
+    border-radius: 18px;
+    box-shadow: 0 10px 34px rgba(20, 45, 85, 0.07);
+    text-align: center;
+}
+
+.profile-form-avatar-wrap {
+    position: relative;
+    width: 116px;
+    height: 116px;
+    margin: 0 auto 17px;
+    padding: 5px;
+    border-radius: 50%;
+    background: #e7f1ff;
+}
+
+.profile-form-avatar {
+    width: 100%;
+    height: 100%;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-form-user-card h2 {
+    margin: 0 0 10px;
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.profile-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 23px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: #eaf3ff;
+    color: #1769d2;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.profile-form-contact {
+    padding-top: 18px;
+    border-top: 1px solid #e9edf3;
+}
+
+    .profile-form-contact > div {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 8px 0;
+        color: #596579;
+        font-size: 13px;
+        text-align: left;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-form-contact i {
+        width: 20px;
+        flex-shrink: 0;
+        color: #687b96;
+        font-size: 16px;
+    }
+
+
+/* ONLINE */
+
+.profile-avatar-online {
+    position: relative;
+}
+
+.profile-online-dot {
+    position: absolute;
+    right: 8px;
+    bottom: 12px;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    background: #25c76f;
+}
+
+
+/* ==========================
+   MAIN CARD
+   ========================== */
+
+.profile-form-card {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 10px 34px rgba(20, 45, 85, 0.06);
+}
+
+.profile-form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 25px 28px;
+    border-bottom: 1px solid #e9edf3;
+}
+
+.profile-form-header-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 13px;
+    background: #ebf4ff;
+    color: #1672e8;
+    font-size: 20px;
+}
+
+.profile-form-card-header h2,
+.profile-password-heading h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.profile-form-card-header p,
+.profile-password-heading p {
+    margin: 4px 0 0;
+    color: #7b8495;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ==========================
+   FORM
+   ========================== */
+
+.profile-form-card form {
+    margin: 0;
+}
+
+.profile-edit-group {
+    margin: 0 28px 20px;
+}
+
+.profile-form-card-header + .profile-validation-summary,
+.profile-validation-summary {
+    margin: 22px 28px 18px;
+}
+
+.profile-edit-group:first-of-type {
+    margin-top: 25px;
+}
+
+.profile-edit-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #172033;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+    .profile-edit-group label > span {
+        color: #ef4444;
+    }
+
+.profile-edit-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border: 1px solid #d6deea;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+    .profile-edit-input:focus-within {
+        border-color: #3182ed;
+        box-shadow: 0 0 0 3px rgba(49, 130, 237, 0.1);
+    }
+
+    .profile-edit-input > i:first-child {
+        position: absolute;
+        left: 16px;
+        color: #8290a5;
+        font-size: 17px;
+        pointer-events: none;
+    }
+
+    .profile-edit-input input {
+        width: 100%;
+        height: 50px;
+        padding: 0 46px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: #172033;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+    }
+
+        .profile-edit-input input::placeholder {
+            color: #a3adbc;
+        }
+
+.profile-edit-disabled {
+    background: #f7f9fc;
+}
+
+    .profile-edit-disabled input {
+        color: #8793a6;
+        cursor: not-allowed;
+    }
+
+.profile-input-end-icon {
+    position: absolute !important;
+    right: 16px !important;
+    left: auto !important;
+    color: #97a1af !important;
+}
+
+.profile-field-note {
+    display: block;
+    margin-top: 6px;
+    color: #98a1b0;
+    font-size: 11px;
+}
+
+.profile-field-error {
+    display: block;
+    margin-top: 6px;
+    color: #dc3545;
+    font-size: 12px;
+}
+
+
+/* OWNER GRID */
+
+.profile-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+    .profile-edit-grid .profile-edit-group {
+        min-width: 0;
+    }
+
+        .profile-edit-grid .profile-edit-group:nth-child(even) {
+            margin-left: 0;
+        }
+
+
+/* ==========================
+   NOTE
+   ========================== */
+
+.profile-edit-note {
+    display: flex;
+    gap: 13px;
+    margin: 5px 28px 24px;
+    padding: 16px;
+    border: 1px solid #dce8f7;
+    border-radius: 12px;
+    background: #f8fbff;
+}
+
+    .profile-edit-note > i {
+        margin-top: 2px;
+        color: #1877e8;
+        font-size: 19px;
+    }
+
+    .profile-edit-note strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #263247;
+        font-size: 13px;
+    }
+
+    .profile-edit-note p {
+        margin: 0;
+        color: #718096;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+
+/* ==========================
+   BUTTONS
+   ========================== */
+
+.profile-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 18px 28px;
+    border-top: 1px solid #e9edf3;
+    background: #fcfdff;
+}
+
+.profile-cancel-btn,
+.profile-save-btn {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
+    border-radius: 9px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.profile-cancel-btn {
+    border: 1px solid #cdd6e2;
+    background: #ffffff;
+    color: #344054;
+}
+
+    .profile-cancel-btn:hover {
+        background: #f5f7fa;
+        color: #182230;
+    }
+
+.profile-save-btn {
+    border: 1px solid #1570ef;
+    background: #1570ef;
+    color: #ffffff;
+}
+
+    .profile-save-btn:hover {
+        border-color: #075fc9;
+        background: #075fc9;
+        color: #ffffff;
+    }
+
+
+/* ==========================
+   BACK
+   ========================== */
+
+.profile-side-back {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 16px;
+    border: 1px solid #e3e9f1;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #536176;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    .profile-side-back:hover {
+        color: #1769d2;
+    }
+
+
+/* =========================================================
+   CHANGE PASSWORD
+   ========================================================= */
+
+.profile-password-heading {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    margin: 28px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid #e9edf3;
+}
+
+.profile-password-shield {
+    display: grid;
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #eaf4ff, #d7e9ff);
+    color: #1570ef;
+    font-size: 34px;
+}
+
+
+/* password icon */
+
+.profile-password-toggle {
+    position: absolute;
+    right: 7px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #677489;
+    cursor: pointer;
+}
+
+    .profile-password-toggle:hover {
+        color: #1769d2;
+    }
+
+
+/* REQUIREMENTS */
+
+.profile-password-requirements {
+    display: flex;
+    gap: 14px;
+    margin: 5px 28px 26px;
+    padding: 18px;
+    border: 1px solid #bdd8ff;
+    border-radius: 12px;
+    background: #f5f9ff;
+}
+
+.profile-requirements-icon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 10px;
+    background: #e0edff;
+    color: #1570ef;
+    font-size: 20px;
+}
+
+.profile-password-requirements strong {
+    color: #253249;
+    font-size: 13px;
+}
+
+.profile-password-requirements ul {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.profile-password-requirements li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 7px;
+    color: #627087;
+    font-size: 12px;
+}
+
+    .profile-password-requirements li i {
+        color: #1570ef;
+    }
+
+
+/* ==========================
+   SECURITY SIDEBAR
+   ========================== */
+
+.profile-security-menu {
+    overflow: hidden;
+    padding: 8px;
+    border: 1px solid #e4eaf2;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(20, 45, 85, .05);
+}
+
+    .profile-security-menu a {
+        display: grid;
+        grid-template-columns: 24px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        min-height: 50px;
+        padding: 0 12px;
+        border-radius: 10px;
+        color: #526074;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .profile-security-menu a:hover {
+            background: #f5f8fc;
+        }
+
+        .profile-security-menu a.active {
+            background: #eaf3ff;
+            color: #1268d4;
+            font-weight: 700;
+        }
+
+
+/* VALIDATION */
+
+.profile-validation-summary:empty {
+    display: none;
+}
+
+.profile-validation-summary {
+    padding: 12px 15px;
+    border: 1px solid #ffd2d7;
+    border-radius: 10px;
+    background: #fff6f7;
+    color: #b42318;
+    font-size: 12px;
+}
+
+
+/* ==========================
+   RESPONSIVE
+   ========================== */
+
+@media (max-width: 900px) {
+
+    .profile-form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-form-sidebar {
+        order: 2;
+    }
+
+    .profile-form-main {
+        order: 1;
+    }
+
+    .profile-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .profile-edit-grid .profile-edit-group {
+            margin-left: 28px;
+        }
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-form-page {
+        padding: 20px 10px 50px;
+    }
+
+    .profile-form-heading h1 {
+        font-size: 28px;
+    }
+
+    .profile-form-card-header,
+    .profile-password-heading {
+        align-items: flex-start;
+    }
+
+    .profile-password-shield {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+    }
+
+    .profile-edit-group,
+    .profile-form-card-header + .profile-validation-summary,
+    .profile-validation-summary,
+    .profile-password-heading,
+    .profile-password-requirements,
+    .profile-edit-note {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    .profile-edit-grid .profile-edit-group {
+        margin-left: 18px;
+    }
+
+    .profile-form-actions {
+        flex-direction: column-reverse;
+        padding: 16px 18px;
+    }
+
+    .profile-cancel-btn,
+    .profile-save-btn {
+        width: 100%;
+    }
+}
+/* =====================================================
+   PROFILE PAGE - OMNIPARK
+   ===================================================== */
+
+.profile-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.profile-hero {
+    margin-bottom: 24px;
+    padding: 30px 32px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0b2d63 0%, #114ea8 60%, #267dff 100%);
+    color: #fff;
+    box-shadow: 0 16px 40px rgba(17, 78, 168, 0.18);
+}
+
+.profile-hero-kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.profile-hero h1 {
+    margin: 0 0 8px;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.profile-hero p {
+    margin: 0;
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.profile-sidebar,
+.profile-main {
+    min-width: 0;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #e6edf7;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(27, 52, 90, 0.06);
+}
+
+.profile-user-card {
+    padding: 28px 22px;
+    text-align: center;
+}
+
+.profile-avatar-wrap {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 16px;
+    padding: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2c7dff, #94c0ff);
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-user-card h2 {
+    margin: 0 0 10px;
+    color: #172033;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.profile-role-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: #edf5ff;
+    color: #1569d8;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.profile-contact-list {
+    padding-top: 16px;
+    border-top: 1px solid #edf1f6;
+    text-align: left;
+}
+
+.profile-contact-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 9px 0;
+    color: #5e6b7e;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+    .profile-contact-item i {
+        width: 18px;
+        color: #1c73df;
+    }
+
+.profile-stats-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.profile-stat-card {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 18px;
+}
+
+.profile-stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 20px;
+}
+
+.profile-stat-card strong {
+    display: block;
+    color: #172033;
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.profile-stat-card span {
+    color: #7c8697;
+    font-size: 13px;
+}
+
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-section {
+    padding: 24px;
+}
+
+.profile-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.profile-section-title {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.profile-section-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 20px;
+}
+
+.profile-section-title h3 {
+    margin: 0;
+    color: #172033;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.profile-section-title p {
+    margin: 4px 0 0;
+    color: #7a8596;
+    font-size: 13px;
+}
+
+.profile-action-btn,
+.profile-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.profile-action-btn {
+    background: #1569d8;
+    color: #fff;
+}
+
+    .profile-action-btn:hover {
+        background: #0e59bb;
+        color: #fff;
+    }
+
+.profile-secondary-btn {
+    border: 1px solid #d8e2ef;
+    background: #fff;
+    color: #22314a;
+}
+
+    .profile-secondary-btn:hover {
+        background: #f5f8fc;
+        color: #22314a;
+    }
+
+.profile-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 26px;
+}
+
+.profile-info-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #edf1f6;
+}
+
+    .profile-info-item span {
+        display: block;
+        margin-bottom: 5px;
+        color: #7c8798;
+        font-size: 13px;
+    }
+
+    .profile-info-item strong {
+        color: #172033;
+        font-size: 16px;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+    }
+
+.profile-status-active {
+    color: #198754 !important;
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.profile-status-locked {
+    color: #dc3545 !important;
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.profile-vehicle-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.profile-vehicle-card {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #e8eef6;
+    background: #fbfdff;
+}
+
+.profile-vehicle-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 20px;
+}
+
+.profile-vehicle-content strong,
+.profile-vehicle-content span,
+.profile-vehicle-content small {
+    display: block;
+}
+
+.profile-vehicle-content strong {
+    color: #172033;
+    font-size: 15px;
+}
+
+.profile-vehicle-content span {
+    color: #667085;
+    font-size: 13px;
+}
+
+.profile-vehicle-content small {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 12px;
+}
+
+.profile-empty-box {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 18px;
+    border: 1px dashed #cfd8e6;
+    border-radius: 14px;
+    background: #f9fbfe;
+}
+
+    .profile-empty-box i {
+        color: #8ca0bc;
+        font-size: 26px;
+    }
+
+    .profile-empty-box strong {
+        display: block;
+        color: #22314a;
+    }
+
+    .profile-empty-box p {
+        margin: 4px 0 0;
+        color: #7c8697;
+        font-size: 13px;
+    }
+
+.profile-alert {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile-alert-success {
+    background: #e9f9ef;
+    color: #18794e;
+    border: 1px solid #c8ebd5;
+}
+
+.profile-alert-error {
+    background: #fff2f3;
+    color: #c01048;
+    border: 1px solid #ffd0d5;
+}
+
+@media (max-width: 991px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-info-grid,
+    .profile-vehicle-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .profile-page {
+        padding: 18px 12px 48px;
+    }
+
+    .profile-hero {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+        .profile-hero h1 {
+            font-size: 28px;
+        }
+
+    .profile-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-action-btn,
+    .profile-secondary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* ======================================================
+   OWNER - CREATE PARKING LOT
+   ====================================================== */
+
+.owner-create-lot-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 16px 70px;
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.owner-create-lot-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 26px;
+    padding: 30px 32px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #0b2e68 0%, #1158c7 65%, #2780ff 100%);
+    color: #fff;
+    box-shadow: 0 18px 45px rgba(16, 79, 178, 0.18);
+}
+
+.owner-create-lot-kicker {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    color: #bcd8ff;
+}
+
+.owner-create-lot-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.owner-create-lot-header p {
+    max-width: 720px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.owner-pending-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.owner-create-lot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.owner-lot-card {
+    overflow: hidden;
+    border: 1px solid #e4eaf3;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 34px rgba(25, 48, 84, 0.06);
+}
+
+.owner-lot-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 26px;
+    border-bottom: 1px solid #edf1f6;
+    background: #fbfdff;
+}
+
+.owner-lot-step {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 12px;
+    background: #eaf3ff;
+    color: #1268d6;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.owner-lot-card-header h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.owner-lot-card-header p {
+    margin: 3px 0 0;
+    color: #7c8798;
+    font-size: 12px;
+}
+
+.owner-lot-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding: 26px;
+}
+
+.owner-lot-field-full {
+    grid-column: 1 / -1;
+}
+
+.owner-lot-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #263247;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+    .owner-lot-field label > span {
+        color: #dc3545;
+    }
+
+.owner-lot-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    border: 1px solid #d7dfeb;
+    border-radius: 11px;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+    .owner-lot-input:focus-within {
+        border-color: #2676e8;
+        box-shadow: 0 0 0 3px rgba(38, 118, 232, 0.1);
+    }
+
+    .owner-lot-input i {
+        position: absolute;
+        left: 16px;
+        color: #8491a5;
+        font-size: 17px;
+    }
+
+    .owner-lot-input input {
+        width: 100%;
+        height: 50px;
+        padding: 0 16px 0 46px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: #172033;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+    }
+
+        .owner-lot-input input::placeholder {
+            color: #a1aabc;
+        }
+
+.owner-lot-field-error {
+    display: block;
+    margin-top: 6px;
+    color: #d92d20;
+    font-size: 12px;
+}
+
+.owner-lot-map-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 26px 26px;
+    padding: 22px;
+    border: 1px dashed #b8cae3;
+    border-radius: 15px;
+    background: linear-gradient(rgba(245, 249, 255, 0.92), rgba(245, 249, 255, 0.92)), repeating-linear-gradient( 45deg, #eaf1fa, #eaf1fa 10px, #f4f8fd 10px, #f4f8fd 20px );
+}
+
+.owner-lot-map-icon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 14px;
+    background: #dfeeff;
+    color: #1268d6;
+    font-size: 24px;
+}
+
+.owner-lot-map-placeholder strong {
+    color: #263247;
+    font-size: 14px;
+}
+
+.owner-lot-map-placeholder p {
+    margin: 4px 0 0;
+    color: #79869a;
+    font-size: 12px;
+}
+
+.owner-lot-amenities {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    padding: 26px;
+}
+
+.owner-amenity-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px;
+    border: 1px solid #e1e7ef;
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .owner-amenity-option:hover {
+        border-color: #b6cef0;
+        background: #f9fbff;
+    }
+
+    .owner-amenity-option input {
+        position: absolute;
+        top: 13px;
+        right: 13px;
+        width: 17px;
+        height: 17px;
+        accent-color: #1769d2;
+    }
+
+    .owner-amenity-option:has(input:checked) {
+        border-color: #7db0f4;
+        background: #f0f6ff;
+    }
+
+.owner-amenity-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 18px;
+}
+
+.owner-amenity-option strong,
+.owner-amenity-option small {
+    display: block;
+}
+
+.owner-amenity-option strong {
+    padding-right: 22px;
+    color: #263247;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.owner-amenity-option small {
+    margin-top: 3px;
+    color: #8b95a5;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.owner-lot-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 18px;
+    border: 1px solid #cfe0f8;
+    border-radius: 14px;
+    background: #f5f9ff;
+}
+
+    .owner-lot-notice > i {
+        margin-top: 2px;
+        color: #1769d2;
+        font-size: 19px;
+    }
+
+    .owner-lot-notice strong {
+        color: #263247;
+        font-size: 13px;
+    }
+
+    .owner-lot-notice p {
+        margin: 4px 0 0;
+        color: #68788f;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+.owner-lot-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 4px;
+}
+
+.owner-lot-cancel-btn,
+.owner-lot-submit-btn {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.owner-lot-cancel-btn {
+    border: 1px solid #cfd8e5;
+    background: #fff;
+    color: #44536a;
+}
+
+    .owner-lot-cancel-btn:hover {
+        background: #f6f8fb;
+        color: #263247;
+    }
+
+.owner-lot-submit-btn {
+    border: 1px solid #1769d2;
+    background: #1769d2;
+    color: #fff;
+}
+
+    .owner-lot-submit-btn:hover {
+        border-color: #0e59b9;
+        background: #0e59b9;
+    }
+
+.owner-lot-validation:empty {
+    display: none;
+}
+
+.owner-lot-validation {
+    padding: 14px 16px;
+    border: 1px solid #ffd0d5;
+    border-radius: 12px;
+    background: #fff5f6;
+    color: #b42318;
+    font-size: 12px;
+}
+
+@media (max-width: 900px) {
+
+    .owner-lot-form-grid,
+    .owner-lot-amenities {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-lot-field-full {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .owner-create-lot-page {
+        padding: 20px 10px 50px;
+    }
+
+    .owner-create-lot-header {
+        flex-direction: column;
+        padding: 24px 20px;
+    }
+
+        .owner-create-lot-header h1 {
+            font-size: 27px;
+        }
+
+    .owner-lot-form-grid,
+    .owner-lot-amenities,
+    .owner-lot-card-header {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .owner-lot-map-placeholder {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    .owner-lot-actions {
+        flex-direction: column-reverse;
+    }
+
+    .owner-lot-cancel-btn,
+    .owner-lot-submit-btn {
+        width: 100%;
+    }
+}
+/* =====================================================
+   OWNER EMPLOYEE MANAGEMENT
+   ===================================================== */
+
+.owner-employee-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 30px 18px 70px;
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.owner-employee-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.owner-employee-kicker {
+    color: #1769d2;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+.owner-employee-heading h1 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0 6px;
+    color: #172033;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+    .owner-employee-heading h1 i {
+        color: #1769d2;
+    }
+
+.owner-employee-heading p {
+    margin: 0;
+    color: #7a8597;
+    font-size: 14px;
+}
+
+.owner-employee-add-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 18px;
+    border-radius: 10px;
+    background: #1769d2;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(23, 105, 210, 0.18);
+}
+
+    .owner-employee-add-top:hover {
+        background: #0e59b9;
+        color: #fff;
+    }
+
+.owner-employee-card {
+    margin-bottom: 22px;
+    overflow: hidden;
+    border: 1px solid #e3eaf3;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 32px rgba(25, 48, 84, 0.06);
+}
+
+.owner-employee-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+    .owner-employee-card-title h2,
+    .owner-create-employee-title h2 {
+        margin: 0;
+        color: #172033;
+        font-size: 19px;
+        font-weight: 800;
+    }
+
+    .owner-employee-card-title p,
+    .owner-create-employee-title p {
+        margin: 4px 0 0;
+        color: #8590a1;
+        font-size: 12px;
+    }
+
+.owner-employee-count {
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.owner-employee-table-wrap {
+    overflow-x: auto;
+    padding: 0 24px 22px;
+}
+
+.owner-employee-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+
+    .owner-employee-table th {
+        padding: 14px;
+        border-bottom: 1px solid #e3e9f1;
+        background: #f8fafc;
+        color: #606b7d;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: left;
+    }
+
+    .owner-employee-table td {
+        padding: 15px 14px;
+        border-bottom: 1px solid #edf1f6;
+        color: #344054;
+        font-size: 13px;
+        vertical-align: middle;
+    }
+
+    .owner-employee-table tbody tr:hover {
+        background: #fbfdff;
+    }
+
+.owner-employee-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.owner-employee-avatar {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 50%;
+    background: #eaf3ff;
+    color: #1769d2;
+    font-size: 17px;
+}
+
+.owner-employee-user strong {
+    display: block;
+    color: #172033;
+    font-size: 13px;
+}
+
+.owner-employee-user small {
+    display: block;
+    margin-top: 2px;
+    color: #98a2b3;
+    font-size: 11px;
+}
+
+.owner-employee-email {
+    color: #475467;
+}
+
+.owner-shift-badge {
+    display: inline-flex;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #eaf3ff;
+    color: #1769d2;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.owner-working-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #eafaf1;
+    color: #168956;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+    .owner-working-badge i {
+        font-size: 6px;
+    }
+
+.owner-employee-delete-btn {
+    display: inline-grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid #ffc6c6;
+    border-radius: 9px;
+    background: #fff;
+    color: #e5484d;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .owner-employee-delete-btn:hover {
+        background: #fff1f1;
+    }
+
+.owner-create-employee-card {
+    padding: 24px;
+}
+
+.owner-create-employee-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.owner-create-title-bar {
+    width: 4px;
+    min-height: 42px;
+    border-radius: 99px;
+    background: #1769d2;
+}
+
+.owner-employee-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 22px;
+}
+
+.owner-employee-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+    .owner-employee-field label span {
+        color: #e5484d;
+    }
+
+.owner-employee-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    border: 1px solid #d8e0eb;
+    border-radius: 10px;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+    .owner-employee-input-wrap:focus-within {
+        border-color: #2676e8;
+        box-shadow: 0 0 0 3px rgba(38, 118, 232, 0.1);
+    }
+
+    .owner-employee-input-wrap > i {
+        position: absolute;
+        left: 15px;
+        color: #8b97a8;
+    }
+
+    .owner-employee-input-wrap input,
+    .owner-employee-input-wrap select {
+        width: 100%;
+        min-height: 48px;
+        padding: 0 42px;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: #172033;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 13px;
+    }
+
+    .owner-employee-input-wrap select {
+        cursor: pointer;
+    }
+
+.owner-password-toggle {
+    position: absolute;
+    right: 12px;
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #7d8899;
+    cursor: pointer;
+}
+
+.owner-employee-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: end;
+    min-height: 50px;
+    padding: 13px 15px;
+    border: 1px solid #cfe0f8;
+    border-radius: 10px;
+    background: #f5f9ff;
+}
+
+    .owner-employee-info i {
+        color: #1769d2;
+    }
+
+    .owner-employee-info p {
+        margin: 0;
+        color: #68788f;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+.owner-employee-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.owner-create-employee-btn,
+.owner-employee-back-btn {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 17px;
+    border-radius: 9px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.owner-create-employee-btn {
+    border: 0;
+    background: #1769d2;
+    color: #fff;
+}
+
+    .owner-create-employee-btn:hover {
+        background: #0f5bbb;
+    }
+
+.owner-employee-back-btn {
+    border: 1px solid #d3dbe7;
+    background: #fff;
+    color: #475467;
+}
+
+    .owner-employee-back-btn:hover {
+        background: #f8fafc;
+        color: #344054;
+    }
+
+.owner-employee-empty {
+    padding: 48px 20px;
+    text-align: center;
+}
+
+.owner-employee-empty-icon {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 14px;
+    place-items: center;
+    border-radius: 18px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 27px;
+}
+
+.owner-employee-empty h3 {
+    margin: 0;
+    color: #172033;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.owner-employee-empty p {
+    margin: 6px 0 0;
+    color: #8a95a5;
+    font-size: 12px;
+}
+
+.owner-employee-alert {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.owner-employee-alert-success {
+    border: 1px solid #bee8d0;
+    background: #edf9f2;
+    color: #168956;
+}
+
+.owner-employee-alert-error {
+    border: 1px solid #ffd0d5;
+    background: #fff4f5;
+    color: #c82734;
+}
+
+@media (max-width: 900px) {
+    .owner-employee-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .owner-employee-page {
+        padding: 20px 10px 50px;
+    }
+
+    .owner-employee-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+        .owner-employee-heading h1 {
+            font-size: 27px;
+        }
+
+    .owner-employee-add-top {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .owner-create-employee-card {
+        padding: 18px;
+    }
+
+    .owner-employee-actions {
+        flex-direction: column;
+    }
+
+    .owner-create-employee-btn,
+    .owner-employee-back-btn {
+        width: 100%;
+    }
+}
+/* ======================================================
+   ADMIN DASHBOARD - OMNIPARK
+   ====================================================== */
+
+.admin-dashboard-page {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 32px 22px 70px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #172033;
+}
+
+/* HEADER */
+
+.admin-dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 26px;
+    margin-bottom: 26px;
+}
+
+.admin-dashboard-welcome {
+    color: #59677a;
+    font-size: 14px;
+}
+
+    .admin-dashboard-welcome strong {
+        color: #172033;
+        font-weight: 800;
+    }
+
+.admin-dashboard-header h1 {
+    margin: 7px 0;
+    color: #111827;
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.admin-dashboard-header p {
+    margin: 0;
+    color: #8792a4;
+    font-size: 13px;
+}
+
+.admin-dashboard-date {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 190px;
+    padding: 12px 15px;
+    border: 1px solid #dde5ef;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 5px 18px rgba(25, 43, 72, .04);
+}
+
+    .admin-dashboard-date > i {
+        color: #1769d2;
+        font-size: 18px;
+    }
+
+    .admin-dashboard-date span,
+    .admin-dashboard-date strong {
+        display: block;
+    }
+
+    .admin-dashboard-date span {
+        color: #98a2b3;
+        font-size: 9px;
+    }
+
+    .admin-dashboard-date strong {
+        margin-top: 2px;
+        color: #344054;
+        font-size: 12px;
+    }
+
+/* STATS */
+
+.admin-dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.admin-stat-card {
+    padding: 21px;
+    border: 1px solid #e3e9f1;
+    border-radius: 17px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(25, 43, 72, .055);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+    .admin-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 34px rgba(25, 43, 72, .08);
+    }
+
+.admin-stat-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.admin-stat-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #58667a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-stat-value {
+    display: block;
+    color: #111827;
+    font-size: 29px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.admin-stat-icon {
+    display: grid;
+    width: 49px;
+    height: 49px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 21px;
+}
+
+.admin-stat-icon-blue {
+    background: #eaf3ff;
+    color: #1769d2;
+}
+
+.admin-stat-icon-green {
+    background: #e9f9f0;
+    color: #16a160;
+}
+
+.admin-stat-icon-orange {
+    background: #fff3e7;
+    color: #ee7925;
+}
+
+.admin-stat-icon-purple {
+    background: #f4eaff;
+    color: #8c3ed9;
+}
+
+.admin-stat-footer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+    padding-top: 13px;
+    border-top: 1px solid #edf1f6;
+}
+
+    .admin-stat-footer small {
+        color: #8a95a6;
+        font-size: 10px;
+    }
+
+    .admin-stat-footer > i {
+        margin-left: auto;
+        color: #8babda;
+    }
+
+.admin-stat-positive {
+    color: #159b5b;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.admin-stat-orange {
+    color: #ee7925;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* ACTION BUTTONS */
+
+.admin-dashboard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.admin-dashboard-tab {
+    position: relative;
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 17px;
+    border: 1px solid #d6dfe9;
+    border-radius: 9px;
+    background: #fff;
+    color: #435168;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+    .admin-dashboard-tab:hover {
+        border-color: #a9c7ef;
+        background: #f8fbff;
+        color: #1769d2;
+    }
+
+.admin-dashboard-tab-primary {
+    border-color: #1769d2;
+    background: #1769d2;
+    color: #fff;
+    box-shadow: 0 7px 18px rgba(23, 105, 210, .17);
+}
+
+    .admin-dashboard-tab-primary:hover {
+        background: #105bbb;
+        color: #fff;
+    }
+
+.admin-tab-badge {
+    display: grid;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    place-items: center;
+    border-radius: 999px;
+    background: #fff;
+    color: #1769d2;
+    font-size: 9px;
+}
+
+/* GRID */
+
+.admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(310px, .95fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-dashboard-card {
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(25, 43, 72, .055);
+}
+
+.admin-dashboard-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 21px 23px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+    .admin-dashboard-card-header h2 {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0;
+        color: #172033;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+        .admin-dashboard-card-header h2 i {
+            color: #1769d2;
+        }
+
+    .admin-dashboard-card-header p {
+        margin: 4px 0 0;
+        color: #8a95a6;
+        font-size: 11px;
+    }
+
+.admin-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 11px;
+    border: 1px solid #dce4ee;
+    border-radius: 8px;
+    color: #1769d2;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+    .admin-view-all:hover {
+        background: #f5f9ff;
+    }
+
+/* EMPTY / PENDING */
+
+.admin-empty-state,
+.admin-pending-state {
+    min-height: 330px;
+    padding: 65px 25px;
+    text-align: center;
+}
+
+.admin-empty-icon,
+.admin-pending-icon {
+    display: grid;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 16px;
+    place-items: center;
+    border-radius: 22px;
+    font-size: 31px;
+}
+
+.admin-empty-icon {
+    background: #edf5ff;
+    color: #75a7e9;
+}
+
+.admin-pending-icon {
+    background: #fff3e7;
+    color: #ef7c29;
+}
+
+.admin-empty-state h3,
+.admin-pending-state h3 {
+    margin: 0;
+    color: #263247;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.admin-empty-state p,
+.admin-pending-state p {
+    max-width: 500px;
+    margin: 7px auto 0;
+    color: #8a95a6;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.admin-pending-btn {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+    padding: 0 14px;
+    border-radius: 9px;
+    background: #1769d2;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+    .admin-pending-btn:hover {
+        background: #105bbb;
+        color: #fff;
+    }
+
+/* OVERVIEW */
+
+.admin-system-overview {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-overview-list {
+    flex: 1;
+    padding: 11px 22px;
+}
+
+.admin-overview-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf1f6;
+}
+
+    .admin-overview-item:last-child {
+        border-bottom: 0;
+    }
+
+    .admin-overview-item > div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+.admin-overview-icon {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 8px;
+    background: #f4f7fb;
+    color: #67788f;
+}
+
+.admin-overview-item span {
+    color: #59677c;
+    font-size: 11px;
+}
+
+.admin-overview-item strong {
+    color: #172033;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* UPDATE BOX */
+
+.admin-update-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 21px 21px;
+    padding: 13px;
+    border: 1px solid #cfe0f8;
+    border-radius: 11px;
+    background: #f5f9ff;
+}
+
+.admin-update-icon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 10px;
+    background: #e2edff;
+    color: #1769d2;
+}
+
+.admin-update-box strong,
+.admin-update-box span {
+    display: block;
+}
+
+.admin-update-box strong {
+    color: #1769d2;
+    font-size: 10px;
+}
+
+.admin-update-box div > span {
+    margin-top: 2px;
+    color: #7e8a9d;
+    font-size: 9px;
+}
+
+.admin-online-dot {
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: #22b66e;
+    box-shadow: 0 0 0 4px rgba(34, 182, 110, .1);
+}
+
+/* QUICK */
+
+.admin-dashboard-quick {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 21px;
+    border: 1px solid #dfe7f2;
+    border-radius: 16px;
+    background: linear-gradient( 90deg, #f7faff 0%, #fbfdff 60%, #f2f7ff 100% );
+}
+
+    .admin-dashboard-quick > div {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+.admin-quick-icon {
+    display: grid;
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 13px;
+    background: #deebff;
+    color: #1769d2;
+    font-size: 20px;
+}
+
+.admin-dashboard-quick strong {
+    color: #263247;
+    font-size: 12px;
+}
+
+.admin-dashboard-quick p {
+    margin: 3px 0 0;
+    color: #718096;
+    font-size: 10px;
+}
+
+.admin-dashboard-quick > a {
+    display: inline-flex;
+    min-height: 40px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 7px;
+    padding: 0 14px;
+    border: 1px solid #cddcf0;
+    border-radius: 9px;
+    background: #fff;
+    color: #1769d2;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .admin-dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .admin-dashboard-page {
+        padding: 21px 11px 55px;
+    }
+
+    .admin-dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+        .admin-dashboard-header h1 {
+            font-size: 30px;
+        }
+
+    .admin-dashboard-date {
+        width: 100%;
+    }
+
+    .admin-dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-dashboard-tab {
+        flex: 1;
+    }
+
+    .admin-dashboard-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-dashboard-quick {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+        .admin-dashboard-quick > a {
+            width: 100%;
+            justify-content: center;
+        }
+}
+/* =========================================
+   ADMIN USER - EXTRA UI
+   ========================================= */
+
+.admin-user-summary-icon.admin-color {
+    background: #e8f1ff;
+    color: #2769ce;
+}
+
+.admin-users-alert-success {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border: 1px solid #bde8cf;
+    border-radius: 11px;
+    background: #edf9f2;
+    color: #188653;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.admin-user-index {
+    color: #7a8798 !important;
+    font-weight: 600;
+}
+
+.admin-user-person > div:last-child {
+    min-width: 0;
+}
+
+.admin-user-person small {
+    display: block;
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.admin-user-toggle-form {
+    display: inline-block;
+    margin: 0;
+}
+
+button.admin-user-action.unlock {
+    border: 1px solid #83d4a8;
+    background: #fff;
+    color: #14834e;
+    cursor: pointer;
+}
+
+    button.admin-user-action.unlock:hover {
+        background: #effaf4;
+    }
+
+.admin-users-empty {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.admin-users-empty-icon {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 15px;
+    place-items: center;
+    border-radius: 19px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 28px;
+}
+
+.admin-users-empty h3 {
+    margin: 0;
+    color: #253247;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.admin-users-empty p {
+    margin: 6px 0 0;
+    color: #8a95a6;
+    font-size: 11px;
+}
+/* =======================================================
+/* =====================================================
+   OWNER PARKING LOT IMAGE UPLOAD
+   ===================================================== */
+
+.owner-lot-image-section {
+    margin-top: 22px;
+    padding: 24px;
+    border: 1px solid #e3e9f1;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(25, 43, 72, .055);
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.owner-lot-image-header {
+    margin-bottom: 20px;
+}
+
+    .owner-lot-image-header h2 {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0;
+        color: #172033;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+        .owner-lot-image-header h2 i {
+            color: #1769d2;
+        }
+
+    .owner-lot-image-header p {
+        margin: 5px 0 0;
+        color: #8490a2;
+        font-size: 11px;
+    }
+
+.owner-lot-upload-form {
+    padding: 18px;
+    border: 1px solid #e0e7f0;
+    border-radius: 15px;
+    background: #fbfdff;
+}
+
+.owner-lot-upload-box {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 16px;
+}
+
+.owner-lot-upload-label {
+    display: flex;
+    min-height: 170px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px dashed #b9cce6;
+    border-radius: 14px;
+    background: #f7faff;
+    cursor: pointer;
+    text-align: center;
+    transition: .2s ease;
+}
+
+    .owner-lot-upload-label:hover {
+        border-color: #1769d2;
+        background: #f1f7ff;
+    }
+
+.owner-lot-upload-icon {
+    display: grid;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    place-items: center;
+    border-radius: 14px;
+    background: #e3efff;
+    color: #1769d2;
+    font-size: 23px;
+}
+
+.owner-lot-upload-label strong {
+    color: #263247;
+    font-size: 13px;
+}
+
+.owner-lot-upload-label span {
+    margin-top: 5px;
+    color: #8b96a7;
+    font-size: 10px;
+}
+
+.owner-lot-preview {
+    overflow: hidden;
+    min-height: 170px;
+    border-radius: 14px;
+    background: #edf2f7;
+}
+
+    .owner-lot-preview img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+    }
+
+.owner-lot-primary-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+    color: #4d5a6f;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+    .owner-lot-primary-check input {
+        width: 16px;
+        height: 16px;
+        accent-color: #1769d2;
+    }
+
+.owner-lot-upload-btn {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 9px;
+    background: #1769d2;
+    color: #fff;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+    .owner-lot-upload-btn:hover {
+        background: #105bbb;
+    }
+
+/* GALLERY */
+
+.owner-lot-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.owner-lot-gallery-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid #e0e7ef;
+    border-radius: 13px;
+    background: #f2f5f9;
+}
+
+    .owner-lot-gallery-item > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.owner-lot-primary-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .94);
+    color: #e8a100;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.owner-lot-image-delete {
+    position: absolute;
+    right: 9px;
+    bottom: 9px;
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border: 0;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .95);
+    color: #db454b;
+    cursor: pointer;
+}
+
+    .owner-lot-image-delete:hover {
+        background: #fff0f0;
+    }
+
+.owner-lot-no-images {
+    display: flex;
+    min-height: 140px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    border: 1px dashed #d1dce9;
+    border-radius: 13px;
+    background: #fafcff;
+    text-align: center;
+}
+
+    .owner-lot-no-images > i {
+        margin-bottom: 8px;
+        color: #91add2;
+        font-size: 27px;
+    }
+
+    .owner-lot-no-images strong {
+        color: #3a475b;
+        font-size: 12px;
+    }
+
+    .owner-lot-no-images span {
+        margin-top: 4px;
+        color: #8c97a7;
+        font-size: 10px;
+    }
+
+@media (max-width: 900px) {
+    .owner-lot-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .owner-lot-upload-box {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-lot-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   ADMIN USERS PAGE - OMNIPARK
+   ========================================================= */
+
+.admin-users-page {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 30px 24px 70px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #172033;
+}
+
+
+/* ================= HEADER ================= */
+
+.admin-users-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.admin-users-kicker {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #1769d2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.admin-users-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 31px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.admin-users-header p {
+    max-width: 700px;
+    margin: 8px 0 0;
+    color: #7d899a;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* ================= ALERT ================= */
+
+.admin-users-alert-success {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border: 1px solid #cdebd9;
+    border-radius: 11px;
+    background: #f0fbf4;
+    color: #168653;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ================= SUMMARY ================= */
+
+.admin-users-summary {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.admin-user-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 102px;
+    padding: 17px;
+    border: 1px solid #e3e9f1;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(22, 39, 69, .045);
+}
+
+.admin-user-summary-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 13px;
+    font-size: 18px;
+}
+
+    .admin-user-summary-icon.blue {
+        background: #eaf3ff;
+        color: #1769d2;
+    }
+
+    .admin-user-summary-icon.green {
+        background: #eaf9f1;
+        color: #15915a;
+    }
+
+    .admin-user-summary-icon.orange {
+        background: #fff3e7;
+        color: #d17c16;
+    }
+
+    .admin-user-summary-icon.purple {
+        background: #f3edff;
+        color: #795dc7;
+    }
+
+    .admin-user-summary-icon.admin-color {
+        background: #edf1ff;
+        color: #4e64cb;
+    }
+
+.admin-user-summary-card span,
+.admin-user-summary-card strong,
+.admin-user-summary-card small {
+    display: block;
+}
+
+.admin-user-summary-card span {
+    color: #8490a3;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.admin-user-summary-card strong {
+    margin-top: 2px;
+    color: #172033;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.admin-user-summary-card small {
+    margin-top: 3px;
+    color: #a0a9b7;
+    font-size: 8px;
+}
+
+
+/* ================= ROLE TABS ================= */
+
+.admin-user-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+.admin-user-tab {
+    display: inline-flex;
+    min-height: 35px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    border: 1px solid #dfe6ee;
+    border-radius: 9px;
+    background: #fff;
+    color: #647086;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+    .admin-user-tab:hover {
+        border-color: #b7cae3;
+        background: #f5f9ff;
+        color: #1769d2;
+    }
+
+    .admin-user-tab.active {
+        border-color: #1769d2;
+        background: #1769d2;
+        color: #fff;
+    }
+
+
+/* ================= SEARCH / FILTER ================= */
+
+.admin-user-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.admin-user-search {
+    position: relative;
+    flex: 1;
+}
+
+    .admin-user-search i {
+        position: absolute;
+        top: 50%;
+        left: 14px;
+        transform: translateY(-50%);
+        color: #98a2b3;
+        font-size: 13px;
+    }
+
+    .admin-user-search input {
+        width: 100%;
+        min-height: 43px;
+        padding: 0 15px 0 40px;
+        border: 1px solid #dce3ec;
+        border-radius: 10px;
+        outline: none;
+        background: #fff;
+        color: #344054;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 10px;
+    }
+
+        .admin-user-search input:focus {
+            border-color: #1769d2;
+            box-shadow: 0 0 0 3px rgba(23, 105, 210, .08);
+        }
+
+.admin-user-filter {
+    position: relative;
+    width: 200px;
+}
+
+    .admin-user-filter i {
+        position: absolute;
+        top: 50%;
+        left: 13px;
+        z-index: 2;
+        transform: translateY(-50%);
+        color: #98a2b3;
+        pointer-events: none;
+    }
+
+    .admin-user-filter select {
+        width: 100%;
+        min-height: 43px;
+        padding: 0 35px;
+        border: 1px solid #dce3ec;
+        border-radius: 10px;
+        outline: none;
+        background: #fff;
+        color: #536075;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 10px;
+    }
+
+
+/* ================= TABLE CARD ================= */
+
+.admin-users-table-card {
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 34px rgba(22, 39, 69, .055);
+}
+
+.admin-users-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .admin-users-table thead {
+        background: #f8fafc;
+    }
+
+    .admin-users-table th {
+        padding: 14px 18px;
+        border-bottom: 1px solid #e7edf4;
+        color: #778398;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: .35px;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    .admin-users-table td {
+        padding: 15px 18px;
+        border-bottom: 1px solid #edf1f5;
+        vertical-align: middle;
+    }
+
+    .admin-users-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .admin-users-table tbody tr {
+        transition: background .15s ease;
+    }
+
+        .admin-users-table tbody tr:hover {
+            background: #fbfdff;
+        }
+
+
+/* ================= INDEX ================= */
+
+.admin-user-index {
+    width: 46px;
+    color: #98a2b3;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* ================= USER ================= */
+
+.admin-user-person {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.admin-user-avatar {
+    display: grid;
+    width: 41px;
+    height: 41px;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid #d4e4f7;
+    border-radius: 11px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-user-person strong,
+.admin-user-person small {
+    display: block;
+}
+
+.admin-user-person strong {
+    color: #28364a;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.admin-user-person small {
+    margin-top: 3px;
+    color: #9aa4b3;
+    font-size: 8px;
+}
+
+.admin-user-email {
+    color: #5f6c80;
+    font-size: 10px;
+}
+
+
+/* ================= ROLE ================= */
+
+.admin-role-badge {
+    display: inline-flex;
+    min-height: 27px;
+    align-items: center;
+    padding: 0 9px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+    .admin-role-badge.customer {
+        background: #edf5ff;
+        color: #1769d2;
+    }
+
+    .admin-role-badge.owner {
+        background: #edf9f2;
+        color: #168a55;
+    }
+
+    .admin-role-badge.employee {
+        background: #fff4e8;
+        color: #c47713;
+    }
+
+    .admin-role-badge.admin {
+        background: #f2edff;
+        color: #7658c7;
+    }
+
+
+/* ================= STATUS ================= */
+
+.admin-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+    .admin-status-badge i {
+        font-size: 7px;
+    }
+
+    .admin-status-badge.active {
+        color: #198c56;
+    }
+
+    .admin-status-badge.locked {
+        color: #cc5360;
+    }
+
+
+/* ================= ACTION ================= */
+
+.admin-user-toggle-form {
+    margin: 0;
+}
+
+.admin-user-action {
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 12px;
+    border-radius: 8px;
+    background: #fff;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+    .admin-user-action.lock {
+        border: 1px solid #efc6cc;
+        color: #ce4f5c;
+    }
+
+        .admin-user-action.lock:hover {
+            background: #fff4f5;
+        }
+
+    .admin-user-action.unlock {
+        border: 1px solid #bfe2ce;
+        color: #198c56;
+    }
+
+        .admin-user-action.unlock:hover {
+            background: #effaf4;
+        }
+
+
+/* ================= FOOTER ================= */
+
+.admin-users-table-footer {
+    display: flex;
+    align-items: center;
+    min-height: 47px;
+    padding: 0 18px;
+    border-top: 1px solid #edf1f5;
+    background: #fafbfd;
+    color: #8792a3;
+    font-size: 9px;
+}
+
+
+/* ================= EMPTY ================= */
+
+.admin-users-empty {
+    display: flex;
+    min-height: 280px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.admin-users-empty-icon {
+    display: grid;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 12px;
+    place-items: center;
+    border-radius: 16px;
+    background: #edf5ff;
+    color: #1769d2;
+    font-size: 23px;
+}
+
+.admin-users-empty h3 {
+    margin: 0;
+    color: #3c495e;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.admin-users-empty p {
+    margin: 5px 0 0;
+    color: #98a2b3;
+    font-size: 10px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1150px) {
+    .admin-users-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .admin-users-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-user-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-user-filter {
+        width: 100%;
+    }
+
+    .admin-users-table {
+        min-width: 850px;
+    }
+}
+
+@media (max-width: 550px) {
+    .admin-users-page {
+        padding: 20px 12px 55px;
+    }
+
+    .admin-users-header h1 {
+        font-size: 25px;
+    }
+
+    .admin-users-summary {
+        grid-template-columns: 1fr;
+    }
+}
+/* =====================================================
+   OWNER MY LOTS
+   ===================================================== */
+
+.owner-mylots-page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 30px 22px 70px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #172033;
+}
+
+.owner-mylots-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 24px;
+}
+
+.owner-mylots-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: #1769d2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.owner-mylots-header h1 {
+    margin: 0;
+    color: #172033;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.owner-mylots-header p {
+    max-width: 650px;
+    margin: 7px 0 0;
+    color: #7f8a9c;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.owner-mylots-create-btn {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 15px;
+    border-radius: 10px;
+    background: #1769d2;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+    .owner-mylots-create-btn:hover {
+        background: #105bbb;
+        color: #fff;
+    }
+
+.owner-mylots-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.owner-mylot-card {
+    overflow: hidden;
+    border: 1px solid #e1e8f0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(25, 43, 72, .05);
+}
+
+.owner-mylot-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 0;
+}
+
+.owner-mylot-icon {
+    display: grid;
+    width: 45px;
+    height: 45px;
+    place-items: center;
+    border-radius: 13px;
+    background: #eaf3ff;
+    color: #1769d2;
+    font-size: 19px;
+}
+
+.owner-mylot-status {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+    .owner-mylot-status.approved {
+        background: #eaf9f1;
+        color: #178b55;
+    }
+
+    .owner-mylot-status.pending {
+        background: #fff5e7;
+        color: #c47b18;
+    }
+
+    .owner-mylot-status.rejected {
+        background: #fff0f1;
+        color: #cc5360;
+    }
+
+    .owner-mylot-status.default {
+        background: #eff2f6;
+        color: #667085;
+    }
+
+.owner-mylot-content {
+    padding: 18px 20px 20px;
+}
+
+.owner-mylot-label {
+    color: #1769d2;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.owner-mylot-content h2 {
+    margin: 5px 0 10px;
+    color: #172033;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.owner-mylot-address {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    color: #7c8899;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+    .owner-mylot-address i {
+        margin-top: 2px;
+        color: #1769d2;
+    }
+
+.owner-mylot-actions {
+    display: flex;
+    gap: 9px;
+    padding: 15px 20px;
+    border-top: 1px solid #edf1f5;
+    background: #fafbfd;
+}
+
+.owner-mylot-manage-btn,
+.owner-mylot-edit-btn {
+    display: inline-flex;
+    min-height: 35px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.owner-mylot-manage-btn {
+    background: #1769d2;
+    color: #fff;
+}
+
+.owner-mylot-edit-btn {
+    border: 1px solid #d5deea;
+    background: #fff;
+    color: #506078;
+}
+
+.owner-mylots-empty {
+    display: flex;
+    min-height: 330px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #d4dfea;
+    border-radius: 18px;
+    background: #fafcff;
+    text-align: center;
+}
+
+.owner-mylots-empty-icon {
+    display: grid;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 13px;
+    place-items: center;
+    border-radius: 17px;
+    background: #eaf3ff;
+    color: #1769d2;
+    font-size: 26px;
+}
+
+.owner-mylots-empty h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.owner-mylots-empty p {
+    margin: 7px 0 16px;
+    color: #8893a5;
+    font-size: 10px;
+}
+
+.owner-mylots-alert.success {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 11px 14px;
+    border: 1px solid #cce9d8;
+    border-radius: 10px;
+    background: #f0faf4;
+    color: #178653;
+    font-size: 10px;
+}
+
+@media (max-width: 800px) {
+    .owner-mylots-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .owner-mylots-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =====================================================
+
+
+/* =========================================================
+
+/* =========================================================
+   PARKING DETAIL - FINAL / SQUARE CARDS
+   Hình mục tiêu: gallery trái, booking phải, review ngang
+========================================================= */
+
+.pdx-page,
+.pdx-page * {
+    box-sizing: border-box;
+}
+
+.pdx-page {
+    width: min(1280px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 18px 0 60px;
+    color: #172033;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.pdx-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+    .pdx-breadcrumb a {
+        color: #64748b;
+        text-decoration: none;
+    }
+
+        .pdx-breadcrumb a:hover {
+            color: #1769e8;
+        }
+
+.pdx-top-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 350px;
+    gap: 20px;
+    align-items: start;
+}
+
+.pdx-main {
+    min-width: 0;
+}
+
+.pdx-sidebar {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pdx-gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 165px;
+    gap: 8px;
+    height: 330px;
+    overflow: hidden;
+    background: #e9eef5;
+}
+
+.pdx-gallery-main,
+.pdx-thumb {
+    overflow: hidden;
+    background: #e7edf4;
+    border-radius: 0 !important;
+}
+
+    .pdx-gallery-main img,
+    .pdx-thumb img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+.pdx-gallery-side {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.pdx-thumb {
+    position: relative;
+    min-height: 0;
+}
+
+.pdx-thumb-placeholder {
+    display: grid;
+    place-items: center;
+    color: #9aa7b8;
+    background: #eef2f7;
+    font-size: 24px;
+}
+
+.pdx-more {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(15, 23, 42, .58);
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.pdx-heading {
+    padding: 16px 0 8px;
+}
+
+.pdx-title-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+    .pdx-title-line h1 {
+        margin: 0;
+        color: #172033;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -.02em;
+    }
+
+.pdx-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border: 1px solid #ccebd8;
+    border-radius: 0 !important;
+    background: #edf9f1;
+    color: #16824d;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+    .pdx-status i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16a34a;
+    }
+
+.pdx-rating-line {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+    color: #7d8899;
+    font-size: 11px;
+}
+
+    .pdx-rating-line strong {
+        color: #344054;
+    }
+
+.pdx-stars {
+    color: #f5b51b;
+    letter-spacing: 1px;
+}
+
+.pdx-address {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    color: #667085;
+    font-size: 11px;
+}
+
+    .pdx-address a,
+    .pdx-map-footer a {
+        margin-left: 4px;
+        color: #1769e8;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+.pdx-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0 16px;
+}
+
+.pdx-stat {
+    min-height: 86px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 0 !important;
+    background: #fff;
+    box-shadow: 0 4px 13px rgba(15, 23, 42, .035);
+}
+
+.pdx-stat-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+    .pdx-stat-icon.blue,
+    .pdx-title-icon.blue {
+        background: #edf5ff;
+        color: #1769e8;
+    }
+
+    .pdx-stat-icon.amber,
+    .pdx-title-icon.amber {
+        background: #fff6df;
+        color: #e9a20b;
+    }
+
+    .pdx-stat-icon.green,
+    .pdx-title-icon.green {
+        background: #eaf8f0;
+        color: #15915a;
+    }
+
+    .pdx-stat-icon.red {
+        background: #fff0f0;
+        color: #e45858;
+    }
+
+.pdx-title-icon.purple {
+    background: #f3edff;
+    color: #7c3aed;
+}
+
+.pdx-stat small,
+.pdx-stat strong,
+.pdx-stat span {
+    display: block;
+}
+
+.pdx-stat small {
+    margin-bottom: 3px;
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.pdx-stat strong {
+    color: #344054;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.pdx-stat div > span {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 8px;
+}
+
+.pdx-green {
+    color: #16945a !important;
+}
+
+.pdx-card,
+.pdx-booking,
+.pdx-side-card,
+.pdx-reviews {
+    border: 1px solid #e2e8f0;
+    border-radius: 0 !important;
+    background: #fff;
+    box-shadow: 0 5px 16px rgba(15, 23, 42, .04);
+}
+
+.pdx-card {
+    margin-bottom: 14px;
+    padding: 16px 18px;
+}
+
+.pdx-card-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+}
+
+    .pdx-card-title h2 {
+        margin: 0;
+        color: #172033;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+.pdx-title-icon {
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.pdx-card > p,
+.pdx-muted {
+    margin: 0;
+    color: #667085;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.pdx-amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+    .pdx-amenities span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 31px;
+        padding: 0 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 0 !important;
+        background: #f8fafc;
+        color: #566378;
+        font-size: 9px;
+    }
+
+.pdx-map {
+    overflow: hidden;
+    border: 1px solid #e4e9ef;
+    border-radius: 0 !important;
+}
+
+    .pdx-map iframe {
+        display: block;
+        width: 100%;
+        height: 300px;
+        border: 0;
+    }
+
+.pdx-map-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    color: #667085;
+    font-size: 9px;
+}
+
+.pdx-booking {
+    position: sticky;
+    top: 84px;
+    padding: 17px;
+}
+
+.pdx-booking-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 15px;
+}
+
+    .pdx-booking-title > span {
+        display: grid;
+        width: 29px;
+        height: 29px;
+        place-items: center;
+        border-radius: 0 !important;
+        background: #edf5ff;
+        color: #1769e8;
+    }
+
+    .pdx-booking-title h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+.pdx-field {
+    margin-bottom: 12px;
+}
+
+    .pdx-field label {
+        display: block;
+        margin-bottom: 6px;
+        color: #344054;
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+.pdx-date-time {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    gap: 8px;
+}
+
+.pdx-booking .form-control,
+.pdx-booking .form-select,
+.pdx-review-form .form-control,
+.pdx-review-form .form-select {
+    min-height: 40px;
+    border: 1px solid #dce3ec;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 10px;
+}
+
+.pdx-check-btn,
+.pdx-book-btn,
+.pdx-review-submit {
+    width: 100%;
+    min-height: 42px;
+    border-radius: 0 !important;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.pdx-check-btn {
+    border: 1px solid #1769e8;
+    background: #fff;
+    color: #1769e8;
+}
+
+    .pdx-check-btn:hover {
+        background: #f3f8ff;
+    }
+
+.pdx-book-btn,
+.pdx-review-submit {
+    margin-top: 11px;
+    border: 1px solid #1769e8;
+    background: #1769e8;
+    color: #fff;
+}
+
+.pdx-availability {
+    margin-top: 13px;
+    padding: 11px 12px;
+    border: 1px solid #dbe5ee;
+    border-radius: 0 !important;
+}
+
+    .pdx-availability.available {
+        border-color: #ccebd8;
+        background: #effaf3;
+    }
+
+    .pdx-availability.full {
+        border-color: #f3d0d0;
+        background: #fff5f5;
+    }
+
+    .pdx-availability > div {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 10px;
+    }
+
+        .pdx-availability > div b {
+            margin-left: auto;
+        }
+
+    .pdx-availability small {
+        display: block;
+        margin-top: 4px;
+        color: #7d8899;
+        font-size: 8px;
+    }
+
+.pdx-price {
+    padding: 12px 0 0;
+}
+
+    .pdx-price > span,
+    .pdx-price > small {
+        display: block;
+        color: #8b96a6;
+        font-size: 8px;
+    }
+
+    .pdx-price > strong {
+        display: block;
+        margin: 3px 0;
+        color: #e84f4f;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+.pdx-login-note {
+    margin: 11px 0 0;
+    color: #8b96a6;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+.pdx-side-card {
+    padding: 16px;
+}
+
+.pdx-side-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+    .pdx-side-notes article {
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 9px;
+        padding-bottom: 11px;
+        border-bottom: 1px solid #eef2f6;
+    }
+
+        .pdx-side-notes article:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .pdx-side-notes article > span {
+            display: grid;
+            width: 28px;
+            height: 28px;
+            place-items: center;
+            border-radius: 50%;
+            background: #f3edff;
+            color: #7c3aed;
+            font-size: 11px;
+        }
+
+    .pdx-side-notes strong {
+        display: block;
+        color: #344054;
+        font-size: 9px;
+    }
+
+    .pdx-side-notes p {
+        margin: 3px 0 0;
+        color: #8b96a6;
+        font-size: 8px;
+        line-height: 1.5;
+    }
+
+.pdx-reviews {
+    margin-top: 16px;
+    padding: 18px;
+}
+
+.pdx-review-grid {
+    display: grid;
+    grid-template-columns: 205px minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.pdx-review-summary {
+    padding-right: 18px;
+    border-right: 1px solid #edf1f5;
+}
+
+.pdx-score {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+    .pdx-score strong {
+        color: #172033;
+        font-size: 34px;
+        line-height: 1;
+        font-weight: 800;
+    }
+
+    .pdx-score span {
+        color: #98a2b3;
+        font-size: 11px;
+    }
+
+.pdx-stars-lg {
+    margin-top: 6px;
+    font-size: 15px;
+}
+
+.pdx-review-summary > p {
+    margin: 4px 0 14px;
+    color: #98a2b3;
+    font-size: 8px;
+}
+
+.pdx-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.pdx-bar-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 18px;
+    align-items: center;
+    gap: 7px;
+    color: #667085;
+    font-size: 8px;
+}
+
+    .pdx-bar-row > div {
+        height: 5px;
+        overflow: hidden;
+        background: #e9edf2;
+    }
+
+    .pdx-bar-row i {
+        display: block;
+        height: 100%;
+        background: #f5b51b;
+    }
+
+.pdx-review-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.pdx-review-item {
+    min-height: 150px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 0 !important;
+    background: #fff;
+}
+
+.pdx-review-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .pdx-review-user img {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .pdx-review-user strong,
+    .pdx-review-user small {
+        display: block;
+    }
+
+    .pdx-review-user strong {
+        color: #344054;
+        font-size: 9px;
+    }
+
+    .pdx-review-user small {
+        margin-top: 2px;
+        color: #98a2b3;
+        font-size: 7px;
+    }
+
+.pdx-review-item > .pdx-stars {
+    margin-top: 8px;
+    font-size: 9px;
+}
+
+.pdx-review-item > p {
+    margin: 8px 0 0;
+    color: #59677b;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+.pdx-owner-reply {
+    margin-top: 8px;
+    padding: 8px;
+    border-left: 2px solid #1769e8;
+    background: #f5f9ff;
+    color: #667085;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+.pdx-empty-review {
+    grid-column: 1 / -1;
+    padding: 35px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    color: #98a2b3;
+    font-size: 9px;
+}
+
+.pdx-pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 4px;
+}
+
+    .pdx-pagination a {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        border: 1px solid #dce4ed;
+        border-radius: 0 !important;
+        color: #637086;
+        font-size: 8px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+        .pdx-pagination a.active {
+            border-color: #1769e8;
+            background: #1769e8;
+            color: #fff;
+        }
+
+.pdx-review-form {
+    margin-top: 16px;
+    padding-top: 15px;
+    border-top: 1px solid #edf1f5;
+}
+
+    .pdx-review-form .form-label {
+        font-size: 9px;
+        font-weight: 700;
+    }
+
+.pdx-review-submit {
+    width: auto;
+    min-width: 120px;
+    padding: 0 14px;
+}
+
+/* ép toàn bộ KHUNG trong trang chi tiết thành góc vuông */
+.pdx-page .card,
+.pdx-page .alert,
+.pdx-page .form-control,
+.pdx-page .form-select,
+.pdx-page button,
+.pdx-page select,
+.pdx-page textarea,
+.pdx-page input,
+.pdx-page .badge {
+    border-radius: 0 !important;
+}
+
+@media (max-width: 1080px) {
+    .pdx-top-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .pdx-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pdx-booking {
+        position: static;
+    }
+}
+
+@media (max-width: 780px) {
+    .pdx-page {
+        width: min(100% - 22px, 1280px);
+    }
+
+    .pdx-gallery {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .pdx-gallery-main {
+        height: 280px;
+    }
+
+    .pdx-gallery-side {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 82px;
+    }
+
+    .pdx-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pdx-sidebar,
+    .pdx-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pdx-review-summary {
+        padding-right: 0;
+        padding-bottom: 14px;
+        border-right: 0;
+        border-bottom: 1px solid #edf1f5;
+    }
+
+    .pdx-review-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .pdx-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .pdx-date-time {
+        grid-template-columns: 1fr;
+    }
+
+    .pdx-map-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* =========================================================
+   PARKING DETAIL - CONTRAST BOOST
+   Tăng độ đậm, rõ, giảm cảm giác nhạt nhòa
+========================================================= */
+
+.pdx-page {
+    background: #ffffff;
+    color: #111827;
+}
+
+.pdx-breadcrumb {
+    color: #64748b;
+}
+
+    .pdx-breadcrumb a {
+        color: #475569;
+    }
+
+.pdx-title-line h1,
+.pdx-card-title h2,
+.pdx-booking-title h2,
+.pdx-score strong {
+    color: #0f172a;
+}
+
+.pdx-rating-line,
+.pdx-address,
+.pdx-card > p,
+.pdx-muted,
+.pdx-map-footer,
+.pdx-side-notes p,
+.pdx-review-item > p {
+    color: #475569;
+}
+
+.pdx-card,
+.pdx-booking,
+.pdx-side-card,
+.pdx-reviews,
+.pdx-stat,
+.pdx-review-item {
+    border-color: #cfd8e3;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .08);
+}
+
+.pdx-gallery {
+    background: #dce3ec;
+}
+
+.pdx-gallery-main,
+.pdx-thumb {
+    background: #d9e1ea;
+}
+
+.pdx-stat small,
+.pdx-stat div > span,
+.pdx-review-user small,
+.pdx-review-summary > p,
+.pdx-price > span,
+.pdx-price > small,
+.pdx-login-note {
+    color: #64748b;
+}
+
+.pdx-stat strong,
+.pdx-side-notes strong,
+.pdx-review-user strong {
+    color: #1e293b;
+}
+
+.pdx-stat-icon.blue,
+.pdx-title-icon.blue {
+    background: #dbeafe;
+    color: #0b63ce;
+}
+
+.pdx-stat-icon.amber,
+.pdx-title-icon.amber {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.pdx-stat-icon.green,
+.pdx-title-icon.green {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.pdx-stat-icon.red {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.pdx-title-icon.purple {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.pdx-status {
+    border-color: #86d3a6;
+    background: #e9f9ef;
+    color: #0f7a42;
+}
+
+.pdx-amenities span {
+    border-color: #cfd8e3;
+    background: #f8fafc;
+    color: #334155;
+}
+
+.pdx-map,
+.pdx-booking .form-control,
+.pdx-booking .form-select,
+.pdx-review-form .form-control,
+.pdx-review-form .form-select {
+    border-color: #bfc9d6;
+}
+
+.pdx-booking .form-control,
+.pdx-booking .form-select,
+.pdx-review-form .form-control,
+.pdx-review-form .form-select {
+    color: #111827;
+    background: #ffffff;
+}
+
+.pdx-check-btn {
+    border-color: #0f62d6;
+    color: #0f62d6;
+    background: #ffffff;
+}
+
+    .pdx-check-btn:hover {
+        background: #eaf3ff;
+    }
+
+.pdx-book-btn,
+.pdx-review-submit {
+    border-color: #0f62d6;
+    background: #0f62d6;
+    color: #ffffff;
+}
+
+    .pdx-book-btn:hover,
+    .pdx-review-submit:hover {
+        background: #0b4fae;
+        border-color: #0b4fae;
+    }
+
+.pdx-availability.available {
+    border-color: #8fd6aa;
+    background: #eaf8ef;
+}
+
+.pdx-availability.full {
+    border-color: #efaaaa;
+    background: #fff0f0;
+}
+
+.pdx-price > strong {
+    color: #dc2626;
+}
+
+.pdx-review-summary {
+    border-color: #d7dee7;
+}
+
+.pdx-bar-row > div {
+    background: #d9dee6;
+}
+
+.pdx-bar-row i {
+    background: #f59e0b;
+}
+
+.pdx-owner-reply {
+    border-left-color: #0f62d6;
+    background: #eef5ff;
+    color: #475569;
+}
+
+/* Tăng độ nổi cho sidebar */
+.pdx-booking {
+    box-shadow: 0 10px 26px rgba(15, 23, 42, .12);
+}
+
+/* Đậm đường phân cách nhưng vẫn sạch */
+.pdx-side-notes article,
+.pdx-review-form {
+    border-color: #d9e0e8;
+}
+/* =========================================================
+   OWNER DASHBOARD - MODERN REDESIGN
+   Không cần sửa Dashboard.cshtml
+========================================================= */
+
+.owner-dashboard-page {
+    --od-blue: #2563eb;
+    --od-green: #16a34a;
+    --od-orange: #f59e0b;
+    --od-purple: #7c3aed;
+    --od-dark: #0f172a;
+    --od-text: #334155;
+    --od-muted: #64748b;
+    --od-border: #e2e8f0;
+    --od-bg: #f6f8fc;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 28px 22px 70px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--od-dark);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.owner-dashboard-header {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 34px 38px;
+    margin-bottom: 22px;
+    background: radial-gradient(circle at 82% 20%, rgba(255,255,255,.18) 0, rgba(255,255,255,0) 30%), linear-gradient(120deg, #0f4cbb 0%, #1769e8 55%, #2585f5 100%);
+    color: white;
+    border: 1px solid #0d5fd1;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(37, 99, 235, .18);
+}
+
+    .owner-dashboard-header::before {
+        content: "";
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        right: -85px;
+        bottom: -130px;
+        border: 40px solid rgba(255,255,255,.07);
+        border-radius: 50%;
+    }
+
+    .owner-dashboard-header > * {
+        position: relative;
+        z-index: 2;
+    }
+
+.owner-dashboard-welcome {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    color: #eaf3ff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.owner-dashboard-header h1 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -.04em;
+}
+
+.owner-dashboard-header p {
+    max-width: 600px;
+    margin: 0;
+    color: rgba(255,255,255,.80);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.owner-dashboard-today {
+    min-width: 190px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255,255,255,.20);
+    border-radius: 14px;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(8px);
+}
+
+    .owner-dashboard-today > i {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: #ffffff;
+        color: var(--od-blue);
+        font-size: 18px;
+    }
+
+    .owner-dashboard-today span,
+    .owner-dashboard-today strong {
+        display: block;
+    }
+
+    .owner-dashboard-today span {
+        margin-bottom: 3px;
+        color: rgba(255,255,255,.72);
+        font-size: 10px;
+    }
+
+    .owner-dashboard-today strong {
+        color: #ffffff;
+        font-size: 14px;
+    }
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.owner-dashboard-filter {
+    display: inline-flex;
+    gap: 5px;
+    padding: 5px;
+    margin-bottom: 24px;
+    border: 1px solid #dce4ee;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 5px 15px rgba(15,23,42,.04);
+}
+
+.owner-dashboard-filter-btn {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 16px;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+    .owner-dashboard-filter-btn:hover {
+        background: #f1f5f9;
+        color: #2563eb;
+    }
+
+    .owner-dashboard-filter-btn.active {
+        background: #1769e8;
+        color: #ffffff;
+        box-shadow: 0 5px 13px rgba(23,105,232,.22);
+    }
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.owner-dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.owner-stat-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 185px;
+    padding: 22px;
+    border: 1px solid var(--od-border);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15,23,42,.055);
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+    .owner-stat-card:hover {
+        transform: translateY(-5px);
+        border-color: #cdd8e6;
+        box-shadow: 0 18px 38px rgba(15,23,42,.11);
+    }
+
+    .owner-stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: #2563eb;
+    }
+
+    .owner-stat-card:nth-child(2)::before {
+        background: #16a34a;
+    }
+
+    .owner-stat-card:nth-child(3)::before {
+        background: #f59e0b;
+    }
+
+    .owner-stat-card:nth-child(4)::before {
+        background: #7c3aed;
+    }
+
+.owner-stat-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.owner-stat-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.owner-stat-value {
+    display: block;
+    margin-bottom: 6px;
+    color: #0f172a;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.03em;
+}
+
+.owner-stat-card-top small {
+    color: #94a3b8;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.owner-stat-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    font-size: 21px;
+}
+
+.owner-stat-icon-blue {
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    color: #2563eb;
+}
+
+.owner-stat-icon-green {
+    background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+    color: #16a34a;
+}
+
+.owner-stat-icon-orange {
+    background: linear-gradient(135deg, #fef3c7, #fff7ed);
+    color: #f59e0b;
+}
+
+.owner-stat-icon-purple {
+    background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+    color: #7c3aed;
+}
+
+.owner-stat-blue {
+    color: #2563eb;
+}
+
+.owner-stat-green {
+    color: #16a34a;
+}
+
+.owner-stat-orange {
+    color: #e98b00;
+}
+
+.owner-stat-purple {
+    color: #7c3aed;
+}
+
+.owner-stat-footer {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 17px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px solid #edf1f5;
+}
+
+    .owner-stat-footer > span {
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    .owner-stat-footer small {
+        color: #94a3b8;
+        font-size: 9px;
+    }
+
+    .owner-stat-footer > i {
+        margin-left: auto;
+        color: #b3bdca;
+        font-size: 14px;
+    }
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.owner-dashboard-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(300px, .75fr);
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 24px;
+}
+
+.owner-dashboard-card {
+    overflow: hidden;
+    border: 1px solid var(--od-border);
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 9px 28px rgba(15,23,42,.055);
+}
+
+.owner-dashboard-card-header {
+    min-height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px 21px;
+    border-bottom: 1px solid #edf1f5;
+    background: linear-gradient( 180deg, #ffffff 0%, #fbfdff 100% );
+}
+
+    .owner-dashboard-card-header h2 {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0;
+        color: #172033;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+        .owner-dashboard-card-header h2 i {
+            color: #2563eb;
+            font-size: 17px;
+        }
+
+    .owner-dashboard-card-header p {
+        margin: 5px 0 0;
+        color: #94a3b8;
+        font-size: 9px;
+    }
+
+.owner-dashboard-chart-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #edf5ff;
+    color: #1769e8;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   REVENUE TABLE
+========================================================= */
+
+.owner-dashboard-revenue-table-wrap {
+    padding: 15px 20px 22px;
+}
+
+.owner-dashboard-revenue-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+    .owner-dashboard-revenue-table thead th {
+        padding: 7px 14px;
+        color: #94a3b8;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .6px;
+    }
+
+    .owner-dashboard-revenue-table tbody tr {
+        background: #f8fafc;
+        transition: .2s;
+    }
+
+        .owner-dashboard-revenue-table tbody tr:hover {
+            background: #eff6ff;
+        }
+
+    .owner-dashboard-revenue-table tbody td {
+        padding: 13px 14px;
+        border-top: 1px solid #edf1f5;
+        border-bottom: 1px solid #edf1f5;
+        color: #475569;
+        font-size: 10px;
+    }
+
+        .owner-dashboard-revenue-table tbody td:first-child {
+            border-left: 1px solid #edf1f5;
+            border-radius: 9px 0 0 9px;
+        }
+
+        .owner-dashboard-revenue-table tbody td:last-child {
+            border-right: 1px solid #edf1f5;
+            border-radius: 0 9px 9px 0;
+            text-align: right;
+        }
+
+    .owner-dashboard-revenue-table strong {
+        color: #1769e8;
+        font-size: 11px;
+    }
+
+
+/* =========================================================
+   EMPTY CHART
+========================================================= */
+
+.owner-dashboard-empty-chart {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    text-align: center;
+    background: linear-gradient( 180deg, #ffffff 0%, #f8fbff 100% );
+}
+
+.owner-dashboard-empty-icon {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 13px;
+    border-radius: 17px;
+    background: #eaf3ff;
+    color: #1769e8;
+    font-size: 25px;
+}
+
+.owner-dashboard-empty-chart h3 {
+    margin: 0 0 7px;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.owner-dashboard-empty-chart > p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+.owner-dashboard-fake-chart {
+    width: min(430px, 100%);
+    height: 115px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+    padding: 10px 14px 0;
+    border-bottom: 1px solid #dce4ee;
+}
+
+    .owner-dashboard-fake-chart span {
+        width: 34px;
+        min-height: 10px;
+        border-radius: 5px 5px 0 0;
+        background: linear-gradient( 180deg, #4b9cff 0%, #1769e8 100% );
+        opacity: .82;
+        transition: .2s ease;
+    }
+
+        .owner-dashboard-fake-chart span:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+
+/* =========================================================
+   QUICK OVERVIEW
+========================================================= */
+
+.owner-dashboard-overview {
+    display: flex;
+    flex-direction: column;
+}
+
+.owner-dashboard-overview-list {
+    padding: 8px 18px;
+}
+
+.owner-dashboard-overview-item {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 4px;
+    border-bottom: 1px solid #edf1f5;
+}
+
+    .owner-dashboard-overview-item:last-child {
+        border-bottom: 0;
+    }
+
+    .owner-dashboard-overview-item > div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .owner-dashboard-overview-item i {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 9px;
+        background: #f1f5f9;
+        color: #64748b;
+        font-size: 14px;
+        transition: .2s;
+    }
+
+    .owner-dashboard-overview-item:hover i {
+        background: #eaf3ff;
+        color: #1769e8;
+    }
+
+    .owner-dashboard-overview-item span {
+        color: #475569;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .owner-dashboard-overview-item strong {
+        color: #172033;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+.owner-dashboard-manage-btn {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin: auto 18px 18px;
+    border-radius: 10px;
+    background: linear-gradient( 90deg, #1769e8, #2585f5 );
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(23,105,232,.18);
+    transition: .2s ease;
+}
+
+    .owner-dashboard-manage-btn:hover {
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 25px rgba(23,105,232,.27);
+    }
+
+
+/* =========================================================
+   TIP
+========================================================= */
+
+.owner-dashboard-tip {
+    position: relative;
+    overflow: hidden;
+    min-height: 96px;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 60px;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 24px;
+    border: 1px solid #f0d48c;
+    border-radius: 15px;
+    background: linear-gradient( 110deg, #fff9e8 0%, #fffdf6 75% );
+    box-shadow: 0 8px 22px rgba(180,132,30,.07);
+}
+
+.owner-dashboard-tip-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #fef3c7;
+    color: #e29a05;
+    font-size: 20px;
+}
+
+.owner-dashboard-tip strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #854d0e;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.owner-dashboard-tip p {
+    max-width: 800px;
+    margin: 0;
+    color: #8a6527;
+    font-size: 9px;
+    line-height: 1.65;
+}
+
+.owner-dashboard-target {
+    display: grid;
+    place-items: center;
+    color: rgba(217,119,6,.20);
+    font-size: 44px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .owner-dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .owner-dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .owner-dashboard-page {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .owner-dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    .owner-dashboard-today {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .owner-dashboard-filter {
+        width: 100%;
+    }
+
+    .owner-dashboard-filter-btn {
+        flex: 1;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .owner-dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .owner-dashboard-tip {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .owner-dashboard-target {
+        display: none;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .owner-dashboard-header h1 {
+        font-size: 28px;
+    }
+
+    .owner-stat-value {
+        font-size: 24px;
+    }
+
+    .owner-dashboard-filter-btn {
+        font-size: 9px;
+    }
+
+    .owner-dashboard-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+.owner-dashboard-header,
+.owner-dashboard-card,
+.owner-dashboard-tip,
+.owner-stat-card,
+.owner-dashboard-filter,
+.owner-dashboard-today,
+.owner-dashboard-filter-btn,
+.owner-dashboard-manage-btn,
+.owner-dashboard-chart-type,
+.owner-dashboard-welcome,
+.owner-dashboard-revenue-table tbody td {
+    border-radius: 0 !important;
+}

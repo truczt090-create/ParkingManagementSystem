@@ -1,0 +1,47 @@
+﻿@model List<ParkingManagement.Web.ViewModels.Admin.PendingLotViewModel>
+@{
+    ViewData["Title"] = "Duyệt bãi xe";
+}
+
+<h1>Duyệt bãi xe</h1>
+
+@if (ViewBag.SuccessMessage != null)
+{
+     <p class="text-success">@ViewBag.SuccessMessage</p>
+}
+
+<div class="mb-3">
+    <a asp-action="PendingLots" asp-route-status="Pending" class="btn btn-sm @(ViewBag.Status=="Pending"?"btn-primary":"btn-outline-primary")">Chờ duyệt</a>
+    <a asp-action="PendingLots" asp-route-status="Approved" class="btn btn-sm @(ViewBag.Status=="Approved"?"btn-primary":"btn-outline-primary")">Đã duyệt</a>
+    <a asp-action="PendingLots" asp-route-status="Rejected" class="btn btn-sm @(ViewBag.Status=="Rejected"?"btn-primary":"btn-outline-primary")">Đã từ chối</a>
+</div>
+
+<table class="table">
+    <thead><tr><th>Tên bãi xe</th><th>Địa chỉ</th><th>Chủ sở hữu</th><th></th></tr></thead>
+    <tbody>
+        @foreach (var lot in Model)
+        {
+                <tr>
+                    <td>@lot.Name</td>
+                    <td>@lot.Address</td>
+                    <td>@lot.OwnerName</td>
+                    <td>
+                    @if (lot.Status == "Pending")
+                    {
+                                <form method="post" asp-action="Approve" asp-route-id="@lot.ParkingLotId" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
+                                </form>
+                                <form method="post" asp-action="Reject" asp-route-id="@lot.ParkingLotId" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
+                                </form>
+                    }
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+        <p>Không có bãi xe nào ở trạng thái này.</p>
+}

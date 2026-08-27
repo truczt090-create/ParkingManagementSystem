@@ -1,0 +1,356 @@
+﻿@model ParkingManagement.Web.ViewModels.Profile.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Hồ sơ";
+
+    var isOwner = Model.Role == "Owner";
+    var isCustomer = Model.Role == "Customer";
+
+    var avatar = string.IsNullOrWhiteSpace(Model.AvatarUrl)
+        ? "/images/default-avatar.png"
+        : Model.AvatarUrl;
+
+    var roleDisplay = Model.Role switch
+    {
+        "Owner" => "Chủ bãi xe",
+        "Customer" => "Khách hàng",
+        "Employee" => "Nhân viên",
+        "Admin" => "Quản trị viên",
+        _ => Model.Role
+    };
+}
+
+<div class="profile-page">
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="profile-alert profile-alert-success">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>@ViewBag.SuccessMessage</span>
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="profile-alert profile-alert-error">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <span>@ViewBag.Error</span>
+        </div>
+    }
+
+    <div class="profile-hero">
+        <div class="profile-hero-content">
+            <span class="profile-hero-kicker">OMNIPARK PROFILE</span>
+            <h1>Hồ sơ của tôi</h1>
+            <p>Quản lý thông tin cá nhân và tài khoản của bạn một cách dễ dàng.</p>
+        </div>
+    </div>
+
+    <div class="profile-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="profile-sidebar">
+
+            <div class="profile-card profile-user-card">
+
+                <div class="profile-avatar-wrap">
+                    <img src="@avatar"
+                         alt="Ảnh đại diện"
+                         class="profile-avatar" />
+                </div>
+
+                <h2>@Model.FullName</h2>
+
+                <span class="profile-role-badge">
+                    @roleDisplay
+                </span>
+
+                <div class="profile-contact-list">
+
+                    <div class="profile-contact-item">
+                        <i class="bi bi-envelope"></i>
+                        <span>@Model.Email</span>
+                    </div>
+
+                    <div class="profile-contact-item">
+                        <i class="bi bi-telephone"></i>
+                        <span>
+                            @(string.IsNullOrWhiteSpace(Model.Phone)
+                                ? "Chưa cập nhật"
+                                : Model.Phone)
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="profile-stats-grid">
+
+                @if (isCustomer)
+                {
+                    <div class="profile-card profile-stat-card">
+                        <div class="profile-stat-icon">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div>
+                            <strong>@Model.BookingCount</strong>
+                            <span>Lượt đặt chỗ</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-card profile-stat-card">
+                        <div class="profile-stat-icon">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div>
+                            <strong>@Model.UnreadNotificationCount</strong>
+                            <span>Thông báo chưa đọc</span>
+                        </div>
+                    </div>
+                }
+
+                @if (isOwner)
+                {
+                    <div class="profile-card profile-stat-card">
+                        <div class="profile-stat-icon">
+                            <i class="bi bi-p-square"></i>
+                        </div>
+                        <div>
+                            <strong>@Model.ParkingLotCount</strong>
+                            <span>Bãi xe quản lý</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-card profile-stat-card">
+                        <div class="profile-stat-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div>
+                            <strong>@Model.EmployeeCount</strong>
+                            <span>Nhân viên</span>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="profile-main">
+
+            <section class="profile-card profile-section">
+
+                <div class="profile-section-header">
+                    <div class="profile-section-title">
+                        <div class="profile-section-icon">
+                            <i class="bi bi-person-vcard"></i>
+                        </div>
+
+                        <div>
+                            <h3>Thông tin người dùng</h3>
+                            <p>Thông tin tài khoản hiện tại của bạn</p>
+                        </div>
+                    </div>
+
+                    <a asp-controller="Profile"
+                       asp-action="Edit"
+                       class="profile-action-btn">
+                        <i class="bi bi-pencil-square"></i>
+                        Cập nhật thông tin
+                    </a>
+                </div>
+
+                <div class="profile-info-grid">
+
+                    <div class="profile-info-item">
+                        <span>Họ và tên</span>
+                        <strong>@Model.FullName</strong>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span>Email</span>
+                        <strong>@Model.Email</strong>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span>Số điện thoại</span>
+                        <strong>
+                            @(string.IsNullOrWhiteSpace(Model.Phone)
+                                ? "Chưa cập nhật"
+                                : Model.Phone)
+                        </strong>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span>Vai trò</span>
+                        <strong>@roleDisplay</strong>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span>Ngày tạo tài khoản</span>
+                        <strong>@Model.CreatedAt.ToLocalTime().ToString("dd/MM/yyyy")</strong>
+                    </div>
+
+                    <div class="profile-info-item">
+                        <span>Trạng thái</span>
+
+                        @if (Model.IsActive)
+                        {
+                            <strong class="profile-status-active">
+                                <i class="bi bi-check-circle-fill"></i>
+                                Đang hoạt động
+                            </strong>
+                        }
+                        else
+                        {
+                            <strong class="profile-status-locked">
+                                <i class="bi bi-lock-fill"></i>
+                                Đã khóa
+                            </strong>
+                        }
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            @if (isOwner)
+            {
+                <section class="profile-card profile-section">
+
+                    <div class="profile-section-header">
+                        <div class="profile-section-title">
+                            <div class="profile-section-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+
+                            <div>
+                                <h3>Thông tin chủ bãi</h3>
+                                <p>Thông tin doanh nghiệp và hệ thống quản lý</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-info-grid">
+
+                        <div class="profile-info-item">
+                            <span>Tên đơn vị / doanh nghiệp</span>
+                            <strong>
+                                @(string.IsNullOrWhiteSpace(Model.BusinessName)
+                                    ? "Chưa cập nhật"
+                                    : Model.BusinessName)
+                            </strong>
+                        </div>
+
+                        <div class="profile-info-item">
+                            <span>Mã số thuế</span>
+                            <strong>
+                                @(string.IsNullOrWhiteSpace(Model.TaxCode)
+                                    ? "Chưa cập nhật"
+                                    : Model.TaxCode)
+                            </strong>
+                        </div>
+
+                        <div class="profile-info-item">
+                            <span>Số bãi xe quản lý</span>
+                            <strong>@Model.ParkingLotCount</strong>
+                        </div>
+
+                        <div class="profile-info-item">
+                            <span>Tổng nhân viên</span>
+                            <strong>@Model.EmployeeCount</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+            }
+
+            @if (isCustomer)
+            {
+                <section class="profile-card profile-section">
+
+                    <div class="profile-section-header">
+                        <div class="profile-section-title">
+                            <div class="profile-section-icon">
+                                <i class="bi bi-car-front"></i>
+                            </div>
+
+                            <div>
+                                <h3>Phương tiện của tôi</h3>
+                                <p>Danh sách phương tiện đã lưu trong tài khoản</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Vehicles != null && Model.Vehicles.Any())
+                    {
+                        <div class="profile-vehicle-list">
+                            @foreach (var vehicle in Model.Vehicles)
+                            {
+                                <div class="profile-vehicle-card">
+                                    <div class="profile-vehicle-icon">
+                                        <i class="bi bi-car-front-fill"></i>
+                                    </div>
+
+                                    <div class="profile-vehicle-content">
+                                        <strong>@vehicle.LicensePlate</strong>
+                                        <span>@vehicle.VehicleType</span>
+
+                                        @if (!string.IsNullOrWhiteSpace(vehicle.Nickname))
+                                        {
+                                            <small>@vehicle.Nickname</small>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="profile-empty-box">
+                            <i class="bi bi-car-front"></i>
+                            <div>
+                                <strong>Chưa có phương tiện</strong>
+                                <p>Bạn chưa lưu phương tiện nào trong tài khoản.</p>
+                            </div>
+                        </div>
+                    }
+
+                </section>
+            }
+
+
+            <section class="profile-card profile-section">
+
+                <div class="profile-section-header">
+                    <div class="profile-section-title">
+                        <div class="profile-section-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+
+                        <div>
+                            <h3>Bảo mật tài khoản</h3>
+                            <p>Quản lý mật khẩu và tăng độ an toàn cho tài khoản</p>
+                        </div>
+                    </div>
+
+                    <a asp-controller="Profile"
+                       asp-action="ChangePassword"
+                       class="profile-secondary-btn">
+                        <i class="bi bi-key"></i>
+                        Đổi mật khẩu
+                    </a>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>

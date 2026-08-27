@@ -1,0 +1,471 @@
+@model ParkingManagement.Web.ViewModels.Owner.RevenueViewModel
+@using ParkingManagement.Web.ViewModels.Owner
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var range = ViewBag.Range as string ?? "day";
+    var occupancy = ViewBag.Occupancy as ParkingManagement.Web.ViewModels.Owner.OccupancyViewModel;
+
+    var totalRevenue = Model?.TotalRevenue ?? 0;
+
+    var occupancyRate = occupancy?.OccupancyRate ?? 0;
+    var occupiedSlots = occupancy?.OccupiedSlots ?? 0;
+    var totalSlots = occupancy?.TotalSlots ?? 0;
+    var summary =
+    ViewBag.Summary as OwnerDashboardSummaryViewModel
+    ?? new OwnerDashboardSummaryViewModel();
+}
+
+<div class="owner-dashboard-page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <section class="owner-dashboard-header">
+
+        <div>
+            <span class="owner-dashboard-welcome">
+                Chào mừng bạn trở lại 👋
+            </span>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Theo dõi nhanh tình hình hoạt động và doanh thu
+                của hệ thống bãi xe.
+            </p>
+        </div>
+
+        <div class="owner-dashboard-today">
+            <i class="bi bi-calendar3"></i>
+
+            <div>
+                <span>Hôm nay</span>
+                <strong>@DateTime.Now.ToString("dd/MM/yyyy")</strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FILTER
+    ========================== -->
+    <div class="owner-dashboard-filter">
+
+        <a asp-controller="Owner"
+           asp-action="Dashboard"
+           asp-route-range="day"
+           class="owner-dashboard-filter-btn @(range == "day" ? "active" : "")">
+
+            <i class="bi bi-calendar-day"></i>
+            Theo ngày
+        </a>
+
+        <a asp-controller="Owner"
+           asp-action="Dashboard"
+           asp-route-range="month"
+           class="owner-dashboard-filter-btn @(range == "month" ? "active" : "")">
+
+            <i class="bi bi-calendar3"></i>
+            Theo tháng
+        </a>
+
+        <a asp-controller="Owner"
+           asp-action="Dashboard"
+           asp-route-range="year"
+           class="owner-dashboard-filter-btn @(range == "year" ? "active" : "")">
+
+            <i class="bi bi-calendar-range"></i>
+            Theo năm
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         SUMMARY CARDS
+    ========================== -->
+    <section class="owner-dashboard-stats">
+
+        <!-- DOANH THU -->
+        <article class="owner-stat-card">
+
+            <div class="owner-stat-card-top">
+
+                <div>
+                    <span class="owner-stat-label owner-stat-blue">
+                        Tổng doanh thu
+                    </span>
+
+                    <strong class="owner-stat-value">
+                        @totalRevenue.ToString("N0")đ
+                    </strong>
+
+                    <small>
+                        Doanh thu theo khoảng thời gian đã chọn
+                    </small>
+                </div>
+
+                <div class="owner-stat-icon owner-stat-icon-blue">
+                    <i class="bi bi-cash-coin"></i>
+                </div>
+
+            </div>
+
+            <div class="owner-stat-footer">
+                <span class="owner-stat-blue">0%</span>
+                <small>so với kỳ trước</small>
+
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+
+        </article>
+
+
+        <!-- LƯỢT XE -->
+        <article class="owner-stat-card">
+
+            <div class="owner-stat-card-top">
+
+                <div>
+                    <span class="owner-stat-label owner-stat-green">
+                        Lượt xe ra vào
+                    </span>
+
+                    <strong class="owner-stat-value">
+                        0
+                    </strong>
+
+                    <small>
+                        Tổng số lượt xe
+                    </small>
+                </div>
+
+                <div class="owner-stat-icon owner-stat-icon-green">
+                    <i class="bi bi-car-front-fill"></i>
+                </div>
+
+            </div>
+
+            <div class="owner-stat-footer">
+                <span class="owner-stat-green">0%</span>
+                <small>so với kỳ trước</small>
+
+                <i class="bi bi-activity"></i>
+            </div>
+
+        </article>
+
+
+        <!-- BOOKING -->
+        <article class="owner-stat-card">
+
+            <div class="owner-stat-card-top">
+
+                <div>
+                    <span class="owner-stat-label owner-stat-orange">
+                        Lượt đặt chỗ
+                    </span>
+
+                    <strong>@summary.BookingCount</strong>
+
+                    <small>
+                        Tổng số lượt đặt
+                    </small>
+                </div>
+
+                <div class="owner-stat-icon owner-stat-icon-orange">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+
+            </div>
+
+            <div class="owner-stat-footer">
+                <span class="owner-stat-orange">0%</span>
+                <small>so với kỳ trước</small>
+
+                <i class="bi bi-graph-up"></i>
+            </div>
+
+        </article>
+
+
+        <!-- OCCUPANCY -->
+        <article class="owner-stat-card">
+
+            <div class="owner-stat-card-top">
+
+                <div>
+                    <span class="owner-stat-label owner-stat-purple">
+                        Tỷ lệ lấp đầy
+                    </span>
+
+                    <strong class="owner-stat-value">
+                        @occupancyRate.ToString("0.#")%
+                    </strong>
+
+                    <small>
+                        @occupiedSlots / @totalSlots chỗ đang sử dụng
+                    </small>
+                </div>
+
+                <div class="owner-stat-icon owner-stat-icon-purple">
+                    <i class="bi bi-pie-chart-fill"></i>
+                </div>
+
+            </div>
+
+            <div class="owner-stat-footer">
+                <span class="owner-stat-purple">0%</span>
+                <small>so với kỳ trước</small>
+
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN GRID
+    ========================== -->
+    <section class="owner-dashboard-main-grid">
+
+        <!-- BIỂU ĐỒ / CHI TIẾT -->
+        <div class="owner-dashboard-card owner-dashboard-chart-card">
+
+            <div class="owner-dashboard-card-header">
+
+                <div>
+                    <h2>
+                        <i class="bi bi-bar-chart-line"></i>
+                        Chi tiết theo mốc thời gian
+                    </h2>
+
+                    <p>
+                        Theo dõi doanh thu phát sinh theo thời gian.
+                    </p>
+                </div>
+
+                <span class="owner-dashboard-chart-type">
+                    <i class="bi bi-graph-up"></i>
+                    Dữ liệu doanh thu
+                </span>
+
+            </div>
+
+            @if (Model?.Breakdown != null && Model.Breakdown.Any())
+            {
+                <div class="owner-dashboard-revenue-table-wrap">
+
+                    <table class="owner-dashboard-revenue-table">
+
+                        <thead>
+                            <tr>
+                                <th>Mốc thời gian</th>
+                                <th>Doanh thu</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model.Breakdown)
+                            {
+                                <tr>
+                                    <td>@item.Period</td>
+
+                                    <td>
+                                        <strong>
+                                            @item.Amount.ToString("N0")đ
+                                        </strong>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+            else
+            {
+                <div class="owner-dashboard-empty-chart">
+
+                    <div class="owner-dashboard-empty-icon">
+                        <i class="bi bi-file-earmark-bar-graph"></i>
+                    </div>
+
+                    <h3>Chưa có dữ liệu</h3>
+
+                    <p>
+                        Dữ liệu sẽ được hiển thị khi có doanh thu phát sinh.
+                    </p>
+
+                    <div class="owner-dashboard-fake-chart">
+                        <span style="height: 20%"></span>
+                        <span style="height: 35%"></span>
+                        <span style="height: 26%"></span>
+                        <span style="height: 48%"></span>
+                        <span style="height: 39%"></span>
+                        <span style="height: 65%"></span>
+                        <span style="height: 55%"></span>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+                    <h3>Chưa có dữ liệu</h3>
+
+                    <p>
+                        Dữ liệu sẽ được hiển thị khi có doanh thu phát sinh.
+                    </p>
+
+                    <div class="owner-dashboard-fake-chart">
+
+                        <span style="height: 20%"></span>
+                        <span style="height: 35%"></span>
+                        <span style="height: 26%"></span>
+                        <span style="height: 48%"></span>
+                        <span style="height: 39%"></span>
+                        <span style="height: 65%"></span>
+                        <span style="height: 55%"></span>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+
+        <!-- TỔNG QUAN NHANH -->
+        <aside class="owner-dashboard-card owner-dashboard-overview">
+
+            <div class="owner-dashboard-card-header">
+                <div>
+                    <h2>
+                        <i class="bi bi-lightning-charge"></i>
+                        Tổng quan nhanh
+                    </h2>
+
+                    <p>
+                        Các thông tin quản lý chính.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="owner-dashboard-overview-list">
+
+                <div class="owner-dashboard-overview-item">
+
+                    <div>
+                        <i class="bi bi-p-square"></i>
+                        <span>Bãi xe của bạn</span>
+                    </div>
+
+            <strong>@summary.ParkingLotCount</strong>
+
+                </div>
+
+
+                <div class="owner-dashboard-overview-item">
+
+                    <div>
+                        <i class="bi bi-grid-3x3-gap"></i>
+                        <span>Số khu vực</span>
+                    </div>
+
+            <strong>@summary.AreaCount</strong>
+
+                </div>
+
+
+                <div class="owner-dashboard-overview-item">
+
+                    <div>
+                        <i class="bi bi-car-front"></i>
+                        <span>Số chỗ xe</span>
+                    </div>
+
+            <strong>@summary.TotalSlots</strong>
+
+                </div>
+
+
+                <div class="owner-dashboard-overview-item">
+
+                    <div>
+                        <i class="bi bi-people"></i>
+                        <span>Nhân viên</span>
+                    </div>
+
+            <strong>@summary.EmployeeCount</strong>
+
+                </div>
+
+
+                <div class="owner-dashboard-overview-item">
+
+                    <div>
+                        <i class="bi bi-star-fill"></i>
+                        <span>Đánh giá trung bình</span>
+                    </div>
+
+            <strong>
+                @(summary.AverageRating > 0
+                    ? summary.AverageRating.ToString("0.0")
+                    : "Chưa có")
+            </strong>
+
+                </div>
+
+            </div>
+
+
+            <a asp-controller="Owner"
+               asp-action="MyLots"
+               class="owner-dashboard-manage-btn">
+
+                Quản lý bãi xe của tôi
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </aside>
+
+    </section>
+
+
+    <!-- =========================
+         TIP
+    ========================== -->
+    <section class="owner-dashboard-tip">
+
+        <div class="owner-dashboard-tip-icon">
+            <i class="bi bi-lightbulb-fill"></i>
+        </div>
+
+        <div>
+            <strong>Mẹo quản lý hiệu quả</strong>
+
+            <p>
+                Theo dõi doanh thu và tỷ lệ lấp đầy thường xuyên
+                để nắm bắt tình hình hoạt động của bãi xe và
+                đưa ra quyết định kịp thời.
+            </p>
+        </div>
+
+        <div class="owner-dashboard-target">
+            <i class="bi bi-bullseye"></i>
+        </div>
+
+    </section>
+
+</div>

@@ -1,0 +1,619 @@
+﻿@model List<ParkingManagement.Web.Models.ParkingLot.ParkingLotViewModel>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<section class="home-hero">
+
+    <div class="container-fluid px-lg-5">
+
+        <div class="row align-items-center hero-row">
+
+            <!-- LEFT -->
+            <div class="col-lg-6">
+
+                <div class="hero-content">
+
+                    <span class="hero-label">
+                        OmniPark
+                    </span>
+
+                    <h1>
+                        Đặt chỗ dễ dàng,
+                        <span>
+                            đỗ xe thông minh
+                        </span>
+                    </h1>
+
+                    <p>
+                        Tìm kiếm bãi đỗ xe phù hợp, kiểm tra thông tin,
+                        đặt chỗ trước và quản lý thời gian gửi xe
+                        ngay trên một hệ thống duy nhất.
+                    </p>
+
+
+                    <a asp-controller="ParkingLot"
+                       asp-action="Index"
+                       class="hero-cta">
+
+                        <span class="hero-cta-icon">
+                            <i class="bi bi-arrow-up-right"></i>
+                        </span>
+
+                        TÌM BÃI XE NGAY
+
+                    </a>
+
+
+                    <div class="hero-stats">
+
+                        <div class="hero-stat-item">
+
+                            <span class="stat-icon blue">
+                                <i class="bi bi-p-square-fill"></i>
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    @(Model?.Count ?? 0)+
+                                </strong>
+
+                                <span>
+                                    Bãi đỗ xe
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="hero-stat-item">
+
+                            <span class="stat-icon green">
+                                <i class="bi bi-calendar-check"></i>
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    24/7
+                                </strong>
+
+                                <span>
+                                    Đặt chỗ
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="hero-stat-item">
+
+                            <span class="stat-icon yellow">
+                                <i class="bi bi-bell"></i>
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Tự động
+                                </strong>
+
+                                <span>
+                                    Nhắc thời gian
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SEARCH -->
+            <div class="col-lg-6">
+
+                <div class="hero-search-card">
+
+                    <div class="search-card-title">
+
+                        <span>
+                            <i class="bi bi-calendar-check"></i>
+                        </span>
+
+                        <h3>
+                            Tìm và đặt chỗ
+                        </h3>
+
+                    </div>
+
+
+                    <form asp-controller="ParkingLot"
+                          asp-action="Index"
+                          method="get">
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Nhập vị trí hoặc tên bãi xe
+                            </label>
+
+                            <div class="hero-input-group">
+
+                                <input type="text"
+                                       name="keyword"
+                                       placeholder="Ví dụ: Bãi xe Quận 1, Vincom..." />
+
+                                <i class="bi bi-geo-alt"></i>
+
+                            </div>
+
+                        </div>
+
+                        <div class="vehicle-preview">
+
+                            <label class="form-label">
+                                Loại xe
+                            </label>
+
+                            <div class="vehicle-buttons">
+
+                                <input type="radio"
+                                       name="vehicleType"
+                                       id="vehicleMotorbike"
+                                       value="Motorbike"
+                                       class="vehicle-radio"
+                                       checked />
+
+                                <label for="vehicleMotorbike"
+                                       class="vehicle-button">
+
+                                    <i class="bi bi-bicycle"></i>
+
+                                    Xe máy
+
+                                </label>
+
+
+                                <input type="radio"
+                                       name="vehicleType"
+                                       id="vehicleCar"
+                                       value="Car"
+                                       class="vehicle-radio" />
+
+                                <label for="vehicleCar"
+                                       class="vehicle-button">
+
+                                    <i class="bi bi-car-front"></i>
+
+                                    Ô tô
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row g-3 mt-1">
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Giờ bắt đầu
+                                </label>
+
+                                <input type="datetime-local"
+                                       name="startTime"
+                                       class="form-control hero-date" />
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Giờ kết thúc
+                                </label>
+
+                                <input type="datetime-local"
+                                       name="endTime"
+                                       class="form-control hero-date" />
+
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit"
+                                class="btn hero-search-button">
+
+                            <i class="bi bi-search"></i>
+
+                            Tìm bãi xe
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="home-features">
+
+    <div class="container-fluid px-lg-5">
+
+        <div class="features-wrapper">
+
+            <div class="feature-item">
+
+                <span class="feature-icon">
+
+                    <i class="bi bi-calendar-check"></i>
+
+                </span>
+
+                <div>
+
+                    <strong>
+                        Đặt chỗ trước
+                    </strong>
+
+                    <p>
+                        Chủ động thời gian gửi xe
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-separator"></div>
+
+
+            <div class="feature-item">
+
+                <span class="feature-icon">
+
+                    <i class="bi bi-credit-card"></i>
+
+                </span>
+
+                <div>
+
+                    <strong>
+                        Thanh toán tiện lợi
+                    </strong>
+
+                    <p>
+                        Thanh toán nhanh chóng
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-separator"></div>
+
+
+            <div class="feature-item">
+
+                <span class="feature-icon">
+
+                    <i class="bi bi-bell"></i>
+
+                </span>
+
+                <div>
+
+                    <strong>
+                        Nhắc nhở thông minh
+                    </strong>
+
+                    <p>
+                        Thông báo trước khi hết giờ
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-separator"></div>
+
+
+            <div class="feature-item">
+
+                <span class="feature-icon">
+
+                    <i class="bi bi-shield-check"></i>
+
+                </span>
+
+                <div>
+
+                    <strong>
+                        An toàn & tin cậy
+                    </strong>
+
+                    <p>
+                        Quản lý thông tin rõ ràng
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PARKING LOTS -->
+<section class="popular-parking-section">
+
+    <div class="container-fluid px-lg-5">
+
+        <div class="parking-section-heading">
+
+            <h2>
+                Bãi đỗ xe phổ biến
+            </h2>
+
+            <a asp-controller="ParkingLot"
+               asp-action="Index">
+
+                Xem tất cả
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var lot in Model.Take(4))
+                {
+                    <div class="col-xl-3 col-lg-6">
+
+                        <article class="home-parking-card">
+
+                            <div class="parking-card-image">
+
+                                <img src="~/images/parking-placeholder.jpg"
+                                     alt="@lot.Name" />
+
+                                <button type="button"
+                                        class="favorite-button">
+
+                                    <i class="bi bi-heart"></i>
+
+                                </button>
+
+
+                                @if (lot.Status == "Approved")
+                                {
+                                    <span class="card-status active">
+                                        Đang hoạt động
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="card-status">
+                                        @lot.Status
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="card-status">
+                                        @lot.Status
+                                    </span>
+                                }
+
+                            </div>
+
+
+                            <div class="parking-card-content">
+
+                                <h3>
+                                    @lot.Name
+                                </h3>
+
+
+                                <p class="parking-location">
+
+                                    <i class="bi bi-geo-alt"></i>
+
+                                    @lot.Address
+
+                                </p>
+
+
+                                <div class="parking-time">
+
+                                    <div>
+
+                                        <small>
+                                            Giờ hoạt động
+                                        </small>
+
+                                        <strong>
+
+                                            @if (lot.OpenTime.HasValue &&
+                                           lot.CloseTime.HasValue)
+                                            {
+                                                @($"{lot.OpenTime.Value:HH\\:mm} - {lot.CloseTime.Value:HH\\:mm}")
+                                            }
+                                            else
+                                            {
+                                                @("Đang cập nhật")
+                                            }
+
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <a asp-controller="ParkingLot"
+                                   asp-action="Detail"
+                                   asp-route-id="@lot.ParkingLotId"
+                                   class="parking-detail-link">
+
+                                    Xem chi tiết
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="parking-empty">
+
+                <i class="bi bi-p-square"></i>
+
+                <h4>
+                    Chưa có bãi đỗ xe
+                </h4>
+
+                <p>
+                    Dữ liệu bãi xe hiện chưa có để hiển thị.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works"
+         id="how-it-works">
+
+    <div class="container-fluid px-lg-5">
+
+        <div class="how-title">
+
+            <span>
+                HƯỚNG DẪN
+            </span>
+
+            <h2>
+                Đặt chỗ chỉ với 3 bước
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="how-card">
+
+                    <span class="how-number">
+                        01
+                    </span>
+
+                    <i class="bi bi-search"></i>
+
+                    <h4>
+                        Tìm bãi xe
+                    </h4>
+
+                    <p>
+                        Nhập tên bãi xe hoặc khu vực
+                        bạn muốn tìm.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="how-card">
+
+                    <span class="how-number">
+                        02
+                    </span>
+
+                    <i class="bi bi-clock"></i>
+
+                    <h4>
+                        Chọn thời gian
+                    </h4>
+
+                    <p>
+                        Chọn loại xe và khoảng thời gian
+                        bạn muốn gửi xe.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="how-card">
+
+                    <span class="how-number">
+                        03
+                    </span>
+
+                    <i class="bi bi-check2-circle"></i>
+
+                    <h4>
+                        Xác nhận đặt chỗ
+                    </h4>
+
+                    <p>
+                        Kiểm tra còn chỗ, thanh toán và
+                        nhận xác nhận đặt chỗ.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

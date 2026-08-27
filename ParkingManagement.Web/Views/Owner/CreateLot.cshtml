@@ -1,0 +1,406 @@
+﻿@model ParkingManagement.Web.ViewModels.Owner.CreateParkingLotViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký bãi xe mới";
+}
+
+<div class="owner-create-lot-page">
+
+    <div class="owner-create-lot-header">
+        <div>
+            <span class="owner-create-lot-kicker">
+                OMNIPARK OWNER
+            </span>
+
+            <h1>Đăng ký bãi xe mới</h1>
+
+            <p>
+                Cung cấp thông tin bãi xe để gửi yêu cầu xét duyệt.
+                Bãi xe chỉ hiển thị cho khách hàng sau khi được Admin phê duyệt.
+            </p>
+        </div>
+
+        <span class="owner-pending-badge">
+            <i class="bi bi-clock-history"></i>
+            Chờ duyệt
+        </span>
+    </div>
+
+
+    <form asp-controller="Owner"
+          asp-action="CreateLot"
+          method="post"
+          class="owner-create-lot-form">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly"
+             class="owner-lot-validation"
+             role="alert">
+        </div>
+
+
+        <!-- =====================================
+             1. THÔNG TIN CƠ BẢN
+        ====================================== -->
+        <section class="owner-lot-card">
+
+            <div class="owner-lot-card-header">
+
+                <span class="owner-lot-step">1</span>
+
+                <div>
+                    <h2>Thông tin cơ bản</h2>
+                    <p>Thông tin nhận diện và thời gian hoạt động của bãi xe.</p>
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-form-grid">
+
+                <div class="owner-lot-field owner-lot-field-full">
+
+                    <label asp-for="Name">
+                        Tên bãi xe
+                        <span>*</span>
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-p-square"></i>
+
+                        <input asp-for="Name"
+                               placeholder="Ví dụ: Bãi xe OmniPark Nguyễn Huệ" />
+                    </div>
+
+                    <span asp-validation-for="Name"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field owner-lot-field-full">
+
+                    <label asp-for="Address">
+                        Địa chỉ
+                        <span>*</span>
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-geo-alt"></i>
+
+                        <input asp-for="Address"
+                               placeholder="Nhập địa chỉ đầy đủ của bãi xe" />
+                    </div>
+
+                    <span asp-validation-for="Address"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="OpenTime">
+                        Giờ mở cửa
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-clock"></i>
+
+                        <input asp-for="OpenTime"
+                               type="time" />
+                    </div>
+
+                    <span asp-validation-for="OpenTime"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="CloseTime">
+                        Giờ đóng cửa
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-clock-history"></i>
+
+                        <input asp-for="CloseTime"
+                               type="time" />
+                    </div>
+
+                    <span asp-validation-for="CloseTime"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             2. VỊ TRÍ
+        ====================================== -->
+        <section class="owner-lot-card">
+
+            <div class="owner-lot-card-header">
+
+                <span class="owner-lot-step">2</span>
+
+                <div>
+                    <h2>Vị trí bãi xe</h2>
+                    <p>
+                        Tọa độ giúp hệ thống xác định chính xác vị trí bãi xe trên bản đồ.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-form-grid">
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="Latitude">
+                        Vĩ độ
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-compass"></i>
+
+                        <input asp-for="Latitude"
+                               type="number"
+                               step="0.000001"
+                               placeholder="Ví dụ: 10.776530" />
+                    </div>
+
+                    <span asp-validation-for="Latitude"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="Longitude">
+                        Kinh độ
+                    </label>
+
+                    <div class="owner-lot-input">
+                        <i class="bi bi-compass-fill"></i>
+
+                        <input asp-for="Longitude"
+                               type="number"
+                               step="0.000001"
+                               placeholder="Ví dụ: 106.700981" />
+                    </div>
+
+                    <span asp-validation-for="Longitude"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-map-placeholder">
+
+                <div class="owner-lot-map-icon">
+                    <i class="bi bi-map"></i>
+                </div>
+
+                <div>
+                    <strong>Bản đồ vị trí</strong>
+
+                    <p>
+                        Tính năng chọn trực tiếp vị trí trên bản đồ
+                        sẽ được bổ sung ở bước tiếp theo.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             3. TIỆN ÍCH
+        ====================================== -->
+        <section class="owner-lot-card">
+
+            <div class="owner-lot-card-header">
+
+                <span class="owner-lot-step">3</span>
+
+                <div>
+                    <h2>Tiện ích bãi xe</h2>
+                    <p>
+                        Chọn các tiện ích hiện có tại bãi xe của bạn.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-amenities">
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Camera an ninh" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-camera-video"></i>
+                    </span>
+
+                    <span>
+                        <strong>Camera an ninh</strong>
+                        <small>Giám sát khu vực bãi xe</small>
+                    </span>
+                </label>
+
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Bảo vệ 24/7" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </span>
+
+                    <span>
+                        <strong>Bảo vệ 24/7</strong>
+                        <small>Nhân viên bảo vệ trực thường xuyên</small>
+                    </span>
+                </label>
+
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Nhà vệ sinh" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-door-open"></i>
+                    </span>
+
+                    <span>
+                        <strong>Nhà vệ sinh</strong>
+                        <small>Phục vụ khách gửi xe</small>
+                    </span>
+                </label>
+
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Wifi miễn phí" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-wifi"></i>
+                    </span>
+
+                    <span>
+                        <strong>Wifi miễn phí</strong>
+                        <small>Kết nối internet tại bãi xe</small>
+                    </span>
+                </label>
+
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Trạm sạc xe điện" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-ev-station"></i>
+                    </span>
+
+                    <span>
+                        <strong>Trạm sạc xe điện</strong>
+                        <small>Hỗ trợ phương tiện điện</small>
+                    </span>
+                </label>
+
+
+                <label class="owner-amenity-option">
+                    <input type="checkbox"
+                           name="Amenities"
+                           value="Rửa xe" />
+
+                    <span class="owner-amenity-icon">
+                        <i class="bi bi-droplet"></i>
+                    </span>
+
+                    <span>
+                        <strong>Dịch vụ rửa xe</strong>
+                        <small>Có dịch vụ vệ sinh phương tiện</small>
+                    </span>
+                </label>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             NOTE
+        ====================================== -->
+        <div class="owner-lot-notice">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+            <div>
+                <strong>Sau khi gửi đăng ký</strong>
+
+                <p>
+                    Thông tin bãi xe sẽ được lưu với trạng thái
+                    <b>Chờ duyệt</b>.
+                    Sau khi Admin phê duyệt, bãi xe mới được hiển thị
+                    trên trang tìm kiếm của khách hàng.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="owner-lot-actions">
+
+            <a asp-controller="Owner"
+               asp-action="MyLots"
+               class="owner-lot-cancel-btn">
+
+                <i class="bi bi-arrow-left"></i>
+                Hủy bỏ
+
+            </a>
+
+            <button type="submit"
+                    class="owner-lot-submit-btn">
+
+                Gửi đăng ký
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

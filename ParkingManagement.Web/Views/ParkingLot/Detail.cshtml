@@ -1,0 +1,515 @@
+﻿@model ParkingManagement.Web.ViewModels.Booking.ParkingLotDetailPageViewModel
+@using ParkingManagement.Web.Helpers
+@{
+    ViewData["Title"] = Model.Lot.Name;
+    ViewData["MetaDescription"] = $"{Model.Lot.Name} tại {Model.Lot.Address}.";
+
+    var images = Model.Images?.ToList() ?? new List<ParkingManagement.Web.ViewModels.Booking.ParkingLotImageViewModel>();
+    var mainImage = images.FirstOrDefault()?.ImageUrl ?? Url.Content("~/images/placeholder-parking.jpg");
+    var thumbs = images.Skip(1).Take(3).ToList();
+    var remainingImages = Math.Max(0, images.Count - 4);
+}
+
+<article class="pdx-page">
+    <nav class="pdx-breadcrumb" aria-label="Đường dẫn">
+        <a asp-controller="Home" asp-action="Index">Trang chủ</a>
+        <span>›</span>
+        <a asp-controller="ParkingLot" asp-action="Index">Tìm bãi xe</a>
+        <span>›</span>
+        <span>Chi tiết bãi xe</span>
+    </nav>
+
+    <div class="pdx-top-layout">
+        <main class="pdx-main">
+            <section class="pdx-gallery" aria-label="Thư viện ảnh @Model.Lot.Name">
+                <div class="pdx-gallery-main">
+                    <img src="@mainImage"
+                         alt="Ảnh @Model.Lot.Name"
+                         onerror="this.onerror=null;this.src='/images/placeholder-parking.jpg';" />
+                </div>
+
+                <div class="pdx-gallery-side">
+                    @for (var i = 0; i < 3; i++)
+                    {
+                        if (i < thumbs.Count)
+                        {
+                            <div class="pdx-thumb">
+                                <img src="@thumbs[i].ImageUrl"
+                                     alt="Ảnh @Model.Lot.Name"
+                                     onerror="this.onerror=null;this.src='/images/placeholder-parking.jpg';" />
+                                @if (i == 2 && remainingImages > 0)
+                                {
+                                    <div class="pdx-more">+@remainingImages</div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="pdx-thumb pdx-thumb-placeholder">
+                                <span>🅿</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </section>
+
+            <section class="pdx-heading">
+                <div class="pdx-title-line">
+                    <h1>@Model.Lot.Name</h1>
+                    @if (Model.Lot.Status == "Approved")
+                    {
+                        <span class="pdx-status"><i></i>Đang hoạt động</span>
+                    }
+                </div>
+
+                <div class="pdx-rating-line">
+                    <strong>@Model.Reviews.AverageRating.ToString("0.0")</strong>
+                    <span class="pdx-stars">★★★★★</span>
+                    <span>(@Model.Reviews.TotalCount đánh giá)</span>
+                </div>
+
+                <div class="pdx-address">
+                    <span>📍</span>
+                    <span>@Model.Lot.Address</span>
+                    <a href="#map-heading">Xem bản đồ</a>
+                </div>
+            </section>
+
+            <section class="pdx-stats" aria-label="Thông tin nhanh">
+                <article class="pdx-stat">
+                    <span class="pdx-stat-icon blue">◷</span>
+                    <div>
+                        <small>Giờ hoạt động</small>
+                        <strong>@Model.Lot.OpenTime - @Model.Lot.CloseTime</strong>
+                        <span>Tất cả các ngày</span>
+                    </div>
+                </article>
+
+                <article class="pdx-stat">
+                    <span class="pdx-stat-icon amber">🚗</span>
+                    <div>
+                        <small>Loại xe</small>
+                        <strong>@(Model.VehicleTypes.Any() ? string.Join(", ", Model.VehicleTypes.Select(v => v.TypeName)) : "Chưa cập nhật")</strong>
+                        <span>Loại xe được hỗ trợ</span>
+                    </div>
+                </article>
+
+                <article class="pdx-stat">
+                    <span class="pdx-stat-icon green">P</span>
+                    <div>
+                        <small>Chỗ trống hiện tại</small>
+                        @if (Model.QuickStats != null)
+                        {
+                            <strong class="pdx-green">@Model.QuickStats.AvailableSlots chỗ</strong>
+                            <span>Cập nhật @Model.QuickStats.UpdatedAt.ToString("HH:mm")</span>
+                        }
+                        else
+                        {
+                            <strong>Chưa cập nhật</strong>
+                            <span>Dữ liệu đang cập nhật</span>
+                        }
+                    </div>
+                </article>
+
+                <article class="pdx-stat">
+                    <span class="pdx-stat-icon red">◇</span>
+                    <div>
+                        <small>Giá từ</small>
+                        @if (Model.QuickStats?.MinPrice != null)
+                        {
+                            <strong>@Model.QuickStats.MinPrice?.ToString("N0")đ</strong>
+                            <span>Tối đa @Model.QuickStats.MaxPrice?.ToString("N0")đ</span>
+                        }
+                        else
+                        {
+                            <strong>Liên hệ</strong>
+                            <span>Tùy loại xe và thời gian</span>
+                        }
+                    </div>
+                </article>
+            </section>
+
+            <section class="pdx-card" aria-labelledby="info-heading">
+                <div class="pdx-card-title">
+                    <span class="pdx-title-icon blue">i</span>
+                    <h2 id="info-heading">Thông tin bãi xe</h2>
+                </div>
+                <p>
+                    @(string.IsNullOrWhiteSpace(Model.Lot.Description)
+                        ? "Bãi xe chưa cập nhật mô tả chi tiết."
+                        : Model.Lot.Description)
+                </p>
+            </section>
+
+            <section class="pdx-card" aria-labelledby="amenities-heading">
+                <div class="pdx-card-title">
+                    <span class="pdx-title-icon purple">✦</span>
+                    <h2 id="amenities-heading">Tiện ích</h2>
+                </div>
+
+                @if (Model.Amenities.Any())
+                {
+                    <div class="pdx-amenities">
+                        @foreach (var a in Model.Amenities)
+                        {
+                            <span>✓ @a.Content</span>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="pdx-muted">Chưa có thông tin tiện ích.</p>
+                }
+            </section>
+
+            <section class="pdx-card" aria-labelledby="map-heading">
+                <div class="pdx-card-title">
+                    <span class="pdx-title-icon green">●</span>
+                    <h2 id="map-heading">Vị trí bãi xe</h2>
+                </div>
+
+                @if (Model.Lot.Latitude != null && Model.Lot.Longitude != null)
+                {
+                    var lat = Model.Lot.Latitude;
+                    var lng = Model.Lot.Longitude;
+                    var bbox = $"{lng - 0.005},{lat - 0.005},{lng + 0.005},{lat + 0.005}";
+
+                    <div class="pdx-map">
+                        <iframe title="Bản đồ vị trí @Model.Lot.Name"
+                                width="100%"
+                                height="300"
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=@bbox&marker=@lat,@lng"
+                                loading="lazy"></iframe>
+                    </div>
+
+                    <div class="pdx-map-footer">
+                        <span>📍 @Model.Lot.Address</span>
+                        <a href="https://www.google.com/maps?q=@lat,@lng" target="_blank" rel="noopener">Chỉ đường →</a>
+                    </div>
+                }
+                else
+                {
+                    <p class="pdx-muted">Bãi xe chưa cập nhật tọa độ.</p>
+                }
+            </section>
+        </main>
+
+        <aside class="pdx-sidebar">
+            <section class="pdx-booking">
+                <div class="pdx-booking-title">
+                    <span>▣</span>
+                    <h2>Đặt chỗ của bạn</h2>
+                </div>
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger py-2">
+                        @TempData["Error"]
+                    </div>
+                }
+
+                <form method="get"
+                      asp-controller="ParkingLot"
+                      asp-action="Detail"
+                      asp-route-id="@Model.Lot.ParkingLotId"
+                      id="booking-form">
+
+                    <div class="pdx-field">
+                        <label for="startDate">Ngày bắt đầu</label>
+                        <div class="pdx-date-time">
+                            <input type="date" id="startDate" class="form-control" />
+                            <input type="time" id="startTimeOnly" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="pdx-field">
+                        <label for="endDate">Ngày kết thúc</label>
+                        <div class="pdx-date-time">
+                            <input type="date" id="endDate" class="form-control" />
+                            <input type="time" id="endTimeOnly" class="form-control" />
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="startTime" name="startTime" value="@(Model.StartTime?.ToString("yyyy-MM-ddTHH:mm"))" />
+                    <input type="hidden" id="endTime" name="endTime" value="@(Model.EndTime?.ToString("yyyy-MM-ddTHH:mm"))" />
+
+                    <div class="pdx-field">
+                        <label for="vehicleTypeId">Loại xe</label>
+                        <select id="vehicleTypeId" name="vehicleTypeId" class="form-select">
+                            <option value="">— Chọn loại xe —</option>
+                            @foreach (var vt in Model.VehicleTypes)
+                            {
+                                <option value="@vt.VehicleTypeId" selected="@(vt.VehicleTypeId == Model.SelectedVehicleTypeId)">@vt.TypeName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <button type="submit" class="pdx-check-btn">Kiểm tra chỗ trống</button>
+                </form>
+
+                @if (Model.Availability != null)
+                {
+                    <div class="pdx-availability @(Model.Availability.AvailableSlots > 0 ? "available" : "full")">
+                        <div>
+                            <span>@(Model.Availability.AvailableSlots > 0 ? "✓" : "!")</span>
+                            <strong>@(Model.Availability.AvailableSlots > 0 ? "Còn trống" : "Đã hết chỗ")</strong>
+                            <b>@Model.Availability.AvailableSlots chỗ</b>
+                        </div>
+                        <small>Trong khoảng thời gian bạn chọn</small>
+                    </div>
+
+                    @if (Model.Availability.EstimatedAmount != null)
+                    {
+                        <div class="pdx-price">
+                            <span>Tổng tiền dự kiến</span>
+                            <strong>@Model.Availability.EstimatedAmount?.ToString("N0")đ</strong>
+                            <small>Giá có thể thay đổi theo loại xe và thời gian gửi.</small>
+                        </div>
+                    }
+
+                    @if (Model.Availability.AvailableSlots > 0)
+                    {
+                        <form method="post"
+                              asp-controller="Booking"
+                              asp-action="Create">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="ParkingLotId"
+                                   value="@Model.Lot.ParkingLotId" />
+
+                            <input type="hidden"
+                                   name="VehicleTypeId"
+                                   value="@Model.SelectedVehicleTypeId" />
+
+                            <input type="hidden"
+                                   name="StartTime"
+                                   value="@Model.StartTime" />
+
+                            <input type="hidden"
+                                   name="EndTime"
+                                   value="@Model.EndTime" />
+
+                            <div class="pdx-field mt-3">
+                                <label for="LicensePlate">
+                                    Biển số xe
+                                </label>
+
+                                <input type="text"
+                                       id="LicensePlate"
+                                       name="LicensePlate"
+                                       class="form-control"
+                                       placeholder="VD: 59A1-12345"
+                                       maxlength="20"
+                                       autocomplete="off"
+                                       required />
+                            </div>
+
+                            <button type="submit"
+                                    class="pdx-book-btn">
+                                Đặt chỗ ngay
+                            </button>
+                        </form>
+                    }
+                }
+                else if (Model.AvailabilityMessage != null)
+                {
+                    <div class="alert alert-danger mt-3 mb-0" role="alert">@Model.AvailabilityMessage</div>
+                }
+
+                @if (!User.Identity?.IsAuthenticated ?? true)
+                {
+                    <p class="pdx-login-note">Bạn sẽ được yêu cầu đăng nhập trước khi xác nhận đặt chỗ.</p>
+                }
+            </section>
+
+            <section class="pdx-side-card" aria-labelledby="notes-heading">
+                <div class="pdx-card-title">
+                    <span class="pdx-title-icon amber">!</span>
+                    <h2 id="notes-heading">Lưu ý khi gửi xe</h2>
+                </div>
+
+                <div class="pdx-side-notes">
+                    <article>
+                        <span>◷</span>
+                        <div><strong>Đúng giờ đặt chỗ</strong><p>Vui lòng đến đúng thời gian đã đặt. Quá 15 phút, chỗ có thể bị hủy.</p></div>
+                    </article>
+                    <article>
+                        <span>▣</span>
+                        <div><strong>Giữ mã đặt chỗ</strong><p>Xuất trình mã đặt chỗ hoặc QR Code cho nhân viên khi vào và ra bãi xe.</p></div>
+                    </article>
+                    <article>
+                        <span>₫</span>
+                        <div><strong>Phụ phí quá giờ</strong><p>Có thể phát sinh phụ phí nếu thời gian gửi xe vượt quá thời gian đã đặt.</p></div>
+                    </article>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <section class="pdx-reviews" aria-labelledby="reviews-heading">
+        <div class="pdx-card-title">
+            <span class="pdx-title-icon amber">☆</span>
+            <h2 id="reviews-heading">Đánh giá từ khách hàng</h2>
+        </div>
+
+        <div class="pdx-review-grid">
+            <aside class="pdx-review-summary">
+                <div class="pdx-score">
+                    <strong>@Model.Reviews.AverageRating.ToString("0.0")</strong><span>/5</span>
+                </div>
+                <div class="pdx-stars pdx-stars-lg">★★★★★</div>
+                <p>(@Model.Reviews.TotalCount đánh giá)</p>
+
+                <div class="pdx-bars">
+                    @for (int star = 5; star >= 1; star--)
+                    {
+                        var count = Model.Reviews.RatingBreakdown.GetValueOrDefault(star, 0);
+                        var percent = Model.Reviews.TotalCount > 0 ? (count * 100 / Model.Reviews.TotalCount) : 0;
+                        <div class="pdx-bar-row">
+                            <span>@star sao</span>
+                            <div><i style="width:@percent%"></i></div>
+                            <small>@count</small>
+                        </div>
+                    }
+                </div>
+            </aside>
+
+            <div class="pdx-review-items">
+                @if (Model.Reviews.Items.Any())
+                {
+                    @foreach (var r in Model.Reviews.Items.Take(3))
+                    {
+                        <article class="pdx-review-item">
+                            <div class="pdx-review-user">
+                                <img src="@(r.AvatarUrl ?? "/images/default-avatar.png")"
+                                     alt="@r.UserName"
+                                     onerror="this.onerror=null;this.src='/images/default-avatar.png';" />
+                                <div>
+                                    <strong>@r.UserName</strong>
+                                    <small>@r.CreatedAt.ToRelativeTime()</small>
+                                </div>
+                            </div>
+                            <div class="pdx-stars">@string.Concat(Enumerable.Repeat("★", r.Rating))</div>
+                            @if (!string.IsNullOrWhiteSpace(r.Comment))
+                            {
+                                <p>@r.Comment</p>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(r.OwnerReply))
+                            {
+                                <div class="pdx-owner-reply"><strong>Phản hồi từ chủ bãi:</strong> @r.OwnerReply</div>
+                            }
+                        </article>
+                    }
+                }
+                else
+                {
+                    <div class="pdx-empty-review">Chưa có đánh giá nào cho bãi xe này.</div>
+                }
+
+                @if (Model.Reviews.TotalPages > 1)
+                {
+                    <nav class="pdx-pagination" aria-label="Phân trang đánh giá">
+                        @for (int p = 1; p <= Model.Reviews.TotalPages; p++)
+                        {
+                            <a class="@(p == Model.Reviews.Page ? "active" : "")"
+                               asp-action="Detail"
+                               asp-route-id="@Model.Lot.ParkingLotId"
+                               asp-route-reviewPage="@p">@p</a>
+                        }
+                    </nav>
+                }
+            </div>
+        </div>
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <form method="post" asp-action="SubmitReview" id="review-form" class="pdx-review-form">
+                <input type="hidden" name="ParkingLotId" value="@Model.Lot.ParkingLotId" />
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="rating" class="form-label">Số sao</label>
+                        <select id="rating" name="Rating" class="form-select" required>
+                            <option value="5">5 sao</option>
+                            <option value="4">4 sao</option>
+                            <option value="3">3 sao</option>
+                            <option value="2">2 sao</option>
+                            <option value="1">1 sao</option>
+                        </select>
+                    </div>
+                    <div class="col-md-9">
+                        <label for="comment" class="form-label">Nhận xét</label>
+                        <textarea id="comment" name="Comment" class="form-control" rows="2" placeholder="Chia sẻ trải nghiệm của bạn..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="pdx-review-submit">Gửi đánh giá</button>
+            </form>
+        }
+    </section>
+</article>
+
+@section Head {
+    <script type="application/ld+json">
+        @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new
+            {
+                @context = "https://schema.org",
+                @type = "ParkingFacility",
+                name = Model.Lot.Name,
+                address = new { @type = "PostalAddress", streetAddress = Model.Lot.Address },
+                openingHours = $"{Model.Lot.OpenTime}-{Model.Lot.CloseTime}",
+                url = $"{Context.Request.Scheme}://{Context.Request.Host}/ParkingLot/Detail/{Model.Lot.ParkingLotId}"
+            }))
+    </script>
+}
+
+@section Scripts {
+    <script>
+        (() => {
+            const form = document.getElementById('booking-form');
+            const startDate = document.getElementById('startDate');
+            const startTimeOnly = document.getElementById('startTimeOnly');
+            const endDate = document.getElementById('endDate');
+            const endTimeOnly = document.getElementById('endTimeOnly');
+            const startHidden = document.getElementById('startTime');
+            const endHidden = document.getElementById('endTime');
+
+            const splitDateTime = (value, dateInput, timeInput) => {
+                if (!value) return;
+                const parts = value.split('T');
+                if (parts.length === 2) {
+                    dateInput.value = parts[0];
+                    timeInput.value = parts[1].substring(0, 5);
+                }
+            };
+
+            splitDateTime(startHidden?.value, startDate, startTimeOnly);
+            splitDateTime(endHidden?.value, endDate, endTimeOnly);
+
+            form?.addEventListener('submit', (e) => {
+                const sd = startDate?.value;
+                const st = startTimeOnly?.value;
+                const ed = endDate?.value;
+                const et = endTimeOnly?.value;
+
+                if (!sd || !st || !ed || !et) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn đầy đủ ngày và giờ bắt đầu/kết thúc.');
+                    return;
+                }
+
+                const start = new Date(`${sd}T${st}`);
+                const end = new Date(`${ed}T${et}`);
+
+                if (end <= start) {
+                    e.preventDefault();
+                    alert('Thời gian kết thúc phải sau thời gian bắt đầu.');
+                    return;
+                }
+
+                startHidden.value = `${sd}T${st}`;
+                endHidden.value = `${ed}T${et}`;
+            });
+        })();
+    </script>
+}

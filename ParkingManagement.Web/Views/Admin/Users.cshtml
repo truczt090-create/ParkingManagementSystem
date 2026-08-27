@@ -1,0 +1,555 @@
+﻿@model List<ParkingManagement.Web.ViewModels.Admin.AdminUserViewModel>
+
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+
+    var users = Model ?? new List<ParkingManagement.Web.ViewModels.Admin.AdminUserViewModel>();
+
+    var totalUsers = users.Count;
+    var customerCount = users.Count(x => x.RoleName == "Customer");
+    var ownerCount = users.Count(x => x.RoleName == "Owner");
+    var employeeCount = users.Count(x => x.RoleName == "Employee");
+    var adminCount = users.Count(x => x.RoleName == "Admin");
+
+    var currentRole = ViewBag.Role as string;
+}
+
+<div class="admin-users-page">
+
+    <!-- HEADER -->
+    <section class="admin-users-header">
+
+        <div>
+            <span class="admin-users-kicker">
+                OMNIPARK ADMIN
+            </span>
+
+            <h1>Quản lý người dùng</h1>
+
+            <p>
+                Quản lý trạng thái và phân loại tài khoản người dùng trong hệ thống OmniPark.
+            </p>
+        </div>
+
+    </section>
+
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="admin-users-alert-success">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                @ViewBag.SuccessMessage
+            </span>
+
+        </div>
+    }
+
+
+    <!-- ==================================================
+         THỐNG KÊ
+    =================================================== -->
+    <section class="admin-users-summary">
+
+        <article class="admin-user-summary-card">
+
+            <div class="admin-user-summary-icon blue">
+                <i class="bi bi-people-fill"></i>
+            </div>
+
+            <div>
+                <span>Tổng người dùng</span>
+
+                <strong>@totalUsers</strong>
+
+                <small>Tài khoản đang hiển thị</small>
+            </div>
+
+        </article>
+
+
+        <article class="admin-user-summary-card">
+
+            <div class="admin-user-summary-icon green">
+                <i class="bi bi-person"></i>
+            </div>
+
+            <div>
+                <span>Khách hàng</span>
+
+                <strong>@customerCount</strong>
+
+                <small>Tài khoản Customer</small>
+            </div>
+
+        </article>
+
+
+        <article class="admin-user-summary-card">
+
+            <div class="admin-user-summary-icon orange">
+                <i class="bi bi-shop"></i>
+            </div>
+
+            <div>
+                <span>Chủ bãi xe</span>
+
+                <strong>@ownerCount</strong>
+
+                <small>Tài khoản Owner</small>
+            </div>
+
+        </article>
+
+
+        <article class="admin-user-summary-card">
+
+            <div class="admin-user-summary-icon purple">
+                <i class="bi bi-person-badge"></i>
+            </div>
+
+            <div>
+                <span>Nhân viên</span>
+
+                <strong>@employeeCount</strong>
+
+                <small>Tài khoản Employee</small>
+            </div>
+
+        </article>
+
+
+        <article class="admin-user-summary-card">
+
+            <div class="admin-user-summary-icon admin-color">
+                <i class="bi bi-person-gear"></i>
+            </div>
+
+            <div>
+                <span>Quản trị viên</span>
+
+                <strong>@adminCount</strong>
+
+                <small>Tài khoản Admin</small>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- ==================================================
+         ROLE FILTER
+    =================================================== -->
+    <div class="admin-user-tabs">
+
+        <a asp-controller="Admin"
+           asp-action="Users"
+           class="admin-user-tab @(string.IsNullOrWhiteSpace(currentRole) ? "active" : "")">
+
+            Tất cả
+
+        </a>
+
+
+        <a asp-controller="Admin"
+           asp-action="Users"
+           asp-route-role="Customer"
+           class="admin-user-tab @(currentRole == "Customer" ? "active" : "")">
+
+            Customer
+
+        </a>
+
+
+        <a asp-controller="Admin"
+           asp-action="Users"
+           asp-route-role="Owner"
+           class="admin-user-tab @(currentRole == "Owner" ? "active" : "")">
+
+            Owner
+
+        </a>
+
+
+        <a asp-controller="Admin"
+           asp-action="Users"
+           asp-route-role="Employee"
+           class="admin-user-tab @(currentRole == "Employee" ? "active" : "")">
+
+            Employee
+
+        </a>
+
+    </div>
+
+
+    <!-- ==================================================
+         SEARCH + STATUS FILTER
+    =================================================== -->
+    <div class="admin-user-toolbar">
+
+        <div class="admin-user-search">
+
+            <i class="bi bi-search"></i>
+
+            <input type="text"
+                   id="adminUserSearch"
+                   placeholder="Tìm kiếm theo họ tên, email..." />
+
+        </div>
+
+
+        <div class="admin-user-filter">
+
+            <i class="bi bi-funnel"></i>
+
+            <select id="adminUserStatusFilter">
+
+                <option value="">
+                    Tất cả trạng thái
+                </option>
+
+                <option value="active">
+                    Đang hoạt động
+                </option>
+
+                <option value="locked">
+                    Đã khóa
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         TABLE
+    =================================================== -->
+    <section class="admin-users-table-card">
+
+        @if (users.Any())
+        {
+            <div class="admin-users-table-wrap">
+
+                <table class="admin-users-table"
+                       id="adminUsersTable">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Vai trò</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        @{
+                            var index = 1;
+                        }
+
+                        @foreach (var u in users)
+                        {
+                            var roleClass = u.RoleName switch
+                            {
+                                "Customer" => "customer",
+                                "Owner" => "owner",
+                                "Employee" => "employee",
+                                "Admin" => "admin",
+                                _ => ""
+                            };
+
+                            var initials = "";
+
+                            if (!string.IsNullOrWhiteSpace(u.FullName))
+                            {
+                                var words = u.FullName
+                                .Split(
+                                ' ',
+                                StringSplitOptions.RemoveEmptyEntries
+                                );
+
+                                initials = words.Length >= 2
+                                ? $"{words[0][0]}{words[^1][0]}"
+                                : u.FullName.Substring(0, 1);
+                            }
+
+                            <tr data-name="@((u.FullName ?? "").ToLowerInvariant())"
+data-email="@((u.Email ?? "").ToLowerInvariant())"
+                                data-status="@(u.IsActive ? "active" : "locked")">
+
+                                <td class="admin-user-index">
+                                    @index
+                                </td>
+
+
+                                <!-- USER -->
+                                <td>
+
+                                    <div class="admin-user-person">
+
+                                        <div class="admin-user-avatar">
+                                            @initials.ToUpperInvariant()
+                                        </div>
+
+                                        <div>
+                                            <strong>
+                                                @u.FullName
+                                            </strong>
+
+                                            <small>
+                                                ID: @u.UserId
+                                            </small>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- EMAIL -->
+                                <td>
+
+                                    <span class="admin-user-email">
+                                        @u.Email
+                                    </span>
+
+                                </td>
+
+
+                                <!-- ROLE -->
+                                <td>
+
+                                    <span class="admin-role-badge @roleClass">
+                                        @u.RoleName
+                                    </span>
+
+                                </td>
+
+
+                                <!-- STATUS -->
+                                <td>
+
+                                    @if (u.IsActive)
+                                    {
+                                        <span class="admin-status-badge active">
+
+                                            <i class="bi bi-circle-fill"></i>
+
+                                            Đang hoạt động
+
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="admin-status-badge locked">
+
+                                            <i class="bi bi-circle-fill"></i>
+
+                                            Đã khóa
+
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- ACTION -->
+                                <td>
+
+                                    <form method="post"
+                                          asp-controller="Admin"
+                                          asp-action="ToggleActive"
+                                          asp-route-id="@u.UserId"
+                                          class="admin-user-toggle-form"
+                                          onsubmit="return confirmToggleUser('@u.FullName', @u.IsActive.ToString().ToLower());">
+
+                                        @Html.AntiForgeryToken()
+
+
+                                        @if (u.IsActive)
+                                        {
+                                            <button type="submit"
+                                                    class="admin-user-action lock">
+
+                                                <i class="bi bi-lock"></i>
+
+                                                Khóa
+
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit"
+                                                    class="admin-user-action unlock">
+
+                                                <i class="bi bi-unlock"></i>
+
+                                                Mở khóa
+
+                                            </button>
+                                        }
+
+                                    </form>
+
+                                </td>
+
+                            </tr>
+
+                            index++;
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="admin-users-table-footer">
+
+                <span id="adminUserResultCount">
+                    Hiển thị @totalUsers người dùng
+                </span>
+
+            </div>
+        }
+        else
+        {
+            <div class="admin-users-empty">
+
+                <div class="admin-users-empty-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h3>Không có người dùng</h3>
+
+                <p>
+                    Không tìm thấy tài khoản thuộc nhóm đang chọn.
+                </p>
+
+            </div>
+        }
+
+    </section>
+
+</div>
+
+
+@section Scripts {
+
+    <script>
+
+        const searchInput =
+            document.getElementById("adminUserSearch");
+
+        const statusFilter =
+            document.getElementById("adminUserStatusFilter");
+
+        const resultCount =
+            document.getElementById("adminUserResultCount");
+
+
+        function filterAdminUsers() {
+
+            const keyword =
+                searchInput?.value
+                    .toLowerCase()
+                    .trim() ?? "";
+
+            const selectedStatus =
+                statusFilter?.value ?? "";
+
+            const rows =
+                document.querySelectorAll(
+                    "#adminUsersTable tbody tr"
+                );
+
+            let visibleCount = 0;
+
+
+            rows.forEach(row => {
+
+                const name =
+                    row.dataset.name || "";
+
+                const email =
+                    row.dataset.email || "";
+
+                const status =
+                    row.dataset.status || "";
+
+
+                const matchKeyword =
+                    name.includes(keyword) ||
+                    email.includes(keyword);
+
+
+                const matchStatus =
+                    selectedStatus === "" ||
+                    status === selectedStatus;
+
+
+                const visible =
+                    matchKeyword && matchStatus;
+
+
+                row.style.display =
+                    visible ? "" : "none";
+
+
+                if (visible) {
+                    visibleCount++;
+                }
+
+            });
+
+
+            if (resultCount) {
+
+                resultCount.textContent =
+                    `Hiển thị ${visibleCount} người dùng`;
+
+            }
+        }
+
+
+        searchInput?.addEventListener(
+            "input",
+            filterAdminUsers
+        );
+
+
+        statusFilter?.addEventListener(
+            "change",
+            filterAdminUsers
+        );
+
+
+        function confirmToggleUser(name, isActive) {
+
+            if (isActive) {
+
+                return confirm(
+                    `Bạn có chắc muốn khóa tài khoản "${name}" không?`
+                );
+
+            }
+
+            return confirm(
+                `Bạn có chắc muốn mở khóa tài khoản "${name}" không?`
+            );
+        }
+
+    </script>
+
+}

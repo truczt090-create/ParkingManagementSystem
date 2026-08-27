@@ -1,0 +1,308 @@
+﻿@model ParkingManagement.Web.ViewModels.Owner.EditParkingLotViewModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa bãi xe";
+
+    var statusDisplay = Model.Status switch
+    {
+        "Pending" => "Chờ duyệt",
+        "Approved" => "Đã duyệt",
+        "Rejected" => "Từ chối",
+        _ => Model.Status
+    };
+}
+
+<div class="owner-create-lot-page">
+
+    <!-- HEADER -->
+    <div class="owner-create-lot-header">
+
+        <div>
+            <span class="owner-create-lot-kicker">
+                OMNIPARK OWNER
+            </span>
+
+            <h1>Chỉnh sửa thông tin bãi xe</h1>
+
+            <p>
+                Cập nhật thông tin địa điểm và thời gian
+                hoạt động của bãi xe.
+            </p>
+        </div>
+
+        <span class="owner-pending-badge">
+            <i class="bi bi-pencil-square"></i>
+            @statusDisplay
+        </span>
+
+    </div>
+
+
+    <form asp-controller="Owner"
+          asp-action="EditLot"
+          method="post"
+          class="owner-create-lot-form">
+
+        @Html.AntiForgeryToken()
+
+        <input asp-for="ParkingLotId" type="hidden" />
+        <input asp-for="Status" type="hidden" />
+
+
+        <div asp-validation-summary="ModelOnly"
+             class="owner-lot-validation">
+        </div>
+
+
+        <!-- THÔNG TIN CƠ BẢN -->
+        <section class="owner-lot-card">
+
+            <div class="owner-lot-card-header">
+
+                <span class="owner-lot-step">
+                    1
+                </span>
+
+                <div>
+                    <h2>Thông tin cơ bản</h2>
+
+                    <p>
+                        Chỉnh sửa tên và địa chỉ của bãi xe.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-form-grid">
+
+                <div class="owner-lot-field owner-lot-field-full">
+
+                    <label asp-for="Name">
+                        Tên bãi xe
+                        <span>*</span>
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-p-square"></i>
+
+                        <input asp-for="Name"
+                               placeholder="Tên bãi xe" />
+
+                    </div>
+
+                    <span asp-validation-for="Name"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field owner-lot-field-full">
+
+                    <label asp-for="Address">
+                        Địa chỉ
+                        <span>*</span>
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-geo-alt"></i>
+
+                        <input asp-for="Address"
+                               placeholder="Địa chỉ bãi xe" />
+
+                    </div>
+
+                    <span asp-validation-for="Address"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="OpenTime">
+                        Giờ mở cửa
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-clock"></i>
+
+                        <input asp-for="OpenTime"
+                               type="time" />
+
+                    </div>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="CloseTime">
+                        Giờ đóng cửa
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-clock-history"></i>
+
+                        <input asp-for="CloseTime"
+                               type="time" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- VỊ TRÍ -->
+        <section class="owner-lot-card">
+
+            <div class="owner-lot-card-header">
+
+                <span class="owner-lot-step">
+                    2
+                </span>
+
+                <div>
+                    <h2>Vị trí bãi xe</h2>
+
+                    <p>
+                        Điều chỉnh tọa độ nếu vị trí bãi xe
+                        trên bản đồ chưa chính xác.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-form-grid">
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="Latitude">
+                        Vĩ độ
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-compass"></i>
+
+                        <input asp-for="Latitude"
+                               type="number"
+                               step="0.000001" />
+
+                    </div>
+
+                    <span asp-validation-for="Latitude"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+
+                <div class="owner-lot-field">
+
+                    <label asp-for="Longitude">
+                        Kinh độ
+                    </label>
+
+                    <div class="owner-lot-input">
+
+                        <i class="bi bi-compass-fill"></i>
+
+                        <input asp-for="Longitude"
+                               type="number"
+                               step="0.000001" />
+
+                    </div>
+
+                    <span asp-validation-for="Longitude"
+                          class="owner-lot-field-error">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="owner-lot-map-placeholder">
+
+                <div class="owner-lot-map-icon">
+                    <i class="bi bi-map"></i>
+                </div>
+
+                <div>
+                    <strong>Vị trí bãi xe</strong>
+
+                    <p>
+                        Tọa độ hiện tại của bãi xe.
+                        Sau này chúng ta sẽ cho chọn trực tiếp
+                        trên bản đồ.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- THÔNG BÁO -->
+        <div class="owner-lot-notice">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+            <div>
+
+                <strong>Lưu ý</strong>
+
+                <p>
+                    Việc chỉnh sửa thông tin không cho phép
+                    thay đổi trạng thái xét duyệt của bãi xe.
+                    Trạng thái hiện tại:
+                    <b>@statusDisplay</b>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTON -->
+        <div class="owner-lot-actions">
+
+            <a asp-controller="Owner"
+               asp-action="MyLots"
+               class="owner-lot-cancel-btn">
+
+                <i class="bi bi-arrow-left"></i>
+                Hủy bỏ
+
+            </a>
+
+
+            <button type="submit"
+                    class="owner-lot-submit-btn">
+
+                <i class="bi bi-check-lg"></i>
+                Lưu thay đổi
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

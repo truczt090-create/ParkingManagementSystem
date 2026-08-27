@@ -1,0 +1,599 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - OmniPark</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+    @await RenderSectionAsync("Head", required: false)
+</head>
+
+<body>
+
+    <header class="main-header">
+
+        <div class="container-fluid px-lg-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+
+                <!-- BRAND -->
+                <a class="navbar-brand omnipark-brand"
+                   asp-controller="Home"
+                   asp-action="Index">
+
+                    <img src="~/images/logo.png"
+                         alt="OmniPark"
+                        />
+
+                </a>
+
+
+                <!-- MOBILE BUTTON -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar"
+                        aria-controls="mainNavbar"
+                        aria-expanded="false"
+                        aria-label="Mở menu">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse"
+                     id="mainNavbar">
+
+                    <!-- MENU GIỮA -->
+                    <ul class="navbar-nav mx-auto main-menu">
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Trang chủ
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="ParkingLot"
+                               asp-action="Index">
+                                Tìm bãi xe
+                            </a>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Guide">Hướng dẫn</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="News">Tin tức</a></li>
+
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Liên hệ</a></li>
+                        </li>
+
+                    </ul>
+
+
+                    <!-- PHÍA PHẢI -->
+                    <div class="header-actions">
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            var fullName =
+                            User.FindFirst(ClaimTypes.Name)?.Value
+                            ?? User.Identity?.Name
+                            ?? "Người dùng";
+
+                            var email =
+                            User.FindFirst(ClaimTypes.Email)?.Value
+                            ?? "Chưa cập nhật";
+
+                            var phone =
+                            Context.Session.GetString("Phone");
+
+                            if (string.IsNullOrWhiteSpace(phone))
+                            {
+                                phone = "Chưa cập nhật";
+                            }
+
+                            var role =
+                            User.FindFirst(ClaimTypes.Role)?.Value
+                            ?? "Customer";
+
+                            var roleDisplay = role switch
+                            {
+                                "Customer" => "Khách hàng",
+                                "Owner" => "Chủ bãi xe",
+                                "Employee" => "Nhân viên",
+                                "Admin" => "Quản trị viên",
+                                _ => role
+                            };
+
+
+                            <!-- =========================
+                                 CHUÔNG THÔNG BÁO
+                            ========================== -->
+
+                            <a asp-controller="Notification"
+                               asp-action="Index"
+                               class="notification-btn"
+                               title="Thông báo">
+
+                                <i class="bi bi-bell"></i>
+
+                                @*
+                            SAU NÀY khi có unreadCount thật:
+
+                            @if (unreadCount > 0)
+                            {
+                            <span class="notification-count">
+                            @unreadCount
+                            </span>
+                            }
+                            *@
+
+                            </a>
+
+
+                            <!-- =========================
+                                 USER DROPDOWN
+                            ========================== -->
+
+                            <div class="dropdown user-dropdown">
+
+                                <button class="user-navbar-button"
+                                        type="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+
+                                    <span class="navbar-user-avatar">
+                                        <i class="bi bi-person-fill"></i>
+                                    </span>
+
+                                    <span class="navbar-user-name">
+                                        @fullName
+                                    </span>
+
+                                    <i class="bi bi-chevron-down user-chevron"></i>
+
+                                </button>
+
+
+                                <div class="dropdown-menu dropdown-menu-end user-dropdown-menu">
+
+                                    <!-- MŨI TÊN NHỎ TRÊN DROPDOWN -->
+                                    <div class="dropdown-arrow"></div>
+
+
+                                    <!-- TITLE -->
+                                    <div class="user-dropdown-title">
+
+                                        <i class="bi bi-person"></i>
+
+                                        <span>
+                                            Thông tin người dùng
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="user-dropdown-divider"></div>
+
+
+                                    <!-- USER INFORMATION -->
+                                    <div class="user-information">
+
+                                        <div class="user-info-row">
+
+                                            <span class="user-info-label">
+                                                Họ tên:
+                                            </span>
+
+                                            <span class="user-info-value">
+                                                @fullName
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="user-info-row">
+
+                                            <span class="user-info-label">
+                                                Email:
+                                            </span>
+
+                                            <span class="user-info-value user-info-email">
+                                                @email
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="user-info-row">
+
+                                            <span class="user-info-label">
+                                                Số điện thoại:
+                                            </span>
+
+                                            <span class="user-info-value">
+                                                @phone
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="user-info-row">
+
+                                            <span class="user-info-label">
+                                                Vai trò:
+                                            </span>
+
+                                            <span class="user-info-value">
+                                                @roleDisplay
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="user-dropdown-divider"></div>
+
+
+                                    <!-- CUSTOMER -->
+                                    @if (role == "Customer")
+                                    {
+                                        <a class="user-dropdown-link"
+                                           asp-controller="Profile"
+                                           asp-action="Index">
+
+                                            <span class="dropdown-link-left">
+
+                                                <i class="bi bi-person"></i>
+
+                                                <span>
+                                                    Hồ sơ
+                                                </span>
+
+                                            </span>
+
+                                            <i class="bi bi-chevron-right"></i>
+
+                                        </a>
+
+
+                                        <a class="user-dropdown-link"
+                                           asp-controller="Booking"
+                                           asp-action="MyBookings">
+
+                                            <span class="dropdown-link-left">
+                                                <i class="bi bi-clock-history"></i>
+
+                                                <span>
+                                                    Lịch sử đặt chỗ
+                                                </span>
+                                            </span>
+
+                                            <i class="bi bi-chevron-right"></i>
+                                        </a>
+                                    }
+
+
+                                    <!-- OWNER -->
+                                    @if (role == "Owner")
+                                    {
+                                        <a class="user-dropdown-link"
+                                           asp-controller="Owner"
+                                           asp-action="Dashboard">
+
+                                            <span class="dropdown-link-left">
+
+                                                <i class="bi bi-speedometer2"></i>
+
+                                                <span>
+                                                    Quản lý bãi xe
+                                                </span>
+
+                                            </span>
+
+                                            <i class="bi bi-chevron-right"></i>
+
+                                        </a>
+                                    }
+
+
+                                    <!-- EMPLOYEE -->
+                                    @if (role == "Employee")
+                                    {
+                                        <a class="user-dropdown-link"
+                                           asp-controller="Employee"
+                                           asp-action="VehicleDashboard">
+
+                                            <span class="dropdown-link-left">
+
+                                                <i class="bi bi-car-front"></i>
+
+                                                <span>
+                                                    Quản lý xe
+                                                </span>
+
+                                            </span>
+
+                                            <i class="bi bi-chevron-right"></i>
+
+                                        </a>
+                                    }
+
+
+                                    <!-- ADMIN -->
+                                    @if (role == "Admin")
+                                    {
+                                        <a class="user-dropdown-link"
+                                           asp-controller="Admin"
+                                           asp-action="Dashboard">
+
+                                            <span class="dropdown-link-left">
+
+                                                <i class="bi bi-shield-check"></i>
+
+                                                <span>
+                                                    Quản trị hệ thống
+                                                </span>
+
+                                            </span>
+
+                                            <i class="bi bi-chevron-right"></i>
+
+                                        </a>
+                                    }
+
+
+                                    <div class="user-dropdown-divider"></div>
+
+
+                                    <!-- LOGOUT -->
+                                    <form asp-controller="Account"
+                                          asp-action="Logout"
+                                          method="post"
+                                          class="logout-form">
+
+                                        <button type="submit"
+                                                class="user-logout-button">
+
+                                            <i class="bi bi-box-arrow-left"></i>
+
+                                            <span>
+                                                Đăng xuất
+                                            </span>
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account"
+                               asp-action="Login"
+                               class="btn btn-login-nav">
+
+                                Đăng nhập
+
+                            </a>
+
+
+                            <a asp-controller="Account"
+                               asp-action="Register"
+                               class="btn btn-register-nav">
+
+                                Đăng ký
+
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </div>
+    </header>
+
+    @if (TempData["LoginSuccess"] != null)
+    {
+        <div id="login-success-toast" class="login-success-toast">
+
+            <div class="login-success-icon">
+                <i class="bi bi-check-lg"></i>
+            </div>
+
+            <div class="login-success-content">
+                <strong>@TempData["LoginSuccess"]</strong>
+                <span>Chào mừng quay trở lại!</span>
+            </div>
+
+            <button type="button"
+                    class="login-success-close"
+                    onclick="closeLoginToast()"
+                    aria-label="Đóng">
+                <i class="bi bi-x"></i>
+            </button>
+
+        </div>
+    }
+
+    <main>
+
+        @RenderBody()
+
+    </main>
+
+
+    <footer class="main-footer">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h5>
+                        OmniPark
+                    </h5>
+
+                    <p>
+                        Hệ thống quản lý và đặt chỗ bãi đỗ xe thông minh.
+                    </p>
+
+                </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <p>
+                        © @DateTime.Now.Year Smart Parking
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <!-- =====================================================
+         OMNIPARK AI CHATBOT
+    ===================================================== -->
+
+    <aside id="chat-widget"
+           class="omnipark-chat"
+           aria-label="Trợ lý AI OmniPark">
+
+        <!-- NÚT MỞ CHAT -->
+        <button id="chat-toggle"
+                class="chat-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="chat-box">
+
+            <i class="bi bi-chat-dots-fill"></i>
+
+            <span class="chat-online-dot"></span>
+
+        </button>
+
+
+        <!-- KHUNG CHAT -->
+        <section id="chat-box"
+                 class="chat-box"
+                 hidden>
+
+            <!-- HEADER -->
+            <div class="chat-header">
+
+                <div class="chat-header-left">
+
+                    <div class="chat-ai-avatar">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <div>
+                        <strong>OmniPark AI</strong>
+                        <span>Trợ lý bãi đỗ xe</span>
+                    </div>
+
+                </div>
+
+
+                <button id="chat-close"
+                        type="button"
+                        class="chat-close">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGES -->
+            <div id="chat-messages"
+                 class="chat-messages"
+                 aria-live="polite">
+
+                <div class="chat-msg chat-msg--bot">
+
+                    <div class="chat-small-avatar">
+                        <i class="bi bi-stars"></i>
+                    </div>
+
+                    <div class="chat-bubble">
+
+                        Xin chào 👋<br />
+
+                        Mình là trợ lý AI của OmniPark.
+                        Bạn cần tìm bãi xe hay hỗ trợ đặt chỗ?
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INPUT -->
+            <form id="chat-form"
+                  class="chat-form">
+
+                <input id="chat-input"
+                       type="text"
+                       placeholder="Nhập câu hỏi..."
+                       autocomplete="off"
+                       required />
+
+                <button id="chat-send"
+                        type="submit">
+
+                    <i class="bi bi-send-fill"></i>
+
+                </button>
+
+            </form>
+
+        </section>
+
+    </aside>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

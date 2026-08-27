@@ -1,0 +1,507 @@
+﻿@model ParkingManagement.Web.ViewModels.Booking.PayBookingViewModel
+
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+@section Head {
+    <style>
+        .pay-page {
+            min-height: calc(100vh - 120px);
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 30%), radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.08), transparent 25%), linear-gradient(180deg, #f8fbff 0%, #f1f5f9 100%);
+            padding: 40px 0 60px;
+        }
+
+        .pay-container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .pay-breadcrumb {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+            .pay-breadcrumb a {
+                color: #2563eb;
+                text-decoration: none;
+            }
+
+        .pay-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .pay-subtitle {
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 28px;
+        }
+
+        .pay-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.9fr;
+            gap: 24px;
+        }
+
+        .pay-card {
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            overflow: hidden;
+        }
+
+        .pay-card-header {
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #fff;
+        }
+
+            .pay-card-header h2 {
+                margin: 0 0 6px 0;
+                font-size: 1.35rem;
+                font-weight: 700;
+            }
+
+            .pay-card-header p {
+                margin: 0;
+                opacity: 0.92;
+                font-size: 0.95rem;
+            }
+
+        .pay-card-body {
+            padding: 28px;
+        }
+
+        .info-strip {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .info-pill {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .form-label {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .form-select,
+        .form-control {
+            border-radius: 14px;
+            min-height: 52px;
+            border: 1px solid #cbd5e1;
+            box-shadow: none;
+        }
+
+            .form-select:focus,
+            .form-control:focus {
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.14);
+            }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 16px;
+            margin-bottom: 22px;
+        }
+
+        .payment-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            background: #fff;
+            transition: all 0.2s ease;
+        }
+
+            .payment-box.active {
+                border-color: #3b82f6;
+                background: #f8fbff;
+                box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+            }
+
+        .payment-box-title {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .payment-box-desc {
+            color: #64748b;
+            font-size: 0.93rem;
+            margin: 0;
+        }
+
+        .note-box {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            color: #334155;
+            margin-top: 10px;
+        }
+
+        .note-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #1d4ed8;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .secure-text {
+            margin-top: 18px;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+            .secure-text strong {
+                color: #16a34a;
+            }
+
+        .pay-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .btn-pay-now {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 13px 26px;
+            font-weight: 700;
+            min-width: 180px;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+        }
+
+            .btn-pay-now:hover {
+                color: #fff;
+                opacity: 0.96;
+            }
+
+        .btn-secondary-soft {
+            border-radius: 14px;
+            padding: 13px 22px;
+            font-weight: 600;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+        .summary-status {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+            color: #334155;
+            font-size: 0.97rem;
+        }
+
+            .summary-row strong {
+                color: #0f172a;
+            }
+
+        .summary-divider {
+            border-top: 1px dashed #cbd5e1;
+            margin: 18px 0;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+            .summary-total .amount {
+                color: #2563eb;
+            }
+
+        .mini-feature-list {
+            margin-top: 22px;
+            padding: 0;
+            list-style: none;
+        }
+
+            .mini-feature-list li {
+                padding: 10px 0;
+                border-bottom: 1px solid #f1f5f9;
+                color: #475569;
+                font-size: 0.94rem;
+            }
+
+                .mini-feature-list li:last-child {
+                    border-bottom: none;
+                }
+
+        .success-soft {
+            background: #ecfdf5;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-top: 20px;
+            font-size: 0.94rem;
+        }
+
+        .validation-box .validation-summary-errors ul {
+            margin-bottom: 0;
+            padding-left: 18px;
+        }
+
+        @@media (max-width: 992px) {
+            .pay-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .pay-title {
+                font-size: 1.8rem;
+            }
+
+            .pay-card-header,
+            .pay-card-body,
+            .summary-card {
+                padding: 20px;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+}
+
+<div class="pay-page">
+    <div class="container pay-container">
+        <div class="pay-breadcrumb">
+            <a asp-controller="Home" asp-action="Index">Trang chủ</a>
+            <span> / </span>
+            <a asp-controller="Booking" asp-action="MyBookings">Đặt chỗ</a>
+            <span> / </span>
+            <span>Thanh toán</span>
+        </div>
+
+        <h1 class="pay-title">Thanh toán đặt chỗ</h1>
+        <p class="pay-subtitle">
+            Hoàn tất bước cuối để xác nhận giữ chỗ tại bãi xe của bạn.
+        </p>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger rounded-4 validation-box mb-4">
+                @Html.ValidationSummary(false, "", new { @class = "mb-0" })
+            </div>
+        }
+
+        <div class="pay-grid">
+            <!-- CỘT TRÁI -->
+            <div class="pay-card">
+                <div class="pay-card-header">
+                    <h2>Thông tin thanh toán</h2>
+                    <p>Vui lòng kiểm tra và chọn phương thức thanh toán phù hợp.</p>
+                </div>
+
+                <div class="pay-card-body">
+                    <div class="info-strip">
+                        <div class="info-pill">Mã booking: #@Model.BookingId</div>
+                        <div class="info-pill">Tổng tiền: @Model.TotalAmount.ToString("N0")đ</div>
+                    </div>
+
+                    <form asp-controller="Booking" asp-action="Pay" method="post">
+                        <input type="hidden" asp-for="BookingId" />
+
+                        <div class="mb-3">
+                            <label asp-for="PaymentMethod" class="form-label">Phương thức thanh toán</label>
+                            <select asp-for="PaymentMethod" class="form-select" id="paymentMethodSelect">
+                                <option value="ViDienTu">Ví điện tử</option>
+                                <option value="TheMoPhong">Thẻ mô phỏng</option>
+                            </select>
+                        </div>
+
+                        <div class="payment-options">
+                            <div class="payment-box active" id="box-vidientu">
+                                <div class="payment-box-title">Ví điện tử</div>
+                                <p class="payment-box-desc">
+                                    Phù hợp cho thanh toán nhanh, thao tác đơn giản và tiện lợi.
+                                </p>
+                            </div>
+
+                            <div class="payment-box" id="box-themophong">
+                                <div class="payment-box-title">Thẻ mô phỏng</div>
+                                <p class="payment-box-desc">
+                                    Thích hợp để kiểm thử luồng thanh toán trong đồ án.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="note-box">
+                            <div class="note-icon">i</div>
+                            <div>
+                                <strong>Lưu ý:</strong><br />
+                                Sau khi bấm <strong>“Thanh toán ngay”</strong>, hệ thống sẽ xác nhận booking và chuyển trạng thái sang đã xác nhận.
+                            </div>
+                        </div>
+
+                        <div class="secure-text">
+                            <strong>✔ An toàn:</strong> Đây là luồng thanh toán mô phỏng trong hệ thống OmniPark.
+                        </div>
+
+                        <div class="pay-actions">
+                            <button type="submit" class="btn btn-pay-now">
+                                Thanh toán ngay
+                            </button>
+
+                            <a asp-controller="Booking"
+                               asp-action="MyBookings"
+                               class="btn btn-outline-secondary btn-secondary-soft">
+                                Xem đặt chỗ của tôi
+                            </a>
+                            <a asp-controller="ParkingLot" asp-action="Index" class="btn btn-outline-dark btn-secondary-soft">
+                                Quay lại tìm bãi xe
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI -->
+            <div class="summary-card">
+                <div class="summary-title">Tóm tắt đơn thanh toán</div>
+
+                <div class="summary-status">Chờ thanh toán</div>
+
+                <div class="summary-row">
+                    <span>Mã đặt chỗ</span>
+                    <strong>#@Model.BookingId</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Loại giao dịch</span>
+                    <strong>Đặt chỗ bãi xe</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Phương thức mặc định</span>
+                    <strong id="paymentMethodPreview">Ví điện tử</strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-row">
+                    <span>Tạm tính</span>
+                    <strong>@Model.TotalAmount.ToString("N0")đ</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Phí dịch vụ</span>
+                    <strong>0đ</strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Tổng cộng</span>
+                    <span class="amount">@Model.TotalAmount.ToString("N0")đ</span>
+                </div>
+
+                <ul class="mini-feature-list">
+                    <li>✔ Giữ chỗ ngay sau khi thanh toán thành công</li>
+                    <li>✔ Dễ theo dõi trong mục “Đặt chỗ của tôi”</li>
+                    <li>✔ Giao diện tối ưu cho cả máy tính và điện thoại</li>
+                </ul>
+
+                <div class="success-soft">
+                    Sau khi thanh toán thành công, bạn có thể tiếp tục theo dõi booking trong danh sách đặt chỗ của mình.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const paymentSelect = document.getElementById("paymentMethodSelect");
+        const paymentPreview = document.getElementById("paymentMethodPreview");
+        const boxViDienTu = document.getElementById("box-vidientu");
+        const boxTheMoPhong = document.getElementById("box-themophong");
+
+        function updatePaymentUI() {
+            const value = paymentSelect.value;
+
+            boxViDienTu.classList.remove("active");
+            boxTheMoPhong.classList.remove("active");
+
+            if (value === "ViDienTu") {
+                paymentPreview.textContent = "Ví điện tử";
+                boxViDienTu.classList.add("active");
+            } else {
+                paymentPreview.textContent = "Thẻ mô phỏng";
+                boxTheMoPhong.classList.add("active");
+            }
+        }
+
+        paymentSelect.addEventListener("change", updatePaymentUI);
+        updatePaymentUI();
+    </script>
+}

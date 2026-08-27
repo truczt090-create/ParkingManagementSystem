@@ -1,0 +1,299 @@
+﻿@model ParkingManagement.Web.ViewModels.Profile.UpdateProfileViewModel
+
+@{
+    ViewData["Title"] = "Cập nhật hồ sơ";
+
+    var isOwner = Model.Role == "Owner";
+
+    var avatar = string.IsNullOrWhiteSpace(Model.AvatarUrl)
+        ? "/images/default-avatar.png"
+        : Model.AvatarUrl;
+
+    var roleName = isOwner ? "Chủ bãi xe" : "Khách hàng";
+}
+
+<div class="profile-form-page">
+
+    <!-- HEADER -->
+    <div class="profile-form-heading">
+        <span class="profile-eyebrow">
+            TÀI KHOẢN OMNIPARK
+        </span>
+
+        <h1>Cập nhật hồ sơ</h1>
+
+        <p>
+            @(isOwner
+                ? "Cập nhật thông tin tài khoản và thông tin doanh nghiệp của bạn."
+                : "Cập nhật thông tin cá nhân của tài khoản OmniPark.")
+        </p>
+    </div>
+
+
+    <div class="profile-form-layout">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+        <aside class="profile-form-sidebar">
+
+            <div class="profile-form-user-card">
+
+                <div class="profile-form-avatar-wrap">
+                    <img src="@avatar"
+                         alt="Ảnh đại diện"
+                         class="profile-form-avatar" />
+                </div>
+
+                <h2>@Model.FullName</h2>
+
+                <span class="profile-role-badge">
+                    <i class="bi @(isOwner ? "bi-shield-check" : "bi-person-check")"></i>
+                    @roleName
+                </span>
+
+                <div class="profile-form-contact">
+
+                    <div>
+                        <i class="bi bi-envelope"></i>
+                        <span>@Model.Email</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-telephone"></i>
+                        <span>
+                            @(string.IsNullOrWhiteSpace(Model.Phone)
+                                ? "Chưa cập nhật"
+                                : Model.Phone)
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a asp-controller="Profile"
+               asp-action="Index"
+               class="profile-side-back">
+
+                <i class="bi bi-arrow-left"></i>
+                Quay lại hồ sơ
+
+            </a>
+
+        </aside>
+
+
+        <!-- =========================
+             FORM
+        ========================== -->
+        <main class="profile-form-main">
+
+            <form asp-controller="Profile"
+                  asp-action="Edit"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <!-- Giữ lại các giá trị không chỉnh sửa -->
+                <input asp-for="Role" type="hidden" />
+                <input asp-for="Email" type="hidden" />
+                <input asp-for="AvatarUrl" type="hidden" />
+
+
+                <div class="profile-form-card">
+
+                    <div class="profile-form-card-header">
+
+                        <div class="profile-form-header-icon">
+                            <i class="bi bi-person-vcard"></i>
+                        </div>
+
+                        <div>
+                            <h2>
+                                @(isOwner
+                                    ? "Thông tin cá nhân & doanh nghiệp"
+                                    : "Thông tin cá nhân")
+                            </h2>
+
+                            <p>
+                                Các thay đổi sẽ được cập nhật vào tài khoản của bạn.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="profile-validation-summary"
+                         role="alert">
+                    </div>
+
+
+                    <!-- HỌ TÊN -->
+                    <div class="profile-edit-group">
+
+                        <label asp-for="FullName">
+                            Họ và tên
+                            <span>*</span>
+                        </label>
+
+                        <div class="profile-edit-input">
+                            <i class="bi bi-person"></i>
+
+                            <input asp-for="FullName"
+                                   placeholder="Nhập họ và tên" />
+                        </div>
+
+                        <span asp-validation-for="FullName"
+                              class="profile-field-error">
+                        </span>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+                    <div class="profile-edit-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <div class="profile-edit-input profile-edit-disabled">
+                            <i class="bi bi-envelope"></i>
+
+                            <input value="@Model.Email"
+                                   readonly />
+
+                            <i class="bi bi-lock profile-input-end-icon"></i>
+                        </div>
+
+                        <small class="profile-field-note">
+                            Email đăng nhập hiện không thể thay đổi tại đây.
+                        </small>
+
+                    </div>
+
+
+                    <div class="profile-edit-grid">
+
+                        <!-- PHONE -->
+                        <div class="profile-edit-group">
+
+                            <label asp-for="Phone">
+                                Số điện thoại
+                            </label>
+
+                            <div class="profile-edit-input">
+                                <i class="bi bi-telephone"></i>
+
+                                <input asp-for="Phone"
+                                       type="tel"
+                                       placeholder="Nhập số điện thoại" />
+                            </div>
+
+                            <span asp-validation-for="Phone"
+                                  class="profile-field-error">
+                            </span>
+
+                        </div>
+
+
+                        @if (isOwner)
+                        {
+                            <!-- BUSINESS -->
+                            <div class="profile-edit-group">
+
+                                <label asp-for="BusinessName">
+                                    Tên đơn vị / doanh nghiệp
+                                    <span>*</span>
+                                </label>
+
+                                <div class="profile-edit-input">
+                                    <i class="bi bi-building"></i>
+
+                                    <input asp-for="BusinessName"
+                                           placeholder="Nhập tên đơn vị / doanh nghiệp" />
+                                </div>
+
+                                <span asp-validation-for="BusinessName"
+                                      class="profile-field-error">
+                                </span>
+
+                            </div>
+
+
+                            <!-- TAX CODE -->
+                            <div class="profile-edit-group">
+
+                                <label asp-for="TaxCode">
+                                    Mã số thuế
+                                </label>
+
+                                <div class="profile-edit-input">
+                                    <i class="bi bi-receipt"></i>
+
+                                    <input asp-for="TaxCode"
+                                           placeholder="Nhập mã số thuế" />
+                                </div>
+
+                                <span asp-validation-for="TaxCode"
+                                      class="profile-field-error">
+                                </span>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="profile-edit-note">
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                        <div>
+                            <strong>Lưu ý</strong>
+
+                            <p>
+                                Vui lòng đảm bảo thông tin được nhập chính xác.
+                                Những thay đổi sau khi lưu sẽ được cập nhật trực tiếp
+                                vào tài khoản OmniPark của bạn.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-form-actions">
+
+                        <a asp-controller="Profile"
+                           asp-action="Index"
+                           class="profile-cancel-btn">
+
+                            Hủy
+                        </a>
+
+                        <button type="submit"
+                                class="profile-save-btn">
+
+                            <i class="bi bi-floppy"></i>
+                            Lưu thay đổi
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

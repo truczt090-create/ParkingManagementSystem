@@ -1,0 +1,261 @@
+@model List<ParkingManagement.Web.ViewModels.Owner.AreaViewModel>
+@{ ViewData["Title"] = "Quản lý bãi xe"; var lotId = (int)ViewBag.ParkingLotId;
+    var images =
+           ViewBag.Images
+           as List<ParkingManagement.Web.ViewModels.Owner.ParkingLotImageViewModel>
+           ?? new();
+   var prices = ViewBag.Prices as List<ParkingManagement.Web.ViewModels.Owner.PriceViewModel>; }
+
+<h1>Quản lý bãi xe #@lotId</h1>
+
+@if (ViewBag.Error != null) { <p class="text-danger">@ViewBag.Error</p> }
+@if (ViewBag.SuccessMessage != null) { <p class="text-success">@ViewBag.SuccessMessage</p> }
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Khu vực</h4>
+        <table class="table">
+            <thead><tr><th>Tên khu vực</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.Name</td>
+                        <td><a asp-action="AreaSlots" asp-route-areaId="@a.ParkingAreaId" asp-route-lotId="@lotId" class="btn btn-sm btn-outline-secondary">Quản lý vị trí đỗ</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form method="post" asp-action="CreateArea">
+            <input type="hidden" name="ParkingLotId" value="@lotId" />
+            <div class="input-group" style="max-width:400px;">
+                <input type="text" name="Name" class="form-control" placeholder="Tên khu vực mới (VD: Khu A)" required />
+                <button type="submit" class="btn btn-primary">Thêm khu vực</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Bảng giá</h4>
+        <table class="table">
+            <thead><tr><th>Loại xe</th><th>Loại giá</th><th>Đơn giá/giờ</th></tr></thead>
+            <tbody>
+                @foreach (var p in prices ?? new())
+                {
+                    <tr><td>@p.VehicleTypeName</td><td>@p.PriceType</td><td>@p.UnitPrice.ToString("N0")đ</td></tr>
+                }
+            </tbody>
+        </table>
+
+        <form method="post" asp-action="CreatePrice">
+            <input type="hidden" name="ParkingLotId" value="@lotId" />
+            <div class="mb-2"><input type="number" name="VehicleTypeId" class="form-control" placeholder="VehicleTypeId" required /></div>
+            <div class="mb-2">
+                <select name="PriceType" class="form-select">
+                    <option value="Booking">Booking (đặt trước)</option>
+                    <option value="WalkIn">WalkIn (vãng lai)</option>
+                    <option value="Overtime">Overtime (quá giờ)</option>
+                </select>
+            </div>
+            <div class="mb-2"><input type="number" name="UnitPrice" class="form-control" placeholder="Đơn giá/giờ" required /></div>
+            <button type="submit" class="btn btn-primary btn-sm">Thêm giá</button>
+        </form>
+    </div>
+    <section class="owner-lot-image-section">
+
+        <div class="owner-lot-image-header">
+
+            <div>
+                <h2>
+                    <i class="bi bi-images"></i>
+                    Hình ảnh bãi xe
+                </h2>
+
+                <p>
+                    Upload ảnh thực tế để khách hàng dễ nhận biết bãi xe.
+                </p>
+            </div>
+
+        </div>
+
+
+        <form asp-controller="Owner"
+              asp-action="UploadLotImage"
+              method="post"
+              enctype="multipart/form-data"
+              class="owner-lot-upload-form">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="parkingLotId"
+                   value="@lotId" />
+
+
+            <div class="owner-lot-upload-box">
+
+                <input type="file"
+                       id="parkingLotImageInput"
+                       name="image"
+                       accept=".jpg,.jpeg,.png,.webp"
+                       hidden
+                       required
+                       onchange="previewParkingLotImage(this)" />
+
+
+                <label for="parkingLotImageInput"
+                       class="owner-lot-upload-label">
+
+                    <div class="owner-lot-upload-icon">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                    </div>
+
+                    <strong>Chọn ảnh bãi xe</strong>
+
+                    <span>
+                        JPG, PNG hoặc WEBP • tối đa 5MB
+                    </span>
+
+                </label>
+
+
+                <div id="parkingLotPreviewWrap"
+                     class="owner-lot-preview"
+                     hidden>
+
+                    <img id="parkingLotPreview"
+                         alt="Xem trước ảnh" />
+
+                </div>
+
+            </div>
+
+
+            <label class="owner-lot-primary-check">
+
+                <input type="checkbox"
+                       name="isPrimary"
+                       value="true" />
+
+                <span>Đặt làm ảnh đại diện của bãi xe</span>
+
+            </label>
+
+
+            <button type="submit"
+                    class="owner-lot-upload-btn">
+
+                <i class="bi bi-upload"></i>
+                Tải ảnh lên
+
+            </button>
+
+        </form>
+
+
+        @if (images.Any())
+        {
+            <div class="owner-lot-gallery">
+
+                @foreach (var image in images)
+                {
+                    <article class="owner-lot-gallery-item">
+
+                        <img src="@image.ImageUrl"
+                             alt="Ảnh bãi xe" />
+
+                        @if (image.IsPrimary)
+                        {
+                            <span class="owner-lot-primary-badge">
+                                <i class="bi bi-star-fill"></i>
+                                Ảnh chính
+                            </span>
+                        }
+
+
+                        <form asp-controller="Owner"
+                              asp-action="DeleteLotImage"
+                              method="post"
+                              onsubmit="return confirm('Bạn có chắc muốn xóa ảnh này?');">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="parkingLotId"
+                                   value="@lotId" />
+
+                            <input type="hidden"
+                                   name="imageId"
+                                   value="@image.ImageId" />
+
+                            <button type="submit"
+                                    class="owner-lot-image-delete">
+
+                                <i class="bi bi-trash3"></i>
+
+                            </button>
+
+                        </form>
+
+                    </article>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="owner-lot-no-images">
+
+                <i class="bi bi-image"></i>
+
+                <strong>Chưa có ảnh bãi xe</strong>
+
+                <span>
+                    Hãy tải ảnh đầu tiên để khách hàng có thể xem.
+                </span>
+
+            </div>
+        }
+
+    </section>
+</div>
+
+<a asp-action="MyLots" class="btn btn-outline-dark mt-3">Quay lại danh sách bãi xe</a>
+<a asp-action="Employees" asp-route-lotId="@lotId" class="btn btn-outline-secondary mt-3">Quản lý nhân viên</a>
+
+@section Scripts {
+    <script>
+        function previewParkingLotImage(input) {
+
+            if (!input.files || !input.files[0]) {
+                return;
+            }
+
+            const file = input.files[0];
+
+            // Kiểm tra dung lượng 5MB
+            if (file.size > 5 * 1024 * 1024) {
+                alert("Ảnh không được lớn hơn 5MB.");
+                input.value = "";
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                const wrap =
+                    document.getElementById("parkingLotPreviewWrap");
+
+                const image =
+                    document.getElementById("parkingLotPreview");
+
+                image.src = e.target.result;
+                wrap.hidden = false;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+}

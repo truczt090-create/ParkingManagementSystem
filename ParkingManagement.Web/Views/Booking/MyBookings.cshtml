@@ -1,0 +1,562 @@
+﻿@model List<ParkingManagement.Web.ViewModels.Booking.MyBookingViewModel>
+
+@{
+    ViewData["Title"] = "Đặt chỗ của tôi";
+
+    string GetStatusText(string? status) => status switch
+    {
+        "ChoThanhToan" => "Chờ thanh toán",
+        "DaXacNhan" => "Đã xác nhận",
+        "DaHuy" => "Đã hủy",
+        "DaHoanTat" => "Đã hoàn thành",
+        _ => status ?? "Không xác định"
+    };
+
+    string GetStatusClass(string? status) => status switch
+    {
+        "ChoThanhToan" => "status-waiting",
+        "DaXacNhan" => "status-confirmed",
+        "DaHuy" => "status-cancelled",
+        "DaHoanTat" => "status-finished",
+        _ => "status-default"
+    };
+
+    string GetFilterGroup(string? status) => status switch
+    {
+        "ChoThanhToan" => "sap-toi",
+        "DaXacNhan" => "sap-toi",
+        "DaHoanTat" => "hoan-thanh",
+        "DaHuy" => "da-huy",
+        _ => "tat-ca"
+    };
+
+    string FormatDuration(DateTime start, DateTime end)
+    {
+        var duration = end - start;
+        if (duration.TotalMinutes <= 0)
+        {
+            return "--";
+        }
+
+        if (duration.TotalHours >= 1)
+        {
+            var hours = (int)duration.TotalHours;
+            var minutes = duration.Minutes;
+
+            if (minutes == 0)
+            {
+                return $"{hours} giờ";
+            }
+
+            return $"{hours} giờ {minutes} phút";
+        }
+
+        return $"{(int)duration.TotalMinutes} phút";
+    }
+
+    var bookings = Model ?? new List<ParkingManagement.Web.ViewModels.Booking.MyBookingViewModel>();
+
+    var totalCount = bookings.Count;
+    var upcomingCount = bookings.Count(x => x.Status is "ChoThanhToan" or "DaXacNhan");
+    var finishedCount = bookings.Count(x => x.Status == "DaHoanTat");
+    var cancelledCount = bookings.Count(x => x.Status == "DaHuy");
+}
+
+<style>
+    .booking-page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 16px 48px;
+    }
+
+    .booking-page-header {
+        margin-bottom: 24px;
+    }
+
+    .booking-page-title {
+        font-size: 42px;
+        font-weight: 700;
+        line-height: 1.15;
+        color: #14213d;
+        margin: 0 0 8px 0;
+    }
+
+    .booking-page-subtitle {
+        margin: 0;
+        font-size: 18px;
+        color: #667085;
+    }
+
+    .booking-alert {
+        border: 1px solid;
+        border-radius: 0;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+
+    .booking-alert-success {
+        background: #ecfdf3;
+        color: #067647;
+        border-color: #abefc6;
+    }
+
+    .booking-alert-error {
+        background: #fef3f2;
+        color: #b42318;
+        border-color: #fecdca;
+    }
+
+    .booking-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        border-bottom: 1px solid #d0d5dd;
+        margin-bottom: 20px;
+    }
+
+    .booking-tab {
+        appearance: none;
+        border: 1px solid #d0d5dd;
+        border-bottom: none;
+        background: #fff;
+        color: #344054;
+        padding: 14px 26px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 0;
+        margin-right: -1px;
+        transition: .2s ease;
+    }
+
+        .booking-tab:hover {
+            background: #f8fafc;
+        }
+
+        .booking-tab.active {
+            color: #175cd3;
+            background: #eff6ff;
+            position: relative;
+        }
+
+            .booking-tab.active::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -1px;
+                height: 3px;
+                background: #175cd3;
+            }
+
+    .booking-empty {
+        border: 1px solid #d0d5dd;
+        background: #fff;
+        padding: 40px 24px;
+        text-align: center;
+        color: #475467;
+        border-radius: 0;
+        font-size: 18px;
+    }
+
+    .booking-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .booking-card {
+        border: 1px solid #d0d5dd;
+        background: #fff;
+        border-radius: 0;
+        padding: 24px 26px;
+    }
+
+    .booking-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 18px;
+    }
+
+    .booking-code {
+        font-size: 18px;
+        color: #344054;
+        margin-bottom: 6px;
+    }
+
+        .booking-code strong {
+            color: #101828;
+        }
+
+    .booking-code-value {
+        color: #175cd3;
+        font-weight: 700;
+    }
+
+    .booking-lot-name {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: #14213d;
+    }
+
+    .booking-status-badge {
+        display: inline-block;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: 1px solid;
+        border-radius: 0;
+        white-space: nowrap;
+    }
+
+    .status-confirmed {
+        background: #ecfdf3;
+        border-color: #abefc6;
+        color: #067647;
+    }
+
+    .status-cancelled {
+        background: #fef3f2;
+        border-color: #fecdca;
+        color: #b42318;
+    }
+
+    .status-finished {
+        background: #f2f4f7;
+        border-color: #d0d5dd;
+        color: #475467;
+    }
+
+    .status-waiting {
+        background: #fffaeb;
+        border-color: #fedf89;
+        color: #b54708;
+    }
+
+    .status-default {
+        background: #f8fafc;
+        border-color: #d0d5dd;
+        color: #344054;
+    }
+
+    .booking-info-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        border-top: 1px solid #eaecf0;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .booking-info-item {
+        padding: 18px 18px 18px 0;
+        min-height: 92px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .booking-info-item:not(:last-child) {
+            border-right: 1px solid #eaecf0;
+            padding-right: 18px;
+        }
+
+    .booking-info-label {
+        font-size: 14px;
+        color: #667085;
+        margin-bottom: 6px;
+    }
+
+    .booking-info-value {
+        font-size: 17px;
+        font-weight: 600;
+        color: #101828;
+        line-height: 1.35;
+    }
+
+    .booking-card-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-top: 18px;
+    }
+
+    .booking-form-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+    }
+
+    .booking-select {
+        min-width: 140px;
+        height: 44px;
+        border: 1px solid #cfd4dc;
+        background: #fff;
+        color: #101828;
+        padding: 0 12px;
+        border-radius: 0;
+        font-size: 16px;
+    }
+
+    .booking-btn {
+        height: 44px;
+        padding: 0 18px;
+        border-radius: 0;
+        font-size: 16px;
+        font-weight: 600;
+        background: #fff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid;
+        transition: .2s ease;
+    }
+
+        .booking-btn:hover {
+            text-decoration: none;
+            opacity: .95;
+        }
+
+    .booking-btn-detail {
+        border-color: #84adff;
+        color: #175cd3;
+        background: #fff;
+    }
+
+    .booking-btn-extend {
+        border-color: #12b76a;
+        color: #067647;
+        background: #ecfdf3;
+    }
+
+    .booking-btn-cancel {
+        border-color: #f04438;
+        color: #d92d20;
+        background: #fff;
+    }
+
+    .booking-btn-pay {
+        border-color: #f79009;
+        color: #b54708;
+        background: #fffaeb;
+    }
+
+    .booking-hidden {
+        display: none !important;
+    }
+
+    @@media (max-width: 992px) {
+        .booking-info-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .booking-info-item:nth-child(2n) {
+            border-right: none;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .booking-page-title {
+            font-size: 32px;
+        }
+
+        .booking-card {
+            padding: 18px;
+        }
+
+        .booking-card-top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .booking-info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .booking-info-item {
+            border-right: none !important;
+            padding-right: 0;
+        }
+
+        .booking-card-actions {
+            justify-content: flex-start;
+        }
+
+        .booking-form-inline {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+<div class="booking-page">
+    <div class="booking-page-header">
+        <h1 class="booking-page-title">Đặt chỗ của tôi</h1>
+        <p class="booking-page-subtitle">Theo dõi và quản lý các lượt đặt chỗ của bạn</p>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="booking-alert booking-alert-success" role="status">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="booking-alert booking-alert-error" role="alert">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="booking-tabs" id="bookingTabs">
+        <button type="button" class="booking-tab active" data-filter="tat-ca">
+            Tất cả (@totalCount)
+        </button>
+        <button type="button" class="booking-tab" data-filter="sap-toi">
+            Sắp tới (@upcomingCount)
+        </button>
+        <button type="button" class="booking-tab" data-filter="hoan-thanh">
+            Đã hoàn thành (@finishedCount)
+        </button>
+        <button type="button" class="booking-tab" data-filter="da-huy">
+            Đã hủy (@cancelledCount)
+        </button>
+    </div>
+
+    @if (bookings.Any())
+    {
+        <div class="booking-list" id="bookingList">
+            @foreach (var b in bookings.OrderByDescending(x => x.StartTime))
+            {
+                var bookingCode = $"BK{b.BookingId:D6}";
+                var statusText = GetStatusText(b.Status);
+                var statusClass = GetStatusClass(b.Status);
+                var filterGroup = GetFilterGroup(b.Status);
+                var durationText = FormatDuration(b.StartTime, b.EndTime);
+
+                <article class="booking-card" data-group="@filterGroup">
+                    <div class="booking-card-top">
+                        <div>
+                            <div class="booking-code">
+                                <strong>Mã đặt chỗ:</strong>
+                                <span class="booking-code-value">@bookingCode</span>
+                            </div>
+                            <h2 class="booking-lot-name">@b.ParkingLotName</h2>
+                        </div>
+
+                        <span class="booking-status-badge @statusClass">
+                            @statusText
+                        </span>
+                    </div>
+
+                    <div class="booking-info-grid">
+                        <div class="booking-info-item">
+                            <span class="booking-info-label">Thời gian</span>
+                            <span class="booking-info-value">
+                                @b.StartTime.ToString("hh:mm tt") → @b.EndTime.ToString("hh:mm tt")
+                            </span>
+                        </div>
+
+                        <div class="booking-info-item">
+                            <span class="booking-info-label">Ngày</span>
+                            <span class="booking-info-value">
+                                @b.StartTime.ToString("MM/dd/yyyy")
+                            </span>
+                        </div>
+
+                        <div class="booking-info-item">
+                            <span class="booking-info-label">Mã bãi / lượt đặt</span>
+                            <span class="booking-info-value">
+                                @bookingCode
+                            </span>
+                        </div>
+
+                        <div class="booking-info-item">
+                            <span class="booking-info-label">Thời lượng</span>
+                            <span class="booking-info-value">
+                                @durationText
+                            </span>
+                        </div>
+
+                        <div class="booking-info-item">
+                            <span class="booking-info-label">Tổng tiền</span>
+                            <span class="booking-info-value">
+                                @b.TotalAmount.ToString("N0")đ
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="booking-card-actions">
+                        @if (b.Status == "DaXacNhan")
+                        {
+                            <form method="post" asp-action="Extend" class="booking-form-inline">
+                                <input type="hidden" name="BookingId" value="@b.BookingId" />
+
+                                <label for="hours-@b.BookingId" class="visually-hidden">Số giờ gia hạn</label>
+                                <select id="hours-@b.BookingId" name="ExtendedHours" class="booking-select">
+                                    <option value="1">+1 giờ</option>
+                                    <option value="2">+2 giờ</option>
+                                    <option value="3">+3 giờ</option>
+                                </select>
+
+                                <button type="submit" class="booking-btn booking-btn-extend">
+                                    Gia hạn
+                                </button>
+                            </form>
+                        }
+
+                        @if (b.Status is "ChoThanhToan" or "DaXacNhan")
+                        {
+                            <form method="post" asp-action="Cancel" asp-route-id="@b.BookingId" class="booking-form-inline"
+                                  onsubmit="return confirm('Bạn có chắc muốn hủy đặt chỗ này không?');">
+                                <button type="submit" class="booking-btn booking-btn-cancel">
+                                    Hủy đặt chỗ
+                                </button>
+                            </form>
+                        }
+
+                      
+                    </div>
+                </article>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="booking-empty">
+            Bạn chưa có đặt chỗ nào.
+        </div>
+    }
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".booking-tab");
+        const cards = document.querySelectorAll(".booking-card");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", function () {
+                tabs.forEach(t => t.classList.remove("active"));
+                this.classList.add("active");
+
+                const filter = this.getAttribute("data-filter");
+
+                cards.forEach(card => {
+                    const group = card.getAttribute("data-group");
+
+                    if (filter === "tat-ca" || group === filter) {
+                        card.classList.remove("booking-hidden");
+                    } else {
+                        card.classList.add("booking-hidden");
+                    }
+                });
+            });
+        });
+    });
+</script>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Models\Auth\" />
+    <Folder Include="ViewModels\Dashboard\" />
+    <Folder Include="ViewModels\ParkingLot\" />
+    <Folder Include="wwwroot\uploads\parkinglots\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\ParkingLot\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+</Project>

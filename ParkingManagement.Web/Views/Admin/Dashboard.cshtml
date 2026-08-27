@@ -1,0 +1,436 @@
+﻿@model ParkingManagement.Web.ViewModels.Admin.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+
+    var totalUsers = Model.TotalUsers;
+    var totalLots = Model.TotalParkingLots;
+    var pendingLots = Model.PendingParkingLots;
+    var totalRevenue = Model.TotalRevenueAllLots;
+
+    var activeLots = Math.Max(0, totalLots - pendingLots);
+}
+
+<div class="admin-dashboard-page">
+
+    <!-- HEADER -->
+    <section class="admin-dashboard-header">
+
+        <div>
+            <span class="admin-dashboard-welcome">
+                Chào mừng trở lại, <strong>Administrator</strong> 👋
+            </span>
+
+            <h1>Dashboard tổng hệ thống</h1>
+
+            <p>
+                Tổng quan hoạt động của hệ thống quản lý bãi đỗ xe OmniPark.
+            </p>
+        </div>
+
+        <div class="admin-dashboard-date">
+            <i class="bi bi-calendar3"></i>
+
+            <div>
+                <span>Hôm nay</span>
+                <strong>@DateTime.Now.ToString("dd/MM/yyyy")</strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- KPI -->
+    <section class="admin-dashboard-stats">
+
+        <!-- USERS -->
+        <article class="admin-stat-card">
+
+            <div class="admin-stat-main">
+
+                <div>
+                    <span class="admin-stat-label">
+                        Tổng người dùng
+                    </span>
+
+                    <strong class="admin-stat-value">
+                        @totalUsers
+                    </strong>
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-blue">
+                    <i class="bi bi-people"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-footer">
+                <span class="admin-stat-positive">+0%</span>
+                <small>so với tháng trước</small>
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+
+        </article>
+
+
+        <!-- PARKING LOTS -->
+        <article class="admin-stat-card">
+
+            <div class="admin-stat-main">
+
+                <div>
+                    <span class="admin-stat-label">
+                        Tổng bãi xe
+                    </span>
+
+                    <strong class="admin-stat-value">
+                        @totalLots
+                    </strong>
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-green">
+                    <i class="bi bi-p-circle"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-footer">
+                <span class="admin-stat-positive">+0%</span>
+                <small>so với tháng trước</small>
+                <i class="bi bi-activity"></i>
+            </div>
+
+        </article>
+
+
+        <!-- PENDING -->
+        <article class="admin-stat-card">
+
+            <div class="admin-stat-main">
+
+                <div>
+                    <span class="admin-stat-label">
+                        Chờ duyệt
+                    </span>
+
+                    <strong class="admin-stat-value">
+                        @pendingLots
+                    </strong>
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-orange">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-footer">
+                <span class="admin-stat-orange">
+                    @pendingLots
+                </span>
+
+                <small>bãi xe đang chờ</small>
+
+                <i class="bi bi-clock-history"></i>
+            </div>
+
+        </article>
+
+
+        <!-- REVENUE -->
+        <article class="admin-stat-card">
+
+            <div class="admin-stat-main">
+
+                <div>
+                    <span class="admin-stat-label">
+                        Tổng doanh thu
+                    </span>
+
+                    <strong class="admin-stat-value">
+                        @totalRevenue.ToString("N0")đ
+                    </strong>
+                </div>
+
+                <div class="admin-stat-icon admin-stat-icon-purple">
+                    <i class="bi bi-cash-stack"></i>
+                </div>
+
+            </div>
+
+            <div class="admin-stat-footer">
+                <span class="admin-stat-positive">+0%</span>
+                <small>toàn hệ thống</small>
+                <i class="bi bi-graph-up"></i>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+    <div class="admin-dashboard-tabs">
+
+        <a asp-controller="Admin"
+           asp-action="PendingLots"
+           class="admin-dashboard-tab admin-dashboard-tab-primary">
+
+            <i class="bi bi-check2-square"></i>
+            Duyệt bãi xe
+
+            @if (pendingLots > 0)
+            {
+                <span class="admin-tab-badge">
+                    @pendingLots
+                </span>
+            }
+
+        </a>
+
+
+        <a asp-controller="Admin"
+           asp-action="Users"
+           class="admin-dashboard-tab">
+
+            <i class="bi bi-people"></i>
+            Quản lý người dùng
+
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+    <section class="admin-dashboard-grid">
+
+        <!-- PENDING -->
+        <div class="admin-dashboard-card">
+
+            <div class="admin-dashboard-card-header">
+
+                <div>
+                    <h2>
+                        <i class="bi bi-card-checklist"></i>
+                        Danh sách bãi xe chờ duyệt
+                    </h2>
+
+                    <p>
+                        Các bãi xe mới đăng ký đang chờ quản trị viên phê duyệt.
+                    </p>
+                </div>
+
+                <a asp-controller="Admin"
+                   asp-action="PendingLots"
+                   class="admin-view-all">
+
+                    Xem tất cả
+                    <i class="bi bi-chevron-right"></i>
+
+                </a>
+
+            </div>
+
+
+            @if (pendingLots == 0)
+            {
+                <div class="admin-empty-state">
+
+                    <div class="admin-empty-icon">
+                        <i class="bi bi-clipboard-check"></i>
+                    </div>
+
+                    <h3>Không có bãi xe chờ duyệt</h3>
+
+                    <p>
+                        Hiện tại không có bãi xe nào đang chờ phê duyệt.
+                    </p>
+
+                </div>
+            }
+            else
+            {
+                <div class="admin-pending-state">
+
+                    <div class="admin-pending-icon">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+
+                    <h3>
+                        Có @pendingLots bãi xe đang chờ duyệt
+                    </h3>
+
+                    <p>
+                        Kiểm tra thông tin bãi xe trước khi cho phép
+                        xuất hiện trên hệ thống.
+                    </p>
+
+                    <a asp-controller="Admin"
+                       asp-action="PendingLots"
+                       class="admin-pending-btn">
+
+                        Xem danh sách chờ duyệt
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+            }
+
+        </div>
+
+
+        <!-- OVERVIEW -->
+        <aside class="admin-dashboard-card admin-system-overview">
+
+            <div class="admin-dashboard-card-header">
+
+                <div>
+                    <h2>
+                        <i class="bi bi-pie-chart"></i>
+                        Tổng quan hệ thống
+                    </h2>
+
+                    <p>
+                        Số liệu chính của OmniPark.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="admin-overview-list">
+
+                <div class="admin-overview-item">
+
+                    <div>
+                        <span class="admin-overview-icon">
+                            <i class="bi bi-people"></i>
+                        </span>
+
+                        <span>Tổng người dùng</span>
+                    </div>
+
+                    <strong>@totalUsers</strong>
+
+                </div>
+
+
+                <div class="admin-overview-item">
+
+                    <div>
+                        <span class="admin-overview-icon">
+                            <i class="bi bi-p-circle"></i>
+                        </span>
+
+                        <span>Tổng bãi xe</span>
+                    </div>
+
+                    <strong>@totalLots</strong>
+
+                </div>
+
+
+                <div class="admin-overview-item">
+
+                    <div>
+                        <span class="admin-overview-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </span>
+
+                        <span>Bãi xe không chờ duyệt</span>
+                    </div>
+
+                    <strong>@activeLots</strong>
+
+                </div>
+
+
+                <div class="admin-overview-item">
+
+                    <div>
+                        <span class="admin-overview-icon">
+                            <i class="bi bi-hourglass-split"></i>
+                        </span>
+
+                        <span>Đang chờ duyệt</span>
+                    </div>
+
+                    <strong>@pendingLots</strong>
+
+                </div>
+
+
+                <div class="admin-overview-item">
+
+                    <div>
+                        <span class="admin-overview-icon">
+                            <i class="bi bi-cash-coin"></i>
+                        </span>
+
+                        <span>Tổng doanh thu</span>
+                    </div>
+
+                    <strong>
+                        @totalRevenue.ToString("N0")đ
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-update-box">
+
+                <div class="admin-update-icon">
+                    <i class="bi bi-info-circle-fill"></i>
+                </div>
+
+                <div>
+                    <strong>Dữ liệu hệ thống</strong>
+
+                    <span>
+                        Cập nhật lúc
+                        @DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+                    </span>
+                </div>
+
+                <span class="admin-online-dot"></span>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+    <!-- QUICK LINKS -->
+    <section class="admin-dashboard-quick">
+
+        <div>
+            <span class="admin-quick-icon">
+                <i class="bi bi-shield-check"></i>
+            </span>
+
+            <div>
+                <strong>Quản trị OmniPark</strong>
+
+                <p>
+                    Thường xuyên kiểm tra các bãi xe mới đăng ký
+                    và tài khoản người dùng để đảm bảo hệ thống hoạt động ổn định.
+                </p>
+            </div>
+        </div>
+
+
+        <a asp-controller="Admin"
+           asp-action="Users">
+
+            Xem người dùng
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+</div>

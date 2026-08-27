@@ -1,0 +1,575 @@
+﻿@model List<ParkingManagement.Web.ViewModels.Notification.NotificationViewModel>
+
+@{
+    ViewData["Title"] = "Thông báo";
+
+    var unreadCount = Model.Count(x => !x.IsRead);
+
+    var todayCount = Model.Count(x =>
+        x.CreatedAt.Date == DateTime.Today);
+
+    var weekStart = DateTime.Today.AddDays(
+        -(((int)DateTime.Today.DayOfWeek + 6) % 7)
+    );
+
+    var weekCount = Model.Count(x =>
+        x.CreatedAt.Date >= weekStart);
+}
+
+<section class="notification-page">
+
+    <div class="container-fluid px-lg-5">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="notification-page-header">
+
+            <div class="notification-heading">
+
+                <span class="notification-kicker">
+                    OMNIPARK
+                </span>
+
+                <h1>Thông báo</h1>
+
+                <p>
+                    Cập nhật mới nhất về đặt chỗ,
+                    nhắc nhở và hoạt động của bạn.
+                </p>
+
+            </div>
+
+
+            <div class="notification-summary">
+
+                <div class="notification-summary-item">
+
+                    <span class="notification-summary-icon blue">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+
+                    <div>
+                        <small>Chưa đọc</small>
+                        <strong>@unreadCount</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="notification-summary-divider"></div>
+
+
+                <div class="notification-summary-item">
+
+                    <span class="notification-summary-icon green">
+                        <i class="bi bi-calendar-check"></i>
+                    </span>
+
+                    <div>
+                        <small>Hôm nay</small>
+                        <strong>@todayCount</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="notification-summary-divider"></div>
+
+
+                <div class="notification-summary-item">
+
+                    <span class="notification-summary-icon purple">
+                        <i class="bi bi-bar-chart"></i>
+                    </span>
+
+                    <div>
+                        <small>Tuần này</small>
+                        <strong>@weekCount</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MAIN LAYOUT
+        ========================== -->
+
+        <div class="notification-layout">
+
+
+            <!-- =========================
+                 SIDEBAR
+            ========================== -->
+
+            <aside class="notification-sidebar">
+
+                <h3>Tổng quan</h3>
+
+
+                <button type="button"
+                        class="notification-nav-item active"
+                        data-filter="all">
+
+                    <span>
+                        <i class="bi bi-bell"></i>
+                        Tất cả thông báo
+                    </span>
+
+                    <strong>@Model.Count</strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="notification-nav-item"
+                        data-filter="unread">
+
+                    <span>
+                        <i class="bi bi-envelope"></i>
+                        Chưa đọc
+                    </span>
+
+                    <strong>@unreadCount</strong>
+
+                </button>
+
+
+                <button type="button"
+                        class="notification-nav-item"
+                        data-filter="booking">
+
+                    <span>
+                        <i class="bi bi-calendar-check"></i>
+                        Đặt chỗ
+                    </span>
+
+                </button>
+
+
+                <button type="button"
+                        class="notification-nav-item"
+                        data-filter="reminder">
+
+                    <span>
+                        <i class="bi bi-clock"></i>
+                        Nhắc nhở
+                    </span>
+
+                </button>
+
+
+                <div class="notification-security-box">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <div>
+
+                        <strong>
+                            Không bỏ lỡ thông tin quan trọng
+                        </strong>
+
+                        <p>
+                            Theo dõi thông báo để cập nhật
+                            trạng thái đặt chỗ và thời gian gửi xe.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =========================
+                 CONTENT
+            ========================== -->
+
+            <main class="notification-content">
+
+                <!-- TOOLBAR -->
+
+                <div class="notification-toolbar">
+
+                    <div class="notification-tabs">
+
+                        <button type="button"
+                                class="notification-tab active"
+                                data-filter="all">
+
+                            <i class="bi bi-grid"></i>
+                            Tất cả
+
+                        </button>
+
+
+                        <button type="button"
+                                class="notification-tab"
+                                data-filter="unread">
+
+                            <i class="bi bi-bell"></i>
+
+                            Chưa đọc
+
+                            @if (unreadCount > 0)
+                            {
+                                <span class="notification-tab-dot"></span>
+                            }
+
+                        </button>
+
+
+                        <button type="button"
+                                class="notification-tab"
+                                data-filter="booking">
+
+                            <i class="bi bi-calendar-check"></i>
+                            Đặt chỗ
+
+                        </button>
+
+
+                        <button type="button"
+                                class="notification-tab"
+                                data-filter="reminder">
+
+                            <i class="bi bi-clock"></i>
+                            Nhắc nhở
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LIST
+                ========================== -->
+
+                <div class="notification-list">
+
+                    @foreach (var n in Model.OrderByDescending(x => x.CreatedAt))
+                    {
+                        var typeLower =
+                        (n.Type ?? "").ToLower();
+
+                        var filterType =
+                        typeLower.Contains("remind") ||
+                        typeLower.Contains("over") ||
+                        typeLower.Contains("nhac")
+                        ? "reminder"
+                        : "booking";
+
+
+                        var iconClass = "booking";
+                        var icon = "bi-bell";
+
+
+                        if (
+                        typeLower.Contains("remind") ||
+                        typeLower.Contains("nhac")
+                        )
+                        {
+                            iconClass = "warning";
+                            icon = "bi-clock";
+                        }
+                        else if (
+                        typeLower.Contains("over")
+                        )
+                        {
+                            iconClass = "overtime";
+                            icon = "bi-clock-history";
+                        }
+                        else if (
+                        typeLower.Contains("payment") ||
+                        typeLower.Contains("thanh")
+                        )
+                        {
+                            iconClass = "success";
+                            icon = "bi-check-lg";
+                        }
+                        else if (
+                        typeLower.Contains("cancel") ||
+                        typeLower.Contains("huy")
+                        )
+                        {
+                            iconClass = "danger";
+                            icon = "bi-x-lg";
+                        }
+                        else if (
+                        typeLower.Contains("booking") ||
+                        typeLower.Contains("dat")
+                        )
+                        {
+                            iconClass = "booking";
+                            icon = "bi-calendar-check";
+                        }
+
+
+                        var relativeTime =
+                        GetRelativeTime(n.CreatedAt);
+
+
+                        <article class="notification-item @(n.IsRead ? "" : "unread")"
+                                 data-type="@filterType"
+                                 data-unread="@(!n.IsRead ? "true" : "false")">
+
+                            <div class="notification-type-icon @iconClass">
+
+                                <i class="bi @icon"></i>
+
+                            </div>
+
+
+                            <div class="notification-item-content">
+
+                                <h4>
+                                    @n.Title
+                                </h4>
+
+                                <p>
+                                    @n.Content
+                                </p>
+
+                            </div>
+
+
+                            <div class="notification-item-meta">
+
+                                <span>
+                                    @relativeTime
+                                </span>
+
+
+                                @if (!n.IsRead)
+                                {
+                                    <span class="unread-dot"></span>
+
+                                    <form method="post"
+                                          asp-action="MarkAsRead"
+                                          asp-route-id="@n.NotificationId">
+
+                                        <button type="submit"
+                                                class="notification-read-btn"
+                                                title="Đánh dấu đã đọc">
+
+                                            <i class="bi bi-check2"></i>
+
+                                        </button>
+
+                                    </form>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-check2-all notification-read-icon"></i>
+                                }
+
+                            </div>
+
+                        </article>
+                    }
+
+                </div>
+
+
+                @if (!Model.Any())
+                {
+                    <div class="notification-empty">
+
+                        <i class="bi bi-bell-slash"></i>
+
+                        <h3>
+                            Chưa có thông báo
+                        </h3>
+
+                        <p>
+                            Các thông báo về đặt chỗ và nhắc nhở
+                            sẽ xuất hiện tại đây.
+                        </p>
+
+                    </div>
+                }
+
+
+                <div id="notificationFilterEmpty"
+                     class="notification-empty"
+                     hidden>
+
+                    <i class="bi bi-search"></i>
+
+                    <h3>
+                        Không tìm thấy thông báo
+                    </h3>
+
+                    <p>
+                        Không có thông báo phù hợp
+                        với bộ lọc này.
+                    </p>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+@functions {
+
+    public string GetRelativeTime(DateTime createdAt)
+    {
+        var difference =
+            DateTime.Now - createdAt;
+
+        if (difference.TotalMinutes < 1)
+        {
+            return "Vừa xong";
+        }
+
+        if (difference.TotalMinutes < 60)
+        {
+            return $"{(int)difference.TotalMinutes} phút trước";
+        }
+
+        if (difference.TotalHours < 24)
+        {
+            return $"{(int)difference.TotalHours} giờ trước";
+        }
+
+        if (difference.TotalDays < 2)
+        {
+            return "Hôm qua";
+        }
+
+        return createdAt.ToString("dd/MM/yyyy HH:mm");
+    }
+
+}
+
+
+@section Scripts {
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const filterButtons =
+                    document.querySelectorAll(
+                        ".notification-tab, .notification-nav-item"
+                    );
+
+                const items =
+                    document.querySelectorAll(
+                        ".notification-item"
+                    );
+
+                const empty =
+                    document.getElementById(
+                        "notificationFilterEmpty"
+                    );
+
+
+                function filterNotifications(filter) {
+
+                    let visibleCount = 0;
+
+
+                    items.forEach(function (item) {
+
+                        const type =
+                            item.dataset.type;
+
+                        const unread =
+                            item.dataset.unread === "true";
+
+
+                        let show = false;
+
+
+                        if (filter === "all") {
+
+                            show = true;
+
+                        }
+                        else if (filter === "unread") {
+
+                            show = unread;
+
+                        }
+                        else {
+
+                            show =
+                                type === filter;
+
+                        }
+
+
+                        item.style.display =
+                            show ? "" : "none";
+
+
+                        if (show) {
+                            visibleCount++;
+                        }
+
+                    });
+
+
+                    if (empty) {
+
+                        empty.hidden =
+                            visibleCount !== 0;
+
+                    }
+
+                }
+
+
+                filterButtons.forEach(function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const filter =
+                                this.dataset.filter;
+
+
+                            filterButtons.forEach(
+                                function (btn) {
+
+                                    btn.classList.toggle(
+                                        "active",
+                                        btn.dataset.filter === filter
+                                    );
+
+                                }
+                            );
+
+
+                            filterNotifications(
+                                filter
+                            );
+
+                        }
+                    );
+
+                });
+
+            }
+        );
+
+    </script>
+
+}

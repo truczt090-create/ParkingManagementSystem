@@ -1,0 +1,167 @@
+@model List<ParkingManagement.Web.ViewModels.Owner.OwnerLotViewModel>
+
+@{
+    ViewData["Title"] = "Bãi xe của tôi";
+}
+
+<div class="owner-mylots-page">
+
+    <section class="owner-mylots-header">
+
+        <div>
+            <span class="owner-mylots-kicker">
+                OMNIPARK OWNER
+            </span>
+
+            <h1>Bãi xe của tôi</h1>
+
+            <p>
+                Quản lý thông tin, khu vực, bảng giá và hoạt động của các bãi xe bạn sở hữu.
+            </p>
+        </div>
+
+        <a asp-controller="Owner"
+           asp-action="CreateLot"
+           class="owner-mylots-create-btn">
+
+            <i class="bi bi-plus-lg"></i>
+            Đăng ký bãi xe mới
+
+        </a>
+
+    </section>
+
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="owner-mylots-alert success">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
+        </div>
+    }
+
+
+    @if (Model != null && Model.Any())
+    {
+        <section class="owner-mylots-grid">
+
+            @foreach (var lot in Model)
+            {
+                var statusClass = lot.Status switch
+                {
+                    "Approved" => "approved",
+                    "Pending" => "pending",
+                    "Rejected" => "rejected",
+                    _ => "default"
+                };
+
+                var statusText = lot.Status switch
+                {
+                    "Approved" => "Đã duyệt",
+                    "Pending" => "Chờ duyệt",
+                    "Rejected" => "Bị từ chối",
+                    _ => lot.Status
+                };
+
+                <article class="owner-mylot-card">
+
+                    <div class="owner-mylot-card-top">
+
+                        <div class="owner-mylot-icon">
+                            <i class="bi bi-p-square-fill"></i>
+                        </div>
+
+                        <span class="owner-mylot-status @statusClass">
+                            @statusText
+                        </span>
+
+                    </div>
+
+
+                    <div class="owner-mylot-content">
+
+                        <span class="owner-mylot-label">
+                            BÃI XE
+                        </span>
+
+                        <h2>
+                            @lot.Name
+                        </h2>
+
+                        <div class="owner-mylot-address">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            <span>
+                                @lot.Address
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="owner-mylot-actions">
+
+                        <a asp-controller="Owner"
+                           asp-action="LotDetail"
+                           asp-route-lotId="@lot.ParkingLotId"
+                           class="owner-mylot-manage-btn">
+
+                            <i class="bi bi-grid"></i>
+                            Quản lý bãi xe
+
+                        </a>
+
+
+                        <a asp-controller="Owner"
+                           asp-action="EditLot"
+                           asp-route-lotId="@lot.ParkingLotId"
+                           class="owner-mylot-edit-btn">
+
+                            <i class="bi bi-pencil-square"></i>
+                            Chỉnh sửa
+
+                        </a>
+
+                    </div>
+
+                </article>
+            }
+
+        </section>
+    }
+    else
+    {
+        <section class="owner-mylots-empty">
+
+            <div class="owner-mylots-empty-icon">
+                <i class="bi bi-p-square"></i>
+            </div>
+
+            <h2>
+                Bạn chưa có bãi xe
+            </h2>
+
+            <p>
+                Hãy đăng ký bãi xe đầu tiên để bắt đầu quản lý trên OmniPark.
+            </p>
+
+            <a asp-controller="Owner"
+               asp-action="CreateLot"
+               class="owner-mylots-create-btn">
+
+                <i class="bi bi-plus-lg"></i>
+                Đăng ký bãi xe
+
+            </a>
+
+        </section>
+    }
+
+</div>

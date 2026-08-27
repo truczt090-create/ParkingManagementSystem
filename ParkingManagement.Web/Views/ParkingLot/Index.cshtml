@@ -1,0 +1,749 @@
+﻿@model List<ParkingManagement.Web.Models.ParkingLot.ParkingLotViewModel>
+
+@{
+    ViewData["Title"] = "Tìm bãi đỗ xe";
+    ViewData["MetaDescription"] =
+        "Tìm kiếm bãi đỗ xe gần bạn theo tên hoặc địa chỉ, xem giờ mở cửa và đặt chỗ trước trực tuyến.";
+}
+
+<section class="parking-search-hero">
+
+    <div class="container">
+
+        <div class="parking-search-hero-content">
+
+            <span class="parking-search-kicker">
+                OmniPark
+             </span>
+
+            <h1>
+                Tìm bãi đỗ xe
+                <span>phù hợp</span>
+            </h1>
+
+            <p>
+                Tìm kiếm nhanh chóng, thuận tiện và an toàn.
+            </p>
+
+            <form method="get"
+                  asp-action="Index"
+                  class="parking-main-search"
+                  aria-label="Tìm kiếm bãi đỗ xe">
+
+                <div class="parking-search-input">
+
+                    <i class="bi bi-search"></i>
+
+                    <input type="search"
+                           id="keyword"
+                           name="keyword"
+                           value="@ViewBag.Keyword"
+                           placeholder="Nhập tên bãi xe hoặc khu vực..." />
+
+                </div>
+
+                <button type="submit"
+                        class="parking-search-submit">
+
+                    Tìm bãi xe
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="parking-results-section">
+
+    <div class="container">
+
+        <div class="parking-results-layout">
+
+            <!-- =========================
+                 FILTER SIDEBAR
+            ========================== -->
+
+            <aside class="parking-filter-panel">
+
+                <div class="parking-filter-title">
+
+                    <i class="bi bi-sliders"></i>
+
+                    <strong>Bộ lọc</strong>
+
+                </div>
+
+
+                <div class="parking-filter-group">
+
+                    <label>
+                        <i class="bi bi-geo-alt"></i>
+                        Khu vực
+                    </label>
+
+                    <select id="areaFilter"
+                            class="parking-filter-select">
+
+                        <option value="">
+                            Tất cả khu vực
+                        </option>
+
+                        <option value="Quận 1">Quận 1</option>
+                        <option value="Quận 3">Quận 3</option>
+                        <option value="Quận 4">Quận 4</option>
+                        <option value="Quận 5">Quận 5</option>
+                        <option value="Quận 6">Quận 6</option>
+                        <option value="Quận 7">Quận 7</option>
+                        <option value="Quận 8">Quận 8</option>
+                        <option value="Quận 10">Quận 10</option>
+                        <option value="Quận 11">Quận 11</option>
+                        <option value="Quận 12">Quận 12</option>
+
+                        <option value="Bình Thạnh">
+                            Bình Thạnh
+                        </option>
+
+                        <option value="Tân Bình">
+                            Tân Bình
+                        </option>
+
+                        <option value="Tân Phú">
+                            Tân Phú
+                        </option>
+
+                        <option value="Gò Vấp">
+                            Gò Vấp
+                        </option>
+
+                        <option value="Phú Nhuận">
+                            Phú Nhuận
+                        </option>
+
+                        <option value="Bình Tân">
+                            Bình Tân
+                        </option>
+
+                        <option value="Thủ Đức">
+                            Thủ Đức
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="parking-filter-group">
+
+                    <label>
+                        <i class="bi bi-car-front"></i>
+                        Loại phương tiện
+                    </label>
+
+                    <label class="parking-filter-check">
+
+                        <input type="checkbox"
+                               checked />
+
+                        <span>Tất cả</span>
+
+                    </label>
+
+                    <label class="parking-filter-check">
+
+                        <input type="checkbox" />
+
+                        <span>Xe máy</span>
+
+                    </label>
+
+                    <label class="parking-filter-check">
+
+                        <input type="checkbox" />
+
+                        <span>Ô tô</span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="parking-filter-group">
+
+                    <label>
+                        <i class="bi bi-circle"></i>
+                        Trạng thái
+                    </label>
+
+                    <label class="parking-filter-check">
+
+                        <input type="checkbox"
+                               checked />
+
+                        <span>Tất cả</span>
+
+                    </label>
+
+                    <label class="parking-filter-check">
+
+                        <input type="checkbox" />
+
+                        <span class="filter-status-active">
+                            <i></i>
+                            Đang hoạt động
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="parking-filter-group">
+
+                    <label>
+                        <i class="bi bi-clock"></i>
+                        Giờ hoạt động
+                    </label>
+
+                    <select id="timeFilter"
+                            class="parking-filter-select">
+
+                        <option value="">
+                            Tất cả
+                        </option>
+
+                        <option value="open-now">
+                            Đang mở cửa
+                        </option>
+
+                        <option value="24h">
+                            Mở cửa 24/7
+                        </option>
+
+                        <option value="early">
+                            Mở sớm trước 07:00
+                        </option>
+
+                        <option value="late">
+                            Đóng muộn sau 22:00
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button type="button"
+                        id="clearParkingFilter"
+                        class="parking-clear-filter">
+
+                    <i class="bi bi-arrow-counterclockwise"></i>
+
+                    Xóa bộ lọc
+
+                </button>
+
+            </aside>
+
+
+            <!-- =========================
+                 RESULTS
+            ========================== -->
+
+            <div class="parking-results-content">
+
+                <div class="parking-results-top">
+
+                    <div>
+
+                        <span class="parking-result-label">
+                            KẾT QUẢ TÌM KIẾM
+                        </span>
+
+                        <h2>
+                            @Model.Count bãi đỗ xe phù hợp
+                        </h2>
+
+                    </div>
+
+
+                    <div class="parking-sort">
+
+                        <label for="parking-sort-select">
+                            Sắp xếp:
+                        </label>
+
+                        <select id="parking-sort-select">
+
+                            <option>Gần nhất</option>
+                            <option>Tên A - Z</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                @if (Model.Any())
+                {
+                    <div class="parking-result-list">
+
+                        @foreach (var lot in Model)
+                        {
+                            <article class="parking-result-card"
+                                     data-address="@lot.Address.ToLower()"
+                                     data-open="@(lot.OpenTime?.ToString("HH:mm") ?? "")"
+                                     data-close="@(lot.CloseTime?.ToString("HH:mm") ?? "")"
+                                     data-status="@lot.Status">
+
+                                <!-- IMAGE -->
+                                <div class="parking-result-image">
+
+                                    <img src="~/images/parking_hero.jpg"
+                                         alt="@lot.Name" />
+
+                                </div>
+
+
+                                <!-- INFORMATION -->
+                                <div class="parking-result-info">
+
+                                    <div class="parking-result-heading">
+
+                                        <div>
+
+                                            <h3>
+                                                @lot.Name
+                                            </h3>
+
+                                            <p class="parking-result-address">
+
+                                                <i class="bi bi-geo-alt"></i>
+
+                                                @lot.Address
+
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="parking-result-meta">
+
+                                        <span>
+
+                                            <i class="bi bi-clock"></i>
+
+                                            @lot.OpenTime - @lot.CloseTime
+
+                                        </span>
+
+
+                                        @if (lot.Status == "Approved")
+                                        {
+                                            <span class="parking-status parking-status-active">
+
+                                                <i></i>
+
+                                                Đang hoạt động
+
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="parking-status">
+
+                                                @lot.Status
+
+                                            </span>
+                                        }
+
+                                    </div>
+
+
+                                    <div class="parking-vehicle-tags">
+
+                                        <span>
+                                            <i class="bi bi-bicycle"></i>
+                                            Xe máy
+                                        </span>
+
+                                        <span>
+                                            <i class="bi bi-car-front"></i>
+                                            Ô tô
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ACTION -->
+                                <div class="parking-result-action">
+
+                                    <a asp-action="Detail"
+                                       asp-route-id="@lot.ParkingLotId"
+                                       class="parking-detail-btn">
+
+                                        Xem chi tiết
+
+                                        <i class="bi bi-arrow-right"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </article>
+                        }
+
+                    </div>
+                }
+                else
+                {
+                    <div class="parking-no-result">
+
+                        <i class="bi bi-p-circle"></i>
+
+                        <h3>Không tìm thấy bãi xe phù hợp</h3>
+
+                        <p>
+                            Hãy thử tìm bằng tên bãi xe hoặc khu vực khác.
+                        </p>
+
+                        <a asp-action="Index">
+                            Xem tất cả bãi xe
+                        </a>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+@section Head {
+
+    <script type="application/ld+json">
+
+        @Html.Raw(
+                    System.Text.Json.JsonSerializer.Serialize(
+                        new
+                        {
+                            @context = "https://schema.org",
+                            @type = "ItemList",
+
+                            itemListElement =
+                                Model.Select(
+                                    (lot, i) => new
+                                    {
+                                        @type = "ListItem",
+                                        position = i + 1,
+
+                                        url =
+                                            $"{Context.Request.Scheme}://{Context.Request.Host}/ParkingLot/Detail/{lot.ParkingLotId}",
+
+                                        name = lot.Name
+                                    }
+                                )
+                        }
+                    )
+                )
+
+    </script>
+}
+@section Scripts {
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const areaFilter =
+                document.getElementById("areaFilter");
+
+            const timeFilter =
+                document.getElementById("timeFilter");
+            const clearFilter =
+                document.getElementById("clearParkingFilter");
+            const cards =
+                document.querySelectorAll(".parking-result-card");
+
+            const resultTitle =
+                document.querySelector(".parking-results-top h2");
+
+
+            function timeToMinutes(time) {
+
+                if (!time) {
+                    return null;
+                }
+
+                const parts = time.split(":");
+
+                return (
+                    parseInt(parts[0]) * 60 +
+                    parseInt(parts[1])
+                );
+            }
+
+
+            function filterParkingLots() {
+
+                const selectedArea =
+                    areaFilter.value
+                        .toLowerCase()
+                        .trim();
+
+                const selectedTime =
+                    timeFilter.value;
+
+
+                const now = new Date();
+
+                const currentMinutes =
+                    now.getHours() * 60 +
+                    now.getMinutes();
+
+
+                let visibleCount = 0;
+
+
+                cards.forEach(function (card) {
+
+                    const address =
+                        card.dataset.address || "";
+
+                    const open =
+                        timeToMinutes(
+                            card.dataset.open
+                        );
+
+                    const close =
+                        timeToMinutes(
+                            card.dataset.close
+                        );
+
+
+                    /* =====================
+                       KHU VỰC
+                    ===================== */
+
+                    let areaMatch = true;
+
+                    if (selectedArea) {
+
+                        areaMatch =
+                            address.includes(
+                                selectedArea
+                            );
+
+                    }
+
+
+                    /* =====================
+                       GIỜ HOẠT ĐỘNG
+                    ===================== */
+
+                    let timeMatch = true;
+
+
+                    if (selectedTime === "open-now") {
+
+                        if (
+                            open === null ||
+                            close === null
+                        ) {
+
+                            timeMatch = false;
+
+                        }
+                        else if (open <= close) {
+
+                            timeMatch =
+                                currentMinutes >= open &&
+                                currentMinutes <= close;
+
+                        }
+                        else {
+
+                            /* Ví dụ:
+                               mở 22:00
+                               đóng 06:00
+                            */
+
+                            timeMatch =
+                                currentMinutes >= open ||
+                                currentMinutes <= close;
+                        }
+
+                    }
+
+
+                    else if (selectedTime === "24h") {
+
+                        timeMatch =
+                            open === 0 &&
+                            (
+                                close === 0 ||
+                                close === 1439
+                            );
+
+                    }
+
+
+                    else if (selectedTime === "early") {
+
+                        timeMatch =
+                            open !== null &&
+                            open <= 7 * 60;
+
+                    }
+
+
+                    else if (selectedTime === "late") {
+
+                        timeMatch =
+                            close !== null &&
+                            (
+                                close >= 22 * 60 ||
+                                close <= 6 * 60
+                            );
+
+                    }
+
+
+                    /* =====================
+                       HIỂN THỊ
+                    ===================== */
+
+                    if (areaMatch && timeMatch) {
+
+                        card.style.display = "";
+
+                        visibleCount++;
+
+                    }
+                    else {
+
+                        card.style.display = "none";
+
+                    }
+
+                });
+
+
+                /* =====================
+                   CẬP NHẬT SỐ KẾT QUẢ
+                ===================== */
+
+                if (resultTitle) {
+
+                    resultTitle.textContent =
+                        visibleCount +
+                        " bãi đỗ xe phù hợp";
+
+                }
+
+            }
+
+
+            areaFilter.addEventListener(
+                "change",
+                filterParkingLots
+            );
+
+
+            timeFilter.addEventListener(
+                "change",
+                filterParkingLots
+            );
+
+        });
+        clearFilter.addEventListener(
+            "click",
+            function () {
+
+                areaFilter.value = "";
+
+                timeFilter.value = "";
+
+                cards.forEach(function (card) {
+                    card.style.display = "";
+                });
+
+                if (resultTitle) {
+                    resultTitle.textContent =
+                        cards.length +
+                        " bãi đỗ xe phù hợp";
+                }
+
+            }
+                    if (clearFilter) {
+
+            clearFilter.addEventListener(
+                "click",
+                function () {
+
+                    // reset khu vực
+                    if (areaFilter) {
+                        areaFilter.value = "";
+                    }
+
+                    // reset giờ hoạt động
+                    if (timeFilter) {
+                        timeFilter.value = "";
+                    }
+
+                    // reset checkbox
+                    const checkboxes =
+                        document.querySelectorAll(
+                            ".parking-filter-panel input[type='checkbox']"
+                        );
+
+                    checkboxes.forEach(function (checkbox) {
+                        checkbox.checked = false;
+                    });
+
+                    // nếu có checkbox "Tất cả" thì bật lại
+                    const allCheckboxes =
+                        document.querySelectorAll(
+                            ".parking-filter-panel input[data-all='true']"
+                        );
+
+                    allCheckboxes.forEach(function (checkbox) {
+                        checkbox.checked = true;
+                    });
+
+                    // hiện lại toàn bộ card
+                    cards.forEach(function (card) {
+                        card.style.display = "";
+                    });
+
+                    // cập nhật số lượng
+                    if (resultTitle) {
+                        resultTitle.textContent =
+                            cards.length +
+                            " bãi đỗ xe phù hợp";
+                    }
+
+                }
+            );
+
+        }
+        );
+
+    </script>
+
+}
